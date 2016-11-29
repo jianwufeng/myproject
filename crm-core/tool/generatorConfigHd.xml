@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.50.33:3306/hd_dev" userId="root"
+			password="123456" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.hunteron.hd.hh.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper/hd"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.hunteron.hd.hh.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+		<!-- 表 -->
+		
+		<table schema="hd_dev" tableName="tb_user_company_application" domainObjectName="UserCompany">
+			<property name="useActualColumnNames" value="true" />			
+			<columnOverride column="user_id" property="userId" />
+			<columnOverride column="company_id" property="companyId" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="update_time" property="updateTime" />
+		</table>		
+	</context>
+</generatorConfiguration>

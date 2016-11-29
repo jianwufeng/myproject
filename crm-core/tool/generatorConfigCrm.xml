@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+		<plugin type="mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.50.33:3306/crm_dev" userId="root"
+			password="123456" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.crm.mapper.user.model"
+			targetProject="src/main/java" />
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper/crm/user"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.crm.mapper.user.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+			
+		<!-- <table schema="crm_dev" tableName="tb_paction" domainObjectName="Paction"> 
+			<property name="useActualColumnNames" value="true" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> 
+			<columnOverride column="invoice_date" property="invoiceDate" /> 
+			<columnOverride column="sign_department" property="signDepartment" />
+			<columnOverride column="sign_user_id" property="signUserId" /> 
+			<columnOverride column="send_time" property="sendTime" /> 
+			<columnOverride column="receive_time" property="receiveTime" /> 
+			<columnOverride column="registration_number" property="registrationNumber" /> 
+			<columnOverride column="candidate_feedback_time" property="candidateFeedbackTime" /> 
+			<columnOverride column="resume_validity" property="resumeValidity" /> 
+			<columnOverride column="recommend_validity" property="recommendValidity" /> 
+			<columnOverride column="referral_calculation" property="referralCalculation" /> 
+			<columnOverride column="file_path" property="filePath" /> 
+			<columnOverride column="guarantee_months" property="guaranteeMonths" /> 
+			<columnOverride column="storage_place" property="storagePlace" />
+			<columnOverride column="expense_policy" property="expensePolicy" />
+			<columnOverride column="bdo_id" property="bdoId" />
+			<columnOverride column="bdh_id" property="bdhId" />
+			<columnOverride column="validate_look_time" property="validateLookTime" />
+			<columnOverride column="confirm_operate_time" property="confirmOperateTime" />
+			<columnOverride column="effect_operate_time" property="effectOperateTime" />
+		</table>  -->
+			
+		 <!-- <table schema="crm_dev" tableName="tb_crm_comment" domainObjectName="CrmComment">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			<columnOverride column="comment" property="comment" jdbcType="VARCHAR"/> 
+		</table>  -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_crm_position_edit_log" domainObjectName="PositionEditLog">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+			<columnOverride column="snapshot_edit_before" property="snapshotEditBefore" jdbcType="VARCHAR"/>
+			<columnOverride column="snapshot_edit_after" property="snapshotEditAfter" jdbcType="VARCHAR"/>
+		</table> --> 
+
+		<!-- <table schema="crm_dev" tableName="tb_crm_user_position" domainObjectName="UserPosition">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_crm_work_order_handle_type" domainObjectName="WorkOrderHandleType">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table>
+ -->
+		<!-- <table schema="crm_dev" tableName="tb_crm_work_order_type" domainObjectName="WorkOrderType">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+
+		<!-- <table schema="crm_dev" tableName="tb_crm_work_order_content" domainObjectName="WorkOrderContent">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+
+		
+		
+		<!-- <table schema="crm_dev" tableName="tb_crm_log_snapshot" domainObjectName="CrmLogSnapshot">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table> -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_crm_user_portrait" domainObjectName="CrmUserPortrait">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table> -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_enterprise_position_report" domainObjectName="EnterprisePositionReport">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> --> 
+			
+		<!-- <table schema="crm_dev" tableName="tb_auth_user_organization" domainObjectName="AuthUserOrganization">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> --> 
+			
+		<!-- <table schema="crm_dev" tableName="tb_user_company_count" domainObjectName="UserCompanyCount">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_user_enterprise_count" domainObjectName="UserEnterpriseCount">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_remind" domainObjectName="Remind">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+		</table> -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_paction_attach" domainObjectName="PactionAttach">
+			<property name="useActualColumnNames" value="false" />
+			<columnOverride column="paction_id" property="pactionId" />
+			<columnOverride column="file_path" property="filePath" />
+			<columnOverride column="file_type" property="fileType" />
+			<columnOverride column="temp_file_path" property="tempFilePath" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_time" property="updateTime" />
+			<columnOverride column="html_content" property="htmlContent" jdbcType="VARCHAR"/>
+			<columnOverride column="temp_html_content" property="tempHtmlContent"  jdbcType="VARCHAR"/>
+		</table> -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_paction_snapshot" domainObjectName="PactionSnapshot">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			<columnOverride column="paction_id" property="pactionId" />
+			<columnOverride column="snapshot" property="snapshot" />
+			<columnOverride column="modify_reason" property="modifyReason" />
+			<columnOverride column="attach_path" property="attachPath" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_time" property="updateTime" />
+			<columnOverride column="defunct" property="defunct" />
+		</table> -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_paction_self_set" domainObjectName="PactionSelfSet">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			<columnOverride column="paction_id" property="pactionId" />
+			<columnOverride column="color" property="color" />
+			<columnOverride column="operator_id" property="operatorId" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_time" property="updateTime" />
+			<columnOverride column="defunct" property="defunct" />
+		</table> -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_clue" domainObjectName="Clue">
+			<property name="useActualColumnNames" value="false"/>
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+			<columnOverride column="introduce" property="introduce" jdbcType="VARCHAR"/> 
+		</table>  -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_remind" domainObjectName="Remind">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table>  -->
+			
+			
+		<!-- <table schema="crm_dev" tableName="tb_crm_white_ip" domainObjectName="CrmWhiteIp">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table>  -->
+			
+	<!-- 	<table schema="crm_dev" tableName="tb_position_evaluate_log" domainObjectName="PositionEvaluateLog">
+			<property name="useActualColumnNames" value="false" />
+		</table> 	 -->
+			
+		<table schema="crm_dev" tableName="tb_user" domainObjectName="User">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			
+		</table> 
+		
+	<!-- 	<table schema="crm_dev" tableName="tb_paction_self_set" domainObjectName="PactionSelfSet">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table>  -->
+		
+		<!-- <table schema="crm_dev" tableName="tb_crm_sale_log" domainObjectName="SaleLog">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			
+		</table>  -->
+			
+		<!-- <table schema="crm_dev" tableName="tb_login_log" domainObjectName="LoginLog">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			
+		</table> 	 -->
+			
+<!-- 		<table schema="crm_dev" tableName="tb_register_wait_handle" domainObjectName="RegisterWaitHandle">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			
+		</table> 	 -->
+		<!-- <table schema="crm_dev" tableName="tb_crm_schedule" domainObjectName="Schedule">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+		</table>  -->
+		
+	
+	<!--		
+		<table schema="crm_dev" tableName="tb_visit" domainObjectName="Visit">
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			 <columnOverride column="visitor_id" property="visitorId" /> 
+			 <columnOverride column="co_visitor_id" property="coVisitorId" /> 
+			 <columnOverride column="visit_time" property="visitTime" /> 
+			 <columnOverride column="enterprise_id" property="enterpriseId" /> 
+			 <columnOverride column="enterprise_name" property="enterpriseName" /> 
+			 <columnOverride column="visited_name" property="visitedName" /> 
+			 <columnOverride column="visited_title" property="visitedTitle" /> 
+			 <columnOverride column="cancel_reason" property="cancelReason" />
+			 <columnOverride column="reject_reason" property="rejectReason" />
+			 <columnOverride column="create_user_id" property="createUserId" />
+			 <columnOverride column="create_time" property="createTime" />
+			 <columnOverride column="update_user_id" property="updateUserId" />
+			 <columnOverride column="update_time" property="updateTime" />
+		</table> -->
+		
+		<!-- 表 -->
+		<!-- <table schema="crm_dev" tableName="tb_group" domainObjectName="Group" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_menu" domainObjectName="GroupMenu" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_oper" domainObjectName="GroupOper" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_user" domainObjectName="GroupUser" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_menu" domainObjectName="Menu" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_operation" domainObjectName="Operation" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_permission" domainObjectName="Permission" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_permission_role" domainObjectName="PermissionRole" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_remind" domainObjectName="Remind" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_role_group" domainObjectName="RoleGroup" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_role" domainObjectName="Role" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_system_log" domainObjectName="SystemLog" 
+			/> -->
+		<!--<table schema="crm_dev" tableName="tb_user" domainObjectName="User"> 
+			<property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table> -->
+		<!-- <table schema="crm_dev" tableName="tb_user_role" domainObjectName="UserRole" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_clue" domainObjectName="Clue" 
+			> <property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table> 
+			<table schema="crm_dev" tableName="tb_contact" domainObjectName="Contact" 
+			> <property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table>
+		 <table schema="crm_dev" tableName="tb_paction" domainObjectName="Paction"> 
+			<property name="useActualColumnNames" value="true" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> 
+			<columnOverride column="invoice_date" property="invoiceDate" /> 
+			<columnOverride column="sign_department" property="signDepartment" />
+			<columnOverride column="sign_user_id" property="signUserId" /> 
+			<columnOverride column="send_time" property="sendTime" /> 
+			<columnOverride column="receive_time" property="receiveTime" /> 
+			<columnOverride column="registration_number" property="registrationNumber" /> 
+			<columnOverride column="candidate_feedback_time" property="candidateFeedbackTime" /> 
+			<columnOverride column="resume_validity" property="resumeValidity" /> 
+			<columnOverride column="recommend_validity" property="recommendValidity" /> 
+			<columnOverride column="referral_calculation" property="referralCalculation" /> 
+			<columnOverride column="file_path" property="filePath" /> 
+			<columnOverride column="guarantee_months" property="guaranteeMonths" /> 
+			<columnOverride column="storage_place" property="storagePlace" />
+			<columnOverride column="expense_policy" property="expensePolicy" />
+		</table> -->
+<!--
+		<table schema="crm_dev" tableName="tb_user" domainObjectName="User">
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table> -->
+
+		<!-- <table schema="crm_dev" tableName="tb_scale" domainObjectName="Scale" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_style" domainObjectName="Style" 
+			/> -->
+	</context>
+</generatorConfiguration>

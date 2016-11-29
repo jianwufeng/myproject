@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.50.33:3306/crm_dev" userId="root"
+			password="123456" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.hunteron.crm.ucenter.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper/crm"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.hunteron.crm.ucenter.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+		<!-- 表 -->
+
+		<!-- <table schema="ho_dev" tableName="payment" domainObjectName="Payment"> 
+			 <property name="useActualColumnNames" value="true" /> 
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+			<columnOverride column="prepay_status" property="prepayStatus"/>  
+			<columnOverride column="prepay_cost" property="prepayCost" />
+			<columnOverride column="prepay_time" property="prepayTime" /> 
+			<columnOverride column="recover_cost" property="recoverCost" />
+			<columnOverride column="recover_num" property="recoverNum"/>   
+			<columnOverride column="recover_time" property="recoverTime"/>  
+			<columnOverride column="invoice_sort" property="invoiceSort"/>
+			<columnOverride column="should_pay_cost" property="shouldPayCost"/>
+		</table>  -->
+		
+		<table schema="crm_dev" tableName="tb_call_vip_tel" domainObjectName="CallVipTel"> 
+			 <property name="useActualColumnNames" value="true" /> 
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+			<columnOverride column="ghid" property="ghid"/>  
+			<columnOverride column="tel" property="tel" />
+		</table> 
+
+		<!-- <table schema="ho_dev" tableName="tb_coupon_usage" domainObjectName="CouponUsage">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table>
+		<table schema="ho_dev" tableName="tb_enterprise_user" domainObjectName="EnterpriseUser"> 
+			<property name="useActualColumnNames" value="false" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_enterprise" domainObjectName="HoEnterprise">
+			<property name="useActualColumnNames" value="true" /> 
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+				
+			<columnOverride column="member_name" property="memberName" />
+			<columnOverride column="display_name" property="displayName" />
+			<columnOverride column="short_name" property="shortName" />
+			<columnOverride column="investigate_id" property="investigateId" />
+			<columnOverride column="industry_id" property="industryId" />
+			<columnOverride column="other_industry_id" property="otherIndustryId" />
+			<columnOverride column="province_id" property="provinceId" />
+			<columnOverride column="city_id" property="cityId" />
+			<columnOverride column="license_number" property="licenseNumber" />
+			<columnOverride column="license_attachment" property="licenseAttachment" />
+			<columnOverride column="legal_person_attachment" property="legalPersonAttachment" />
+			<columnOverride column="service_admin" property="serviceAdmin" />
+			<columnOverride column="sales_admin" property="salesAdmin" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_time" property="updateTime" />
+			<columnOverride column="approve_time" property="approveTime" />
+			<columnOverride column="top_count" property="topCount" />
+			<columnOverride column="offer_type" property="offerType" />
+			<columnOverride column="candidate_interval_month" property="candidateIntervalMonth" />
+			<columnOverride column="develop_status" property="developStatus" />
+		</table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_profile" domainObjectName="Profile"> 
+			<property name="useActualColumnNames" value="false" /> </table> -->
+
+
+		<!-- <table schema="ho_dev" tableName="city" domainObjectName="City"> <property 
+			name="useActualColumnNames" value="true" /> </table> <table schema="ho_dev" 
+			tableName="province" domainObjectName="Province"> <property name="useActualColumnNames" 
+			value="true" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="comments" domainObjectName="HoComments"> 
+			<property name="useActualColumnNames" value="true" /> <columnOverride column="candidate_id" 
+			property="candidateId" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="interview" domainObjectName="HoInterview"> 
+			<property name="useActualColumnNames" value="true" /> <columnOverride column="confirm_interview_time" 
+			property="confirmInterviewTime" /> <columnOverride column="request_type" 
+			property="requestType" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="candidate" domainObjectName="HoCandidate"> 
+			<property name="useActualColumnNames" value="true" /> 
+			<columnOverride column="hr_priority" property="hrPriority" />
+			<columnOverride column="last_status" property="lastStatus" /> 
+			<columnOverride column="undetermined_reason" property="undeterminedReason" />
+			<columnOverride column="undetermined_time" property="undeterminedTime"/>  
+			<columnOverride column="marital_status" property="maritalStatus" />
+			<columnOverride column="id_card" property="idCard" /> 
+			<columnOverride column="city_id" property="cityId" />
+			<columnOverride column="expect_city" property="expectCity"/>   
+			<columnOverride column="recommand_report_id" property="recommandReportId"/>  
+			<columnOverride column="degree_id" property="degreeId"/>  			
+		</table> -->
+		<!-- <table schema="ho_dev" tableName="company" domainObjectName="HoCompany"> 
+			<property name="useActualColumnNames" value="true" /> </table> <table schema="ho_dev" 
+			tableName="user" domainObjectName="HoUser"> <property name="useActualColumnNames" 
+			value="true" /> </table> -->
+	</context>
+</generatorConfiguration>

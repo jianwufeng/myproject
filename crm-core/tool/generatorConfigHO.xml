@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<plugin type="mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.50.42:3306/ho_test" userId="test"
+			password="test" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.crm.domain.ho.loginsource.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper.ho.loginsource"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.crm.dao.ho.loginsource.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+			
+			
+		<table schema="ho_test" tableName="tb_login_source" domainObjectName="LoginSource"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> 
+			
+		<!-- 
+		<table schema="ho_test" tableName="online" domainObjectName="Online"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_registration_source" domainObjectName="RegistrationSource"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- 
+		<table schema="ho_test" tableName="tb_user_delete_record" domainObjectName="UserDeleteRecord"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_position_data_log" domainObjectName="PositionDataLog"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_enterprise_report" domainObjectName="EnterpriseReport"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_hh_data_log" domainObjectName="HhDataLog"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+			
+		<!-- <table schema="ho_test" tableName="tb_position_dispatch_hunter" domainObjectName="PositionDispatchHunter"> 
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" />
+			<columnOverride column="position_id" property="positionId" />
+			<columnOverride column="hunter_id" property="hunterId" />
+			<columnOverride column="operation_id" property="operationId" />
+			<columnOverride column="create_user_id" property="createUserId" />
+			<columnOverride column="create_time" property="createTime" />
+			<columnOverride column="update_user_id" property="updateUserId" />
+			<columnOverride column="update_time" property="updateTime" />
+			<columnOverride column="user_type" property="userType" />
+			<columnOverride column="status" property="status" />
+			<columnOverride column="source_type" property="sourceType" />
+			<columnOverride column="massage" property="massage" />
+			<columnOverride column="type" property="type" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_portrait_enterprise" domainObjectName="PortraitEnterprise"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+		
+		<!-- <table schema="ho_test" tableName="tb_portrait_position" domainObjectName="PortraitPosition"> 
+			<property name="useActualColumnNames" value="false" />
+		</table> -->
+
+		<!-- <table schema="ho_test" tableName="candidate" domainObjectName="HoCandidate">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+			<columnOverride column="talentId" property="talentId" />
+			<columnOverride column="positionId" property="positionId" />
+			<columnOverride column="positionCompanyId" property="positionCompanyId" />
+			<columnOverride column="headhunterCompanyId" property="headhunterCompanyId" />
+			<columnOverride column="headhunterId" property="headhunterId" />
+			<columnOverride column="name" property="name" />
+			<columnOverride column="cellPhone" property="cellPhone" />
+			<columnOverride column="email" property="email" />
+			<columnOverride column="rewardType" property="rewardType" />
+			<columnOverride column="fixedRewardAmount" property="fixedRewardAmount" />
+			<columnOverride column="percentageNumbric" property="percentageNumbric" />
+			<columnOverride column="resumeId" property="resumeId" />
+			<columnOverride column="description" property="description" />
+			<columnOverride column="terminatedReason" property="terminatedReason" />
+			<columnOverride column="status" property="status" />
+			<columnOverride column="createUserId" property="createUserId" />
+			<columnOverride column="updateUserId" property="updateUserId" />
+			<columnOverride column="createTime" property="createTime" />
+			<columnOverride column="updateTime" property="updateTime" />
+			<columnOverride column="interviewed" property="interviewed" />
+			<columnOverride column="positionCreateId" property="positionCreateId" />
+			<columnOverride column="resumeName" property="resumeName" />
+			<columnOverride column="resumeUrl" property="resumeUrl" />
+			<columnOverride column="hastenCandidateTime" property="hastenCandidateTime" />
+			<columnOverride column="positionAssignId" property="positionAssignId" />
+			<columnOverride column="engageType" property="engageType" />
+			<columnOverride column="otherReward" property="otherReward" />
+			<columnOverride column="holderId" property="holderId" />
+			<columnOverride column="currentAnnual" property="currentAnnual" />
+			<columnOverride column="expectAnnual" property="expectAnnual" />
+			<columnOverride column="interviewId" property="interviewId" />
+			<columnOverride column="priority" property="priority" />
+			<columnOverride column="gender" property="gender" />
+			<columnOverride column="birthday" property="birthday" />
+			<columnOverride column="city" property="city" />
+			<columnOverride column="address" property="address" />
+			<columnOverride column="avatar" property="avatar" />
+			<columnOverride column="standardized" property="standardized" />
+			<columnOverride column="integrity" property="integrity" />
+			<columnOverride column="hr_priority" property="hrPriority" />
+			<columnOverride column="last_status" property="lastStatus" />
+			<columnOverride column="undetermined_reason" property="undeterminedReason" />
+			<columnOverride column="undetermined_time" property="undeterminedTime" />
+			<columnOverride column="marital_status" property="maritalStatus" />
+			<columnOverride column="id_card" property="idCard" />
+			<columnOverride column="city_id" property="cityId" />
+			<columnOverride column="expect_city" property="expectCity" />
+			<columnOverride column="recommand_report_id" property="recommandReportId" />
+			<columnOverride column="degree_id" property="degreeId" />
+			<columnOverride column="self_evaluation" property="selfEvaluation" />
+			<columnOverride column="salary_desc" property="salaryDesc" />
+			<columnOverride column="other_welfare" property="otherWelfare" />
+			<columnOverride column="extra_msg" property="extraMsg" />
+			<columnOverride column="apply_job_status" property="applyJobStatus" />
+			<columnOverride column="expect_industry" property="expectIndustry" />
+			<columnOverride column="expect_function" property="expectFunction" />
+			<columnOverride column="primal_referee_id" property="primalRefereeId" />
+			<columnOverride column="old_head_hunter_id" property="oldHeadHunterId" />
+			<columnOverride column="english_name" property="englishName" />
+			<columnOverride column="guarantee_time" property="guaranteeTime" />
+			<columnOverride column="status_time" property="statusTime" />
+			<columnOverride column="report_standardized" property="reportStandardized" />
+			<columnOverride column="recommend_time" property="recommendTime" />
+			<columnOverride column="hr_read_time" property="hrReadTime" />
+			<columnOverride column="hr_feedback_time" property="hrFeedbackTime" />
+			<columnOverride column="cv_id" property="cvId" />
+			<columnOverride column="hide_hr" property="hideHr" />
+			<columnOverride column="revoke_type" property="revokeType" />
+			<columnOverride column="school" property="school" />
+			<columnOverride column="start_work_year" property="startWorkYear" />
+			<columnOverride column="company_name" property="companyName" />
+			<columnOverride column="job_title" property="jobTitle" />
+			<columnOverride column="original_reward" property="originalReward" />
+			<columnOverride column="original_guarantee_time"
+				property="originalGuaranteeTime" />
+			<columnOverride column="arrived" property="arrived" />
+			<columnOverride column="contacted" property="contacted" />
+			<columnOverride column="jobhunter_id" property="jobhunterId"></columnOverride>
+			<columnOverride column="position_activity_id"
+				property="positionActivityId"></columnOverride>
+			<columnOverride column="all_status" property="allStatus" />
+			<columnOverride column="resume_flag" property="resumeFlag" />
+		</table> -->
+
+		<!-- <table schema="ho_test" tableName="tb_service_relation" domainObjectName="ServiceRelation"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> </table> -->
+
+		<!-- <table schema="ho_test" tableName="tb_portrait_hh_company" domainObjectName="PortraitHhCompany"> 
+			<property name="useActualColumnNames" value="false" /> </table> -->
+			
+		<!-- <table schema="ho_test" tableName="tb_portrait_headhunter" domainObjectName="PortraitHeadhunter"> 
+			<property name="useActualColumnNames" value="false" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_hh_portrait" domainObjectName="CrmtHHPortrait"> 
+			<property name="useActualColumnNames" value="false" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_advertisement" domainObjectName="CrmAdvertisement"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_recruit_special" domainObjectName="CrmRecruitSpecial"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> </table> -->
+
+		<!-- <table schema="ho_dev" tableName="tb_position_question" domainObjectName="PositionQuestion"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> </table> -->
+		<!-- <table schema="ho_dev" tableName="tb_position_answer" domainObjectName="PositionAnswer"> 
+			<property name="useActualColumnNames" value="false" /> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /> </table> -->
+	</context>
+</generatorConfiguration>

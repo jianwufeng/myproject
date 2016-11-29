@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hunter.crm.domain.CityMapper">
+
+	<resultMap type="com.hunter.crm.domain.CityDO" id="CityDOResultMap">
+		<id column="id" property="id" />
+        <result column="name" property="name"/>
+        <result column="provinceId" property="provinceId"/>
+        <result column="postcode" property="postcode"/>
+        <result column="order" property="order"/>
+	</resultMap>
+
+	<sql id="MybatisCityDAO_all_column_fields">
+	      id,name,provinceId,postcode,order
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisCityDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="name != null  and name != '' "> AND name=#{name} </if>
+			<if test="provinceId != null "> AND provinceId=#{provinceId} </if>
+			<if test="postcode != null  and postcode != '' "> AND postcode=#{postcode} </if>
+			<if test="order != null "> AND order=#{order} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisCityDAO_selectById" parameterType="long" resultMap="CityDOResultMap">
+	SELECT
+		<include refid="MybatisCityDAO_all_column_fields" />
+	FROM
+		city
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisCityDAO_insert" parameterType="com.hunter.crm.domain.CityDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO city(
+				id,
+				name,
+				provinceId,
+				postcode,
+				order
+		)values(
+				#{id},
+				#{name},
+				#{provinceId},
+				#{postcode},
+				#{order}
+		)
+    </insert>
+
+	<update id="MybatisCityDAO_updateById" parameterType="com.hunter.crm.domain.CityDO">
+		UPDATE city
+		SET
+					name = #{name},
+					provinceId = #{provinceId},
+					postcode = #{postcode},
+					order = #{order}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisCityDAO_deleteById" parameterType="long">
+		DELETE FROM city WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisCityDAO_update_dynamic" parameterType="com.hunter.crm.domain.CityDO">
+		UPDATE city
+		<set>
+					<if test="name != null  and name != '' ">name=#{name},</if>
+					<if test="provinceId != null ">provinceId=#{provinceId},</if>
+					<if test="postcode != null  and postcode != '' ">postcode=#{postcode},</if>
+					<if test="order != null ">order=#{order},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisCityDAO_select_dynamic" resultMap="CityDOResultMap" parameterType="com.hunter.crm.domain.CityDO">
+	     SELECT
+	     	<include refid="MybatisCityDAO_all_column_fields" />
+		 FROM
+		 	city
+			<include refid="MybatisCityDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCityDAO_select_dynamic_count" resultType="long" parameterType="com.hunter.crm.domain.CityDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	city
+	 	<include refid="MybatisCityDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCityDAO_select_dynamic_page_query" resultMap="CityDOResultMap" parameterType="com.hunter.crm.domain.CityDO">
+	     SELECT
+	     	<include refid="MybatisCityDAO_all_column_fields" />
+		 FROM
+		 	city
+	 	<include refid="MybatisCityDAO_dynamic_where_fields" />
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

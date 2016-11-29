@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="com.hunteron.common.mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.50.33:3306/crm_dev" userId="root"
+			password="123456" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.hunteron.crm.ucenter.model"
+			targetProject="src/main/java" />
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper/crm"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.hunteron.crm.ucenter.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+		<!-- 表 -->
+		<!-- <table schema="crm_dev" tableName="tb_group" domainObjectName="Group" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_menu" domainObjectName="GroupMenu" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_oper" domainObjectName="GroupOper" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_group_user" domainObjectName="GroupUser" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_menu" domainObjectName="Menu" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_operation" domainObjectName="Operation" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_permission" domainObjectName="Permission" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_permission_role" domainObjectName="PermissionRole" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_remind" domainObjectName="Remind" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_role_group" domainObjectName="RoleGroup" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_role" domainObjectName="Role" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_system_log" domainObjectName="SystemLog" 
+			/> -->
+		<!--<table schema="crm_dev" tableName="tb_user" domainObjectName="User"> 
+			<property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table> -->
+		<!-- <table schema="crm_dev" tableName="tb_user_role" domainObjectName="UserRole" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_clue" domainObjectName="Clue" 
+			> <property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table> 
+			<table schema="crm_dev" tableName="tb_contact" domainObjectName="Contact" 
+			> <property name="useActualColumnNames" value="false"/> <generatedKey column="id" 
+			sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/> </table> -->
+		
+		
+		<table schema="crm_dev" tableName="tb_call_cts_hd" domainObjectName="CallCtsHd">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+			<columnOverride column="dest_type" property="desttype" />
+			<columnOverride column="op_name" property="opname" />
+			<columnOverride column="len_ring" property="lenring" />
+			<columnOverride column="len_talk" property="lentalk" />
+			<columnOverride column="trans_type" property="transtype" />
+			<columnOverride column="ext_in" property="extin" />
+			<columnOverride column="ext_out" property="extout" />
+			<columnOverride column="qn_type" property="qntype" />
+			<columnOverride column="qn_dest" property="qndest" />
+			<columnOverride column="qn_reason" property="qnreason" />
+			<columnOverride column="qn_result" property="qnresult" />
+			<columnOverride column="disc_type" property="disctype" />
+			<columnOverride column="callid_1" property="callid1" />
+		</table>
+
+
+
+		<!-- <table schema="crm_dev" tableName="tb_scale" domainObjectName="Scale" 
+			/> -->
+		<!-- <table schema="crm_dev" tableName="tb_style" domainObjectName="Style" 
+			/> -->
+	</context>
+</generatorConfiguration>
