@@ -9,7 +9,7 @@
   
   <properties>
 		<springframework.version>4.0.3.RELEASE</springframework.version>
-	</properties>
+  </properties>
   
   <dependencies>
   	<dependency>
@@ -94,12 +94,6 @@
 		<artifactId>cglib-nodep</artifactId>
 		<version>3.2.0</version>
 	</dependency>
-	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi-ooxml</artifactId>
-		<version>3.9</version>
-	</dependency>
-	
 	<dependency>
 		<groupId>org.apache.solr</groupId>
 		<artifactId>solr-solrj</artifactId>
