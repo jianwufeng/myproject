@@ -1,10 +1,11 @@
-package com.crm.controller;
+package com.crm.user.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import com.crm.domain.crm.User;
 import com.crm.service.IUserService;
 import com.crm.util.excel.ExcelUtils;
 
+@Description("user查看文档")
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -21,7 +23,7 @@ public class UserController {
     private IUserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "test", method = RequestMethod.GET)
+    @RequestMapping(value = "getUser", method = RequestMethod.GET)
     public String getUser() {
         return userService.getUserName(115);
     }
