@@ -14,7 +14,7 @@ import com.crm.domain.crm.UserExample;
 import com.crm.service.IUserService;
 import com.crm.util.mybatis.plugin.Limit;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements IUserService {
 
     @Autowired

@@ -13,8 +13,8 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         
-	<bean id="metadataRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+	<!-- <bean id="metadataRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="${api.v2.remote.url}/v2/metadataService" />
 		<property name="serviceInterface" value="com.hunteron.api.common.remote.v2.IMetadataRemoteService" />
-	</bean>
+	</bean> -->
 </beans>
