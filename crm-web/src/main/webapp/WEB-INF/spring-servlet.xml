@@ -35,6 +35,8 @@
 		 </mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<context:annotation-config />
+	
 	<mvc:resources mapping="/js/**" location="/js/" />
 	
 	<!-- 设置使用注解的类所在的jar包 -->
@@ -47,6 +49,14 @@
 	</bean>
 	
 	<import resource="classpath*:hessian/exporter/*.xml" />
+	
+	<!-- 权限拦截器-->
+	<mvc:interceptors>
+		<mvc:interceptor>		
+			<mvc:mapping path="/**"/> 
+			<bean class="com.crm.interceptor.AuthInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> 
 	
 	<!-- 完成请求和注解POJO的映射 -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
