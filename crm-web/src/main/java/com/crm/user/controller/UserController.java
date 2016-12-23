@@ -2,6 +2,7 @@ package com.crm.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "getUser", method = RequestMethod.GET)
-    public String getUser() {
+    public String getUser(HttpServletRequest request, HttpServletResponse response) {
         return userService.getUserName(115);
     }
 

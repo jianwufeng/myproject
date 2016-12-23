@@ -22,7 +22,7 @@
 			</bean> -->
 			
 			<!-- 返回字符串 -->
-			<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+			<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				 <!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
 				<property name="supportedMediaTypes">
 					<list>
@@ -35,12 +35,12 @@
 		 </mvc:message-converters>
 	</mvc:annotation-driven>
 	
-	<context:annotation-config />
+	<!-- 设置使用注解的类所在的jar包 -->
+	<context:component-scan base-package="com.crm.*">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
 	
 	<mvc:resources mapping="/js/**" location="/js/" />
-	
-	<!-- 设置使用注解的类所在的jar包 -->
-	<context:component-scan base-package="com.crm.*" />
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
@@ -54,7 +54,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>		
 			<mvc:mapping path="/**"/> 
-			<bean class="com.crm.interceptor.AuthInterceptor"></bean>
+			<bean class="com.crm.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> 
 	
