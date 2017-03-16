@@ -42,6 +42,9 @@
 		<property name="dataSource" ref="crmDataSource" />
 		<!-- 方式一 -->
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		
+		<!-- <property name="mapperLocations" value="classpath:mapper/crm/user/**/*.xml" /> -->
 		<!-- 方式二 -->
 		<property name="mapperLocations">
 			<list>

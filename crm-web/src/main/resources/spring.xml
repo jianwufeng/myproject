@@ -18,7 +18,7 @@
 	
 	<context:property-placeholder location="classpath:jdbc.properties,classpath:config.properties,classpath:memcache.properties,classpath:tianRun.properties" />-->
 	
-	<context:property-placeholder location="classpath:config/jdbc.properties"/>
+	<context:property-placeholder location="classpath:config/jdbc.properties,classpath:config/hessian.properties"/>
 	
 	<import resource="classpath:spring/application-*-context.xml" />
 	

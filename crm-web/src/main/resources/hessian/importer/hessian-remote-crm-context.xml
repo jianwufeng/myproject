@@ -22,4 +22,9 @@
 		<property name="serviceUrl" value="http://192.168.142.1:8082/crm-web/hessian/userService" />
 		<property name="serviceInterface" value="com.crm.service.IUserService" />
 	</bean>
+	
+	<bean id="userRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${api.v2.remote.url}/v2/userService" />
+		<property name="serviceInterface" value="com.hunteron.api.user.remote.v2.IUserRemoteService" />
+	</bean>
 </beans>

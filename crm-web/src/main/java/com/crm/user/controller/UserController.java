@@ -1,5 +1,6 @@
 package com.crm.user.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.crm.domain.crm.User;
 import com.crm.service.IUserService;
 import com.crm.util.excel.ExcelUtils;
+import com.hunteron.api.user.remote.v2.IUserRemoteService;
 
 @Description("user查看文档")
 @Controller
@@ -22,10 +25,12 @@ import com.crm.util.excel.ExcelUtils;
 public class UserController {
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IUserRemoteService userRemoteService;
 
     @ResponseBody
-    @RequestMapping(value = "getUser", method = RequestMethod.GET)
-    public String getUser(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "getUserName", method = RequestMethod.GET)
+    public String getUserName(HttpServletRequest request, HttpServletResponse response) {
         return userService.getUserName(115);
     }
 
@@ -42,4 +47,26 @@ public class UserController {
         return "success";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "getUserList", method = RequestMethod.GET)
+    public List<User> getUserList(HttpServletRequest request, HttpServletResponse response) {
+        return userService.selectByCondition(0, 1);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "getLastLoginTime", method = RequestMethod.GET)
+    public Date getLastLoginTime(HttpServletRequest request, HttpServletResponse response) {
+        return userRemoteService.getLastLoginTime(103L);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "importExcel", method = RequestMethod.GET)
+    public String importExcel(HttpServletRequest request, HttpServletResponse response, MultipartFile excel) {
+        try {
+            ExcelUtils.readExcelContent(excel, User.class, 0, "导入");
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        return "success";
+    }
 }

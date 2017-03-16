@@ -35,4 +35,6 @@ public interface IUserService {
 
     public String getUserName(Integer userId);
 
+    List<User> selectByCondition(int start, int pageSize);
+
 }

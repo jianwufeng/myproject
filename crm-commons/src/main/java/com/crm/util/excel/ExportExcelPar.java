@@ -27,4 +27,9 @@ public @interface ExportExcelPar {
      * 后缀
      */
     String postfix() default "";
+
+    /**
+     * 表头
+     */
+    String title() default "";
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crm.dao.crm.user.mapper.ExtraUserMapper;
 import com.crm.dao.crm.user.mapper.UserMapper;
 import com.crm.domain.crm.User;
 import com.crm.domain.crm.UserExample;
@@ -19,6 +21,8 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ExtraUserMapper extraUserMapper;
 
     @Override
     public List<User> getAll(int start, int pagesize) {
@@ -61,6 +65,11 @@ public class UserServiceImpl implements IUserService {
     public List<User> getActiveUserByIds(List<Integer> userIds) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public List<User> selectByCondition(int offset, int limit) {
+        return extraUserMapper.selectByCondition(new RowBounds(offset, limit));
     }
 
 }
