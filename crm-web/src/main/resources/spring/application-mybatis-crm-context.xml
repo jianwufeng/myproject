@@ -58,6 +58,7 @@
 		<property name="basePackage" value="
 		com.crm.dao.crm.user.mapper
 		" />
+		<!-- <property name="basePackage" value="com.crm.*.mapper" /> -->
 	</bean>
 
 </beans>
