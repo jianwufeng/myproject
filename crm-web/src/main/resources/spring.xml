@@ -12,6 +12,11 @@
 	
 	<!-- <context:component-scan base-package="com.crm.*" /> -->
 	
+	<!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.crm.*">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+    </context:component-scan>
+	
 	<mvc:view-controller path="/" view-name="redirect:/login"/>
 
 	<!-- <util:properties id="meta" location="classpath:config/jdbc.properties" /> 
@@ -24,4 +29,6 @@
 	
 	<import resource="classpath:hessian/importer/hessian-remote-*-context.xml" />
 	
+    <import resource="classpath*:hessian/exporter/*.xml" />
+    
 </beans>
