@@ -1,0 +1,164 @@
+div {
+	display: block;
+	font-size: 14px;
+}
+
+table {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 24px;
+}
+
+table tr td {
+	border: solid #ccc 1px;
+	padding-left: 3px;
+}
+
+ul {
+	display: block;
+	line-height: 24px;
+	padding: 0px;
+	margin: 5px 0px;
+}
+
+li {
+	list-style-type: none;
+	padding-left: 10px;
+}
+
+li:hover {
+	color: #0011ff;
+	cursor: pointer;
+}
+
+textarea {
+	border: solid #ccc 1px;
+	resize: vertical;
+    padding: 5px;
+}
+
+input {
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.btn { border-radius: 0; margin-right: 10px; }
+
+.btn-url { color: blue; cursor: pointer; }
+.btn-save { float: right; margin-right: 60px; }
+
+.oddLi { background-color: #eeeeee; }
+
+.evenLi {}
+
+.workArea {
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+.grid {
+	display: inline;
+	float: left;
+}
+
+.grid-r {
+	display: inline;
+	float: right;
+}
+
+.menuArea {
+	width: 260px;
+	display: inline;
+	padding-right: 10px;
+}
+
+.menuList {
+	height: 720px;
+	overflow: auto;
+}
+
+.interface-container {
+	width: 900px;
+	height: 700px;
+	padding: 10px;
+	overflow: auto;
+}
+
+.styleBorder {
+	border: solid #ccc 1px;
+}
+
+.tip{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.tip-inner{
+  background: rgba(0, 0, 0, .8);
+  line-height: 20px;
+  padding: 10px;
+  color: white;
+  max-width: 280px;
+  position: fixed;
+  font-size:.7rem;
+  left: 0;
+  top: 50%;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#testModal {
+	width: 700px;
+	height: 600px;
+	border-radius: 6px;
+	margin: 0 auto;
+	box-shadow: 1px 1px 5px #333;
+	-webkit-box-shadow: 1px 1px 5px #333;
+	display: none;
+	background-color: #ffffff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -120px 0 0 -150px;
+	z-index: 100000;
+}
+
+.request-container { padding:10px; height: 540px; overflow: auto; }
+
+#url { width:650px }
+
+.keyvalueeditor-row {}
+
+.keyvalueeditor {
+    width: 224px;
+	height: 18px;
+	padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 9px;
+    line-height: 18px;
+	vertical-align: middle;
+	border: none;
+	border-bottom: solid thin #CCC;
+	border-radius: 0;
+    outline: none;
+}
+
+.keyvalueeditor-key {}
+
+.keyvalueeditor-value {}
+
+.keyvalueeditor-valueTypeSelector {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.keyvalueeditor-delete { cursor: pointer; }
+
+#reqResult { width:650px; height:250px; margin-top:10px; }

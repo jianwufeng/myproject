@@ -17,6 +17,7 @@ public class MethodInfoItem {
     private String reqMethod;
     private Boolean isDeprecated;
     private List<MethodParam> methodParams;
+    private String reqResult;
 
     public MethodInfoItem(Method method, ClassInfoItem classInfoItem) {
         if (method != null) {
@@ -33,7 +34,7 @@ public class MethodInfoItem {
 
             // 方法的RequestMapping
             String classReqMapping = classInfoItem.getRequestMapping() == null ? "" : classInfoItem.getRequestMapping();
-            if (classReqMapping != null && classReqMapping.endsWith("/")) {
+            if (classReqMapping != null && classReqMapping.startsWith("/")) {
                 classReqMapping = classReqMapping.substring(1);
             }
             RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
@@ -124,6 +125,14 @@ public class MethodInfoItem {
 
     public void setMethodParams(List<MethodParam> methodParams) {
         this.methodParams = methodParams;
+    }
+
+    public String getReqResult() {
+        return reqResult;
+    }
+
+    public void setReqResult(String reqResult) {
+        this.reqResult = reqResult;
     }
 
 }

@@ -27,4 +27,9 @@
 		<property name="serviceUrl" value="${api.v2.remote.url}/v2/userService" />
 		<property name="serviceInterface" value="com.hunteron.api.user.remote.v2.IUserRemoteService" />
 	</bean>
+	
+	<bean id="interfaceRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${interface.remote.url}/interfaceRemoteService" />
+        <property name="serviceInterface" value="com.hunteron.api.interfaces.remote.IInterfaceRemoteService" />
+    </bean>
 </beans>

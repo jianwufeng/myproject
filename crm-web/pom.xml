@@ -135,6 +135,11 @@
 		<artifactId>hessian</artifactId>
 		<version>4.0.38</version>
 	</dependency>
+	<dependency>
+		<groupId>com.hunteron</groupId>
+		<artifactId>remote-services</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   
   

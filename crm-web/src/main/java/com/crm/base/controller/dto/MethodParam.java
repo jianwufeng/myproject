@@ -15,6 +15,7 @@ public class MethodParam {
     private Boolean required;
     private String type;
     private String defaultValue;
+    private String remark;
 
     public static List<MethodParam> getParams(Method method) {
         if (method != null) {
@@ -74,6 +75,14 @@ public class MethodParam {
 
     public void setDefaultValue(String defaultValue) {
         this.defaultValue = defaultValue;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
 }
