@@ -80,7 +80,7 @@ public class JspController {
     @Description("查看所有控制层类")
     @RequestMapping(value = "controllerClasses", method = RequestMethod.GET)
     public JsonResult controllerClasses(HttpServletRequest request, HttpServletResponse response) {
-        List<Class<?>> classes = ClassUtil.getClasses("com.hunteron.hd", "%Controller");
+        List<Class<?>> classes = ClassUtil.getClasses("com.crm", "%Controller");
         List<ClassInfoItem> classList = new ArrayList<ClassInfoItem>();
         if (CollectionUtils.isNotEmpty(classes)) {
             for (Class<?> clazz : classes) {
@@ -106,7 +106,7 @@ public class JspController {
                 methodList = MethodInfoItem.convert2MethodInfoItem(methods, classInfoItem);
 
                 if (CollectionUtils.isNotEmpty(methodList)) {
-                    List<AppInterfaceView> interfaceList = interfaceRemoteService.getAppInterfaceInfosList(Platform.HD, className);
+                    List<AppInterfaceView> interfaceList = interfaceRemoteService.getAppInterfaceInfosList(Platform.CRM_WEB, className);
                     this.combineInterfaceInfo(interfaceList, methodList);
                 }
 
@@ -184,7 +184,7 @@ public class JspController {
         }
 
         AppInterfaceBean interfaceModal = new AppInterfaceBean();
-        interfaceModal.setPlatform(Platform.HD);
+        interfaceModal.setPlatform(Platform.CRM_WEB);
         interfaceModal.setModalName(modalName);
         interfaceModal.setController(controller);
         interfaceModal.setDescription(description);

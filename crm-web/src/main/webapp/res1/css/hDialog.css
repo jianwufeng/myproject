@@ -1,0 +1,10 @@
+#HTitle {
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	padding:10px 45px 10px 12px;
+	border-bottom:1px solid #ddd;
+	background-color:#fff;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}

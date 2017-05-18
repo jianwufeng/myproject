@@ -9,9 +9,9 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
 	<mvc:annotation-driven>
-		 <mvc:message-converters>
+		<mvc:message-converters>
 		 	<!-- 返回是json -->
-		 	<!-- <bean class="org.springframework.http.converter.StringHttpMessageConverter">   
+		 	<bean class="org.springframework.http.converter.StringHttpMessageConverter">   
                	<property name="supportedMediaTypes">
                		<list>
 						<value>text/html;charset=UTF-8</value>
@@ -19,11 +19,11 @@
 						<value>text/json;charset=UTF-8</value>
 					</list>
                	</property>
-			</bean> -->
+			</bean>
 			
 			<!-- 返回字符串 -->
-			<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				 <!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
+			<!-- <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation
 				<property name="supportedMediaTypes">
 					<list>
 						<value>text/html;charset=UTF-8</value>
@@ -31,13 +31,17 @@
 						<value>text/json;charset=UTF-8</value>
 					</list>
 				</property>
-			</bean> 
+			</bean> --> 
 		 </mvc:message-converters>
 	</mvc:annotation-driven>
-	
+		 
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/res/**" location="/res/" />
     <!-- <mvc:view-controller path="/" view-name="redirect:/login"/>	 -->
+    
+    <context:component-scan base-package="com.crm.**.*">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+    </context:component-scan>
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
@@ -51,7 +55,7 @@
 			<mvc:mapping path="/**"/> 
 			<bean class="com.crm.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> 
+	</mvc:interceptors>
 	
 	<!-- 完成请求和注解POJO的映射 -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />

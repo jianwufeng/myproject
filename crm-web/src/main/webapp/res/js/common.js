@@ -8,10 +8,37 @@ $.fn.autoHeight = function(){
 }
 
 var common = {
+	contextPath : "http://localhost:8080/crm-web/",
 	currentInterfaceId : "",
 	currentModalName : "",
 	currentClassName : ""
 };
+
+// 拉取控制层类列表
+common.initClassList = function() {
+	var url = common.contextPath + "crm/api/controllerClasses";
+	$.ajax({url : url, type : 'GET',
+		success : function(rs) {
+			if (rs != null && rs.success) {
+				var html = "";
+				if (rs.data != null && rs.data.length > 0) {
+					html += "<ul>";
+					$.each(rs.data, function(idx, clazz) {
+						var name = clazz.name;
+						var description = clazz.description == null ? clazz.simpleName : clazz.description;
+						if (idx%2 == 0) {
+							html = html + "<li className='"+name+"' onclick='common.getControllerApi(this)' title='"+name+"' class='evenLi'>"+description+"</li>";
+						} else {
+							html = html + "<li className='"+name+"' onclick='common.getControllerApi(this)' title='"+name+"' class='oddLi'>"+description+"</li>";
+						}
+					});
+					html += "</ul>";
+				}
+				$("#menuList").append(html);
+			}
+		}
+	});
+}
 
 // 组织接口页面
 common.getControllerApi = function(obj) {
@@ -19,7 +46,7 @@ common.getControllerApi = function(obj) {
 	$(obj).css("color", "#0011ff");
 	common.currentModalName = $(obj).get(0).innerText;
 	common.currentClassName = $(obj).attr("className");
-	var url = "./controllerInterfaces?className=" + common.currentClassName;
+	var url = common.contextPath + "crm/api/controllerInterfaces?className=" + common.currentClassName;
 	$.ajax({url : url, type : 'GET',
 		success : function(rs) {
 			if (rs != null && rs.success) {
@@ -113,7 +140,7 @@ common.getControllerApi = function(obj) {
 					var reqPara = "modalName="+common.currentModalName+"&controller="+common.currentClassName+"&description="+desc;
 					reqPara = reqPara +"&reqUrl="+reqUrl+"&reqMethod="+method+"&interfaceParas="+paraListJson+"&reqResult="+encodeURIComponent(encodeURIComponent(result));
 					$.ajax({
-			            url: "saveAppInterface",
+			            url: common.contextPath + "crm/api/saveAppInterface",
 			            type: "post", //(post或get),jquery默认为get
 			            data: reqPara, //发送到服务器上的数据，如果不是字符串格式则自动转为字符串格式，get方法则附在html请求地址后面。
 			            dataType: "json", //可为:html、script、text、xml、json、jsonp ，jsonp回调函数名的参数名(默认为:callback)
@@ -151,8 +178,8 @@ common.initPostModal = function(obj) {
 	$obj = $(obj)[0];
 	var thisId = $obj.id;
 	common.currentInterfaceId = thisId;
-	var requestUrl = $obj.innerText.replace("http://~/", $("#contextPath").val());
-	var getHtml = "<div class='request-container'><div id='request-url-container'><input type='text' name='url' id='url' class='keyvalueeditor' placeholder='Enter request URL here' value='"+requestUrl+"?testUserId=41868'></div>";
+	var requestUrl = $obj.innerText.replace("http://~/", common.contextPath);
+	var getHtml = "<div class='request-container'><div id='request-url-container'><input type='text' name='url' id='url' class='keyvalueeditor' placeholder='Enter request URL here' value='"+requestUrl+"?testUserId=30852'></div>";
 	getHtml = getHtml +"<div id='url-keyvaleditor' class='keyvaleditor'>";
 	$.each($("td[id^='"+thisId+"para']"), function(idx, paraTd) {
 		var testValue = $("#"+paraTd.id + "testvalue").get(0).value;
@@ -160,7 +187,7 @@ common.initPostModal = function(obj) {
 		var required = paraTd.nextSibling.innerText;
 		getHtml = getHtml + "<div class='keyvalueeditor-row'><input type='text' class='keyvalueeditor keyvalueeditor-key' placeholder='URL Parameter Key' name='keyvalueeditor-"+paraTd.textContent+"' value='"+paraTd.textContent+"'>";
 		getHtml = getHtml + "<input type='text' class='keyvalueeditor keyvalueeditor-value' placeholder='Value' name='keyvalueeditor-"+testValue+"' value='"+testValue+"'>";
-		getHtml = getHtml + "<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../../res/img/delete.png'></a>";
+		getHtml = getHtml + "<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../img/delete.png'></a>";
 		if ("true" == required) {
 			getHtml = getHtml + "<span style='color:red;padding-left:10px;'>*</span></div>";
 		} else {
@@ -220,8 +247,8 @@ common.initGetModal = function(obj) {
 	$obj = $(obj)[0];
 	var thisId = $obj.id;
 	common.currentInterfaceId = thisId;
-	var requestUrl = $obj.innerText.replace("http://~/", $("#contextPath").val());
-	var getHtml = "<div class='request-container'><div id='request-url-container'><input type='text' name='url' id='url' class='keyvalueeditor' placeholder='Enter request URL here' value='"+requestUrl+"?testUserId=41868'></div>";
+	var requestUrl = $obj.innerText.replace("http://~/", common.contextPath);
+	var getHtml = "<div class='request-container'><div id='request-url-container'><input type='text' name='url' id='url' class='keyvalueeditor' placeholder='Enter request URL here' value='"+requestUrl+"?testUserId=30852'></div>";
 	getHtml = getHtml +"<div id='url-keyvaleditor' class='keyvaleditor'>";
 	$.each($("td[id^='"+thisId+"para']"), function(idx, paraTd) {
 		var testValue = $("#"+paraTd.id + "testvalue").get(0).value;
@@ -229,7 +256,7 @@ common.initGetModal = function(obj) {
 		var required = paraTd.nextSibling.innerText;
 		getHtml = getHtml + "<div class='keyvalueeditor-row'><input type='text' class='keyvalueeditor keyvalueeditor-key' placeholder='URL Parameter Key' name='keyvalueeditor-"+paraTd.textContent+"' value='"+paraTd.textContent+"'>";
 		getHtml = getHtml + "<input type='text' class='keyvalueeditor keyvalueeditor-value' placeholder='Value' name='keyvalueeditor-"+testValue+"' value='"+testValue+"'>";
-		getHtml = getHtml + "<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../../res/img/delete.png'></a>";
+		getHtml = getHtml + "<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../img/delete.png'></a>";
 		if ("true" == required) {
 			getHtml = getHtml + "<span style='color:red;padding-left:10px;'>*</span></div>";
 		} else {
@@ -290,7 +317,7 @@ common.bindPostClickEvent = function() {
 	$(".keyvalueeditor-last").on("click", function(){
 		$(".keyvalueeditor-last").unbind("click").removeClass("keyvalueeditor-last");
 		var idx = $(".keyvalueeditor-row").length - 1;
-		$(this).append("<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../../res/img/delete.png'></a>");
+		$(this).append("<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../img/delete.png'></a>");
 		$("#url-keyvaleditor").append("<div class='keyvalueeditor-row keyvalueeditor-last'><input type='text' class='keyvalueeditor keyvalueeditor-key' placeholder='URL Parameter Key' name='keyvalueeditor-key' value=''>"
 				+"<input type='text' class='keyvalueeditor keyvalueeditor-value' placeholder='Value' name='keyvalueeditor-value' value=''></div>");
 		common.bindPostClickEvent();
@@ -305,7 +332,7 @@ common.bindGetClickEvent = function() {
 	$(".keyvalueeditor-last").on("click", function(){
 		$(".keyvalueeditor-last").unbind("click").removeClass("keyvalueeditor-last");
 		var idx = $(".keyvalueeditor-row").length - 1;
-		$(this).append("<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../../res/img/delete.png'></a>");
+		$(this).append("<a tabindex='"+idx+"' class='keyvalueeditor-delete'><img class='deleteButton' src='../img/delete.png'></a>");
 		$("#url-keyvaleditor").append("<div class='keyvalueeditor-row keyvalueeditor-last'><input type='text' class='keyvalueeditor keyvalueeditor-key' placeholder='URL Parameter Key' name='keyvalueeditor-key' value=''>"
 				+"<input type='text' class='keyvalueeditor keyvalueeditor-value' placeholder='Value' name='keyvalueeditor-value' value=''></div>");
 		common.bindGetClickEvent();
