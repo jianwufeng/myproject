@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+       
+ 	<bean id="jobRepository"  
+        class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">  
+        <property name="transactionManager" ref="transactionManager" />  
+    </bean>  
+    
+    <bean id="transactionManager"  
+        class="org.springframework.batch.support.transaction.ResourcelessTransactionManager">  
+    </bean>  
+    
+    <bean id="jobLauncher"  
+        class="org.springframework.batch.core.launch.support.SimpleJobLauncher">  
+        <property name="jobRepository" ref="jobRepository" />  
+    </bean>  
+    
+     <!-- <import resource="spring/springbatch/steps.xml"/> -->
+     
+    <batch:job id="ioSampleJob">  
+        <batch:step id="step1">  
+            <batch:tasklet ref="begin"/>
+        </batch:step>  
+    </batch:job>  
+    
+    <bean id="begin" class="com.crm.base.springbatch.TaskletDemo" scope="step"/>  
+    
+    <batch:job id="dbJob1">
+        <batch:step id="dbReadAndWriterStep" >
+            <batch:tasklet>
+                <batch:chunk reader="userReader" processor="processDemo" writer="jdbcItemWriter"
+                    commit-interval="1">
+                </batch:chunk>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+    
+    <!-- 读文件 多文件上传-->
+    <bean id="userReader" class="org.springframework.batch.item.file.MultiResourceItemReader"  scope="step">
+		<!-- 单个文件读取 -->
+        <!-- <property name="resource" value="file:./sample.csv" /> -->
+		<!-- 多个文件读取  读取文件的位置 -->
+        <property name="resources" value="file:#{jobParameters['inputFile']}" />
+    	<!-- 引入单个文件的读取对象 -->
+        <property name="delegate" ref="flatFileItemReader" />
+    </bean>
+    
+    <!-- 单个文件的读取对象 -->
+    <bean id="flatFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+	    <!-- 跳过读取文件的第一行 因为第一行是列名-->
+	    <property name="linesToSkip" value="1"/>
+	    
+	    <!-- <property name="skippedLinesCallback" class=""/> -->
+	    
+	    <!-- 文件的行映射 -->
+	    <property name="lineMapper">
+	      <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+	        <!-- 行的字段映射 -->
+	        <property name="lineTokenizer">
+	            <!-- 映射的字段以下面names属性，以，隔开 -->
+	            <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+	                <!-- <property name="names" value="id,userCode,userName,englishName" /> -->
+	                <property name="delimiter" value="|"/>
+	                <property name="names">
+		                <list>
+			                <value>id</value>
+			                <value>userCode</value>
+			                <value>userName</value>
+			                <value>englishName</value>
+			            </list>
+	                </property>
+	            </bean>
+	        </property>
+	        
+	        <!-- 设置 读取的字段映射给实体对象 -->
+	        <property name="fieldSetMapper">
+	            <bean class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+	                <property name="prototypeBeanName" value="user" />
+	            </bean>
+	        </property>
+	      </bean>
+	    </property>
+    </bean>
+  
+    <bean id="user" class="com.crm.domain.crm.User2"/>
+    
+    <bean id="processDemo" class="com.crm.base.springbatch.ProcessDemo"/>
+  
+    <bean id="jdbcItemWriter" class="com.crm.base.springbatch.JdbcItemWriter" scope="step"/>
+  
+</beans>  

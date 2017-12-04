@@ -135,6 +135,11 @@
 		<artifactId>hessian</artifactId>
 		<version>4.0.38</version>
 	</dependency>
+	<dependency>
+		<groupId>org.springframework.batch</groupId>
+		<artifactId>spring-batch-core</artifactId>
+		<version>3.0.6.RELEASE</version>
+	</dependency>
   </dependencies>
   
   

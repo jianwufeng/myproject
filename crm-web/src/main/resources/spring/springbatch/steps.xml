@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 文件Resource -->
+    <bean id="fileResource" class="com.allinfinance.gmp.service.sdk.BatchFileResourceFactoryBean" scope="prototype">
+        <description>文件地址</description>
+        <property name="filePath" value="#{env['batchWorkDir']}/$yyyymmdd/input/#{T(com.allinfinance.ares.facility.util.SystemPropertyUtil).getDcnCode()}_csii_error_correction.dat"/>
+    </bean>
+
+    <!-- 等待文件Tasklet -->
+    <bean id="waitFileResource" class="com.allinfinance.ares.batch.AresWaitingResourceTask" scope="step">
+        <property name="waitResources">
+            <list>
+                <ref bean="fileResource"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 读取文件Reader，没有文件头 -->
+    <bean id="readTestFiles" class="com.allinfinance.ares.batch.AresFileItemReader" scope="step">
+        <property name="fileDetailClass" value="com.allinfinance.cps.batch.filestruct.CsiiErrorCorrectionFileItem" />
+        <property name="resource" ref="fileResource" />
+        <property name="separator" value="\|" />
+    </bean>
+
+    <!-- 处理文件Processor -->
+    <bean id="processTestFiles" class="com.allinfinance.cps.batch.s1300.P1300CsiiErrorCorrection" scope="step"/>
+
+    <!-- 保存文件记录Writer -->
+    <bean id="writeTestFiles" class="com.allinfinance.cps.batch.s1300.W1300CsiiErrorCorrection" scope="step"/>
+    
+    <!-- 批量步骤模版，目前用于定义一组listener -->
+	<batch:step id="stepTemplate" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="gmpBatchStatusListener" />
+			<batch:listener>
+				<bean class="com.allinfinance.ares.batch.DebugSupportListener" />
+			</batch:listener>
+		</batch:listeners>
+	</batch:step>
+
+	<!-- 用于支持并发批量的线程池 -->
+	<task:executor id="asyncTaskExecutor" pool-size="#{env['batchTaskPoolSize'] ?: 16}" />
+
+	<batch:job id="testJob">
+		<batch:listeners>
+			<batch:listener ref="gmpBatchStatusListener" />
+			<batch:listener ref="gmpCommandExecutionListener" />
+		</batch:listeners>
+		<batch:validator>
+			<bean class="com.allinfinance.gmp.service.sdk.BatchDateJobParametersValidator" />
+		</batch:validator>
+
+		<!-- 文件处理 -->
+		<batch:step parent="stepTemplate" id="step1" next="step2">
+			<batch:tasklet ref="waitFileResource" />
+		</batch:step>
+		
+		<batch:step parent="stepTemplate" id="step2" >
+			<batch:tasklet>
+				<batch:chunk reader="readTestFiles" processor="processTestFiles" writer="writeTestFiles" commit-interval="1000" />
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+</beans>
