@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="/home/li/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar" 
+		/> -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+	<context id="crm-ctx" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<plugin type="mybatis.plugin.ModelExampleLimitPlugin" />
+		<plugin type="mybatis.plugin.ModelJavaDocPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 取消注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ques_survey" userId="root"
+			password="Xing1234" />
+
+		<!-- 实体对象路径 -->
+		<javaModelGenerator targetPackage="com.crm.domain.backend.survey"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis xml文件路径 -->
+		<sqlMapGenerator targetPackage="mapper/backend"
+			targetProject="src/main/resources" />
+		<!-- dao接口路径 -->
+		<javaClientGenerator targetPackage="com.backend.survey.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+		<!-- 表 -->
+
+		<!-- <table schema="ques_survey" tableName="t_an_ques_survey" domainObjectName="QuesSurvey"> 
+			 <property name="useActualColumnNames" value="false" /> 
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table> 
+
+		<table schema="ques_survey" tableName="t_an_ques" domainObjectName="Ques">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+				<columnOverride column="is_delete" property="isDelete" jdbcType="integer"/> 
+		</table>
+		
+		<table schema="ques_survey" tableName="t_an_ques_type" domainObjectName="QuesType">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table>
+		
+		<table schema="ques_survey" tableName="t_an_ques_survey_answered_detail" domainObjectName="QuesSurveyAnsweredDetail">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table>
+		
+		<table schema="ques_survey" tableName="t_an_ques_answer_detail" domainObjectName="QuesAnswerDetail">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table> -->
+		<table schema="ques_survey" tableName="t_user" domainObjectName="User">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" />
+		</table>
+
+	</context>
+</generatorConfiguration>

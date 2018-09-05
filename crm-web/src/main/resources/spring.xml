@@ -22,6 +22,4 @@
 	
 	<import resource="classpath:spring/application-*-context.xml" />
 	
-	<import resource="classpath:hessian/importer/hessian-remote-*-context.xml" />
-	
 </beans>

@@ -18,12 +18,7 @@ public class MybatisGenerator {
     public static void main(String[] args) throws InvalidConfigurationException, IOException, XMLParserException, SQLException, InterruptedException {
         List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
-        File configFile = new File("tool/generatorConfigHO.xml");
-        // File configFile = new File("generatorConfig.xml");
-        // File configFile = new File("generatorConfigCrmUser.xml");
-        // File configFile = new File("generatorConfigAc.xml");
-        // File configFile = new File("tool/generatorConfigCrm.xml");
-        // File configFile = new File("tool/generatorConfigJobhunter.xml");
+        File configFile = new File("tool/generatorConfig_survey.xml");
 
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
