@@ -28,6 +28,28 @@ function asyncXhr(url, data, callback, type) {
 }
 
 /**
+ * ajax异步调用
+ * 
+ * @param url
+ * @param data
+ * @param contentType
+ * @param callback
+ *            回调函数
+ * @param type
+ */
+function asyncXhr2(url, data, type, contentType, callback) {
+	var _data, options = {
+		url : url,
+		data : data,
+		type : type,
+		async : true,
+		contentType : contentType,
+		success : callback
+	};
+	$.ajax(options);
+}
+
+/**
  * ajax异步get调用
  */
 function asyncXhrGet(url, data, callback) {

@@ -9,4 +9,6 @@ public interface IQuesSurveyService {
     void addQuesSurvey(QuesSurvey quesSurvey);
 
     List<QuesSurvey> queryQuesSurvey();
+
+    List<QuesSurvey> queyQuesSurveyByCondition(QuesSurvey quesSurvey);
 }

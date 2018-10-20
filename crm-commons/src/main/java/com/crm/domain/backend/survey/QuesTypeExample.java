@@ -209,66 +209,6 @@ public class QuesTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("id =", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("id <>", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("id >", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("id >=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("id <", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("id <=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("id in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
         public Criteria andQuesTypeIdIsNull() {
             addCriterion("ques_type_id is null");
             return (Criteria) this;
@@ -279,62 +219,52 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdEqualTo(String value) {
+        public Criteria andQuesTypeIdEqualTo(Long value) {
             addCriterion("ques_type_id =", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdNotEqualTo(String value) {
+        public Criteria andQuesTypeIdNotEqualTo(Long value) {
             addCriterion("ques_type_id <>", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdGreaterThan(String value) {
+        public Criteria andQuesTypeIdGreaterThan(Long value) {
             addCriterion("ques_type_id >", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdGreaterThanOrEqualTo(String value) {
+        public Criteria andQuesTypeIdGreaterThanOrEqualTo(Long value) {
             addCriterion("ques_type_id >=", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdLessThan(String value) {
+        public Criteria andQuesTypeIdLessThan(Long value) {
             addCriterion("ques_type_id <", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdLessThanOrEqualTo(String value) {
+        public Criteria andQuesTypeIdLessThanOrEqualTo(Long value) {
             addCriterion("ques_type_id <=", value, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdLike(String value) {
-            addCriterion("ques_type_id like", value, "quesTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuesTypeIdNotLike(String value) {
-            addCriterion("ques_type_id not like", value, "quesTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuesTypeIdIn(List<String> values) {
+        public Criteria andQuesTypeIdIn(List<Long> values) {
             addCriterion("ques_type_id in", values, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdNotIn(List<String> values) {
+        public Criteria andQuesTypeIdNotIn(List<Long> values) {
             addCriterion("ques_type_id not in", values, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdBetween(String value1, String value2) {
+        public Criteria andQuesTypeIdBetween(Long value1, Long value2) {
             addCriterion("ques_type_id between", value1, value2, "quesTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesTypeIdNotBetween(String value1, String value2) {
+        public Criteria andQuesTypeIdNotBetween(Long value1, Long value2) {
             addCriterion("ques_type_id not between", value1, value2, "quesTypeId");
             return (Criteria) this;
         }
@@ -419,62 +349,52 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdEqualTo(String value) {
+        public Criteria andQuesSurveyIdEqualTo(Long value) {
             addCriterion("ques_survey_id =", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdNotEqualTo(String value) {
+        public Criteria andQuesSurveyIdNotEqualTo(Long value) {
             addCriterion("ques_survey_id <>", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdGreaterThan(String value) {
+        public Criteria andQuesSurveyIdGreaterThan(Long value) {
             addCriterion("ques_survey_id >", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdGreaterThanOrEqualTo(String value) {
+        public Criteria andQuesSurveyIdGreaterThanOrEqualTo(Long value) {
             addCriterion("ques_survey_id >=", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdLessThan(String value) {
+        public Criteria andQuesSurveyIdLessThan(Long value) {
             addCriterion("ques_survey_id <", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdLessThanOrEqualTo(String value) {
+        public Criteria andQuesSurveyIdLessThanOrEqualTo(Long value) {
             addCriterion("ques_survey_id <=", value, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdLike(String value) {
-            addCriterion("ques_survey_id like", value, "quesSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuesSurveyIdNotLike(String value) {
-            addCriterion("ques_survey_id not like", value, "quesSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuesSurveyIdIn(List<String> values) {
+        public Criteria andQuesSurveyIdIn(List<Long> values) {
             addCriterion("ques_survey_id in", values, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdNotIn(List<String> values) {
+        public Criteria andQuesSurveyIdNotIn(List<Long> values) {
             addCriterion("ques_survey_id not in", values, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdBetween(String value1, String value2) {
+        public Criteria andQuesSurveyIdBetween(Long value1, Long value2) {
             addCriterion("ques_survey_id between", value1, value2, "quesSurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andQuesSurveyIdNotBetween(String value1, String value2) {
+        public Criteria andQuesSurveyIdNotBetween(Long value1, Long value2) {
             addCriterion("ques_survey_id not between", value1, value2, "quesSurveyId");
             return (Criteria) this;
         }
@@ -549,52 +469,52 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteEqualTo(Integer value) {
+        public Criteria andIsDeleteEqualTo(Boolean value) {
             addCriterion("is_delete =", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotEqualTo(Integer value) {
+        public Criteria andIsDeleteNotEqualTo(Boolean value) {
             addCriterion("is_delete <>", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteGreaterThan(Integer value) {
+        public Criteria andIsDeleteGreaterThan(Boolean value) {
             addCriterion("is_delete >", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIsDeleteGreaterThanOrEqualTo(Boolean value) {
             addCriterion("is_delete >=", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteLessThan(Integer value) {
+        public Criteria andIsDeleteLessThan(Boolean value) {
             addCriterion("is_delete <", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteLessThanOrEqualTo(Integer value) {
+        public Criteria andIsDeleteLessThanOrEqualTo(Boolean value) {
             addCriterion("is_delete <=", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteIn(List<Integer> values) {
+        public Criteria andIsDeleteIn(List<Boolean> values) {
             addCriterion("is_delete in", values, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotIn(List<Integer> values) {
+        public Criteria andIsDeleteNotIn(List<Boolean> values) {
             addCriterion("is_delete not in", values, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteBetween(Integer value1, Integer value2) {
+        public Criteria andIsDeleteBetween(Boolean value1, Boolean value2) {
             addCriterion("is_delete between", value1, value2, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotBetween(Integer value1, Integer value2) {
+        public Criteria andIsDeleteNotBetween(Boolean value1, Boolean value2) {
             addCriterion("is_delete not between", value1, value2, "isDelete");
             return (Criteria) this;
         }

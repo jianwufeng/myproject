@@ -40,16 +40,16 @@
 			 <property name="useActualColumnNames" value="false" /> 
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
-		</table> 
+		</table>  -->
 
 		<table schema="ques_survey" tableName="t_an_ques" domainObjectName="Ques">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
-				<columnOverride column="is_delete" property="isDelete" jdbcType="integer"/> 
+				<!-- <columnOverride column="is_delete" property="isDelete" jdbcType="integer"/> --> 
 		</table>
 		
-		<table schema="ques_survey" tableName="t_an_ques_type" domainObjectName="QuesType">
+		<!-- <table schema="ques_survey" tableName="t_an_ques_type" domainObjectName="QuesType">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
@@ -65,12 +65,12 @@
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
-		</table> -->
+		</table>
 		<table schema="ques_survey" tableName="t_user" domainObjectName="User">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 		</table>
-
+ -->
 	</context>
 </generatorConfiguration>

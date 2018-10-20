@@ -30,7 +30,7 @@
 </div>
 
 <!-- 表格 -->
-<div id="dateTable"></div>
+<div id="dateTableId" lay-filter="dateTableId"></div>
 
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
@@ -48,24 +48,24 @@
 
         // 表格渲染
         var tableIns = table.render({
-            elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
+            elem: '#dateTableId'                  //指定原始表格元素选择器（推荐id选择器）
             , height: vipTable.getFullHeight()    //容器高度
             , cols: [[                  //标题栏
                 {checkbox: true, sort: true, fixed: true, space: true}
-                , {field: 'id', title: 'ID', width: 80}
-                , {field: 'account', title: '用户名', width: 120}
-                , {field: 'auth_group_name', title: '权限组', width: 120}
-                , {field: 'last_login_time', title: '最后登录时间', width: 180}
-                , {field: 'last_login_ip', title: '最后登录IP', width: 180}
-                , {field: 'create_time', title: '创建时间', width: 180}
-                , {field: 'status', title: '状态', width: 70}
-                , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {field: 'quesId', title: '题目ID', width: 80}
+                , {field: 'quesName', title: '题目名称', width: 120}
+                , {field: 'quesType', title: '题目类型', width: 100}
+                , {field: 'quesSurveyId', title: '所属问卷ID', width: 120}
+                , {field: 'quesTypeId', title: '所属题目大类ID', width: 150}
+                , {field: 'orderById', title: '题目排序', width: 100}
+                , {field: 'createTime', title: '创建时间', width: 120}
+                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
-            , url: './../json/data_table.json'
+            , url: 'http://localhost:8080/crm-web/queryQuesList'
             , method: 'get'
             , page: true
-            , limits: [30, 60, 90, 150, 300]
+            /* , limits: [30, 60, 90, 150, 300]
             , limit: 30 //默认采用30
             , loading: false
             , done: function (res, curr, count) {
@@ -78,7 +78,7 @@
 
                 //得到数据总量
                 console.log(count);
-            }
+            } */
         });
 
         // 获取选中行
@@ -94,14 +94,45 @@
             tableIns.reload();
         });
 
-
         // you code ...
-
+      	//监听行工具事件
+        table.on('tool(dateTableId)', function(obj){ //注：tool 是工具条事件名，dateTableId 是 table 原始容器的属性 lay-filter="对应的值"
+          var data = obj.data //获得当前行数据
+          ,layEvent = obj.event; //获得 lay-event 对应的值
+          if(layEvent === 'detail'){
+            layer.msg('查看操作');
+          } else if(layEvent === 'add'){
+        	  //layer.msg('添加操作');
+              	layer.open({
+              		  type: 2,
+              		  area: ['700px', '300px'],
+              		  fixed: false, //不固定
+              		  maxmin: true,
+              		  content: 'http://localhost:8080/crm-web/getQuesAnswerFtl?quesId=' + data.quesId
+              	});
+          } else if(layEvent === 'del'){
+            layer.confirm('真的删除行么', function(index){
+              obj.del(); //删除对应行（tr）的DOM结构
+              layer.close(index);
+              //向服务端发送删除指令
+            });
+          } else if(layEvent === 'edit'){
+            //layer.msg('编辑操作');
+            layer.open({
+        		  type: 2,
+        		  area: ['700px', '350px'],
+        		  fixed: false, //不固定
+        		  maxmin: true,
+        		  content: 'http://localhost:8080/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
+        	});
+          }
+        });
+      
     });
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
-    <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="add">添加答案</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
 </script>

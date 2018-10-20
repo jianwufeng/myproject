@@ -26,4 +26,11 @@ public class QuesSurveyServiceImpl implements IQuesSurveyService {
         QuesSurveyExample example = new QuesSurveyExample();
         return quesSurveyMapper.selectByExample(example);
     }
+
+    @Override
+    public List<QuesSurvey> queyQuesSurveyByCondition(QuesSurvey quesSurvey) {
+        QuesSurveyExample example = new QuesSurveyExample();
+        example.createCriteria().andQuesSurveyIdEqualTo(quesSurvey.getQuesSurveyId());
+        return quesSurveyMapper.selectByExample(example);
+    }
 }

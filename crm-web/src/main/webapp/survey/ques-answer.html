@@ -52,15 +52,17 @@
             , height: vipTable.getFullHeight()    //容器高度
             , cols: [[                  //标题栏
                 {checkbox: true, sort: true, fixed: true, space: true}
-                , {field: 'quesTypeId', title: '题目大类ID', width: 100}
-                , {field: 'quesTypeName', title: '题目大类名称', width: 280}
+                , {field: 'answerId', title: '答案ID', width: 80}
+                , {field: 'answerName', title: '答案名称', width: 120}
+                , {field: 'quesId', title: '题目ID', width: 100}
                 , {field: 'quesSurveyId', title: '所属问卷ID', width: 120}
-                , {field: 'orderById', title: '排序', width: 80}
-                , {field: 'createTime', title: '创建时间', width: 150}
-                , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {field: 'quesTypeId', title: '所属题目大类ID', width: 150}
+                , {field: 'orderById', title: '答案排序', width: 100}
+                , {field: 'createTime', title: '创建时间', width: 180}
+                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
-            , url: 'http://localhost:8080/crm-web/queryQuesTypeList'
+            , url: 'http://localhost:8080/crm-web/queryQuesAnswerList'
             , method: 'get'
             , page: true
             /* , limits: [30, 60, 90, 150, 300]
@@ -70,8 +72,10 @@
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                 console.log(res);
+
                 //得到当前页码
                 console.log(curr);
+
                 //得到数据总量
                 console.log(count);
             } */
@@ -90,9 +94,8 @@
             tableIns.reload();
         });
 
-
         // you code ...
-      //监听行工具事件
+      	//监听行工具事件
         table.on('tool(dateTableId)', function(obj){ //注：tool 是工具条事件名，dateTableId 是 table 原始容器的属性 lay-filter="对应的值"
           var data = obj.data //获得当前行数据
           ,layEvent = obj.event; //获得 lay-event 对应的值
@@ -105,7 +108,7 @@
               		  area: ['700px', '300px'],
               		  fixed: false, //不固定
               		  maxmin: true,
-              		  content: 'http://localhost:8080/crm-web/getQuesFtl?quesSurveyId=' + data.quesSurveyId + '&quesTypeId=' + data.quesTypeId
+              		  content: 'http://localhost:8080/crm-web/getQuesAnswerFtl?quesId=' + data.quesId
               	});
           } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){
@@ -125,21 +128,10 @@
           }
         });
       
-        $('#btn-add').on('click', function () {
-        	layer.open({
-        		  type: 2,
-        		  area: ['700px', '450px'],
-        		  fixed: false, //不固定
-        		  maxmin: true,
-        		  content: './add-edit.html'
-        	});
-        });
-        
     });
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
-    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="add">添加题目</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
 </script>
