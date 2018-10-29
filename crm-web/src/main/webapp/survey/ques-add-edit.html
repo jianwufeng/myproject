@@ -12,94 +12,92 @@
 </head>
 <body class="body">
 
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form" action="">
+    <fieldset class="layui-elem-field layui-field-title">
+	  <legend>大类标题</legend>
+	</fieldset>
     <div class="layui-form-item">
-        <label class="layui-form-label">长输入框</label>
-
+        <label class="layui-form-label">大类标题</label>
         <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" placeholder="请输入标题" lay-verify="required"
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入问卷标题" lay-verify="required"
                    class="layui-input">
-        </div>
-    </div>
-    
-    <div class="layui-form-item">
-        <label class="layui-form-label">问卷名称</label>
-
-        <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" placeholder="请输入问卷名称" lay-verify="required"
-                   class="layui-input">
-        </div>
-    </div>
-    
-    <div class="layui-form-item">
-        <label class="layui-form-label">问卷LOGO</label>
-
-        <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" placeholder="请输入问卷LOGO链接" lay-verify="required"
-                   class="layui-input">
-        </div>
-    </div>
-    
-    <div class="layui-form-item">
-        <label class="layui-form-label">问卷标题</label>
-
-        <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" placeholder="请输入问卷标题" lay-verify="required"
-                   class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">问卷选择框</label>
-
-        <div class="layui-input-block">
-            <select name="interest" lay-filter="aihao">
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1" selected="">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">行内选择框</label>
-
-        <div class="layui-input-inline">
-            <select name="quiz1">
-                <option value="" selected="">请选择问卷</option>
-                <option value="浙江">浙江省</option>
-                <option value="你的工号">江西省</option>
-                <option value="你最喜欢的老师">福建省</option>
-            </select>
-        </div>
-        <div class="layui-input-inline">
-            <select name="quiz2">
-                <option value="">请选择大类</option>
-                <option value="杭州">杭州</option>
-                <option value="宁波" disabled="">宁波</option>
-                <option value="温州">温州</option>
-                <option value="温州">台州</option>
-                <option value="温州">绍兴</option>
-            </select>
-        </div>
-        <div class="layui-input-inline">
-            <select name="quiz3">
-                <option value="">请选择题目</option>
-                <option value="西湖区">西湖区</option>
-                <option value="余杭区">余杭区</option>
-                <option value="拱墅区">临安市</option>
-            </select>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
         <div class="layui-input-block">
-            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" class="layui-textarea"></textarea>
+            <!-- <input type="text" name="quesSurveyRemarks" autocomplete="off" placeholder="请输入问卷说明" lay-verify="required"
+                   class="layui-input"> -->
+            <textarea placeholder="请输入大类说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required"></textarea>
         </div>
-        <label class="layui-form-label">请输入问卷说明</label>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">题目标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入标题" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入英文标题" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    
+    <fieldset class="layui-elem-field layui-field-title">
+	  <legend>题目</legend>
+	</fieldset>
+	
+	<div id="quesListId">
+		<div id="ques_dev">
+			<div class="layui-form-item">
+			 	<div class="layui-inline">
+			        <label class="layui-form-label">题目信息</label>
+			        <div class="layui-input-inline">
+			            <input type="text" name="quesName" autocomplete="off" placeholder="请输入题目名称" lay-verify="required"
+			                   class="layui-input">
+			        </div>
+			        <label class="layui-form-label">题目类型</label>
+			        <div class="layui-input-inline">
+			            <select name="quesType">
+				          <option value="">请选择</option>
+				          <option value="1">单选</option>
+				          <option value="2">多选</option>
+				          <option value="3">问答</option>
+				        </select>
+			        </div>
+			        <label class="layui-form-label">是否必答</label>
+			        <div class="layui-input-inline">
+			            <select name="required">
+				          <option value="">请选择</option>
+				          <option value="1">是</option>
+				          <option value="2">否</option>
+				        </select>
+			        </div>
+		        </div>
+		        <div class="layui-inline">
+		        	<label class="layui-form-label"></label>
+			        <div class="layui-input-inline">
+			            <input type="text" name="quesName" autocomplete="off" placeholder="请输入题目名称" lay-verify="required"
+			                   class="layui-input">
+			        </div>
+			     </div>
+		    </div>
+		    <div class="layui-form-item">
+			    <div class="layui-inline">
+			        <label class="layui-form-label">答案选项：</label>
+			        <div class="layui-input-inline">
+				        <input type="button" class="layui-btn layui-btn-xs" id="button-add" value="添加选项"></input>
+				    </div>
+			    </div>
+		    </div>
+		    <div id="answer-add">
+			    
+		    </div>
+		</div>
+	</div>
     <div class="layui-form-item">
         <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
     </div>

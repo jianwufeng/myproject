@@ -91,7 +91,7 @@
                 title: '最终的提交信息'
             });
             
-            asyncXhr2('http://localhost:8080/crm-web/addQuesAnswerDetail', JSON.stringify(data.field), "POST", 'application/json', function(data){
+            asyncXhr2('/crm-web/addQuesAnswerDetail', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
    	              //parent.location.href="/queryQuesSurveyList";

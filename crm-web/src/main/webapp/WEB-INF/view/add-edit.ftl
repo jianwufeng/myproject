@@ -87,7 +87,7 @@
                 title: '最终的提交信息'
             });
         	console.log(data.field); */
-        	/* var url = "http://localhost:8080/crm-web/addQuesSurvey";
+        	/* var url = "/crm-web/addQuesSurvey";
         	var data = JSON.stringify(data.field);
         	var data = syncPost(url, data);
         	if(data){
@@ -99,7 +99,7 @@
         	/* var $=layui.$;
       	    $.ajax({  
       	          type: 'post',  
-      	          url: 'http://localhost:8080/crm-web/addQuesSurvey', // ajax请求路径  
+      	          url: '/crm-web/addQuesSurvey', // ajax请求路径  
       	          contentType : 'application/json',
       	          data:JSON.stringify(data.field),
       	          success: function(data){ 
@@ -111,20 +111,16 @@
       	            }
       	          }  
       	      });  */
-        	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引  
-        	alert("index = " + index);
 
-      	    asyncXhr2('http://localhost:8080/crm-web/addQuesSurvey', JSON.stringify(data.field), "POST", 'application/json', function(data){
+      	    asyncXhr2('/crm-web/addQuesSurvey', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	              //parent.location.href="http://localhost:8080/crm-web/queryQuesSurveyList?page=1&limit=30";
+   	              parent.location.href="survey/ques-survey.html";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }
       	    });
         	
-            //parent.layui.table.reload('dateTableId'); //重载表格
-            //parent.layer.close(index); //再执行关闭 
             return false;
         });
 

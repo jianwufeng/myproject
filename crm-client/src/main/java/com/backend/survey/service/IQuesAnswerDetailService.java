@@ -3,6 +3,7 @@ package com.backend.survey.service;
 import java.util.List;
 import java.util.Map;
 
+import com.crm.domain.backend.survey.Ques;
 import com.crm.domain.backend.survey.QuesAnswerDetail;
 
 public interface IQuesAnswerDetailService {
@@ -16,4 +17,7 @@ public interface IQuesAnswerDetailService {
     List<QuesAnswerDetail> queryQuesAnswerListPage(int page, int limit);
 
     int countQuesAnswer();
+
+    Map<Ques, List<QuesAnswerDetail>> queryQuesAnswerDetailMapBy(Long quesSurveyId, List<Long> quesIds);
+
 }

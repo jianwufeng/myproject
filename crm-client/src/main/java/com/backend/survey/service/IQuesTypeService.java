@@ -11,4 +11,8 @@ public interface IQuesTypeService {
     List<QuesType> queryQuesTypeList(Long quesSurveyId);
 
     List<QuesType> queryQuesTypeList(int page, int limit);
+
+    QuesType getById(Long quesTypeId);
+
+    int countQuesType();
 }

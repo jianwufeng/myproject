@@ -10,21 +10,23 @@ $.ajaxSetup({
 $(document).ready(function() {
 	
 	$(".layui-form").on("click", "#login-id", function(e) {
-		var REMOVE_URL = "http://localhost:8080/crm-web/login";
-        var email = $('#username').val();
-        alert(email);
+		var REMOVE_URL = "/crm-web/login";
+        var userName = $('#username').val();
         var password = $('#pwd').val();
-        var data = syncPost(REMOVE_URL, {
-			email : email,
+        var formData = {
+        	userName : userName,
 			password : password
-		});
-		if (data) {
-			alert('登录成功');
-            location.href = "index.ftl";
-            alert(location.href)
-		} else {
-			alert("失败！请稍后再试。");
-		}
+		};
+        
+        asyncXhr2('/crm-web/login', JSON.stringify(formData), "POST", 'application/json', function(data){
+        	var jsonData =  eval("("+data+")");
+  	    	if(jsonData.data){
+  	    		window.location.href="/crm-web/index.ftl";
+  	    		//$(location).attr("href","/crm-web/index.ftl");
+            }else {
+            	alert('用户名或密码错误!');
+            }
+  	    });
 	});
 	
 });

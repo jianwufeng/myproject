@@ -28,8 +28,9 @@ public class QuesServiceImpl implements IQuesService {
     }
 
     @Override
-    public void addQues(Ques ques) {
+    public Long addQues(Ques ques) {
         quesMapper.insertSelective(ques);
+        return ques.getQuesId();
     }
 
     @Override
@@ -68,6 +69,28 @@ public class QuesServiceImpl implements IQuesService {
         QuesExample example = new QuesExample();
         Criteria criteria = example.createCriteria();
         return quesMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Ques> queryQuesListBy(Long quesTypeId) {
+        QuesExample example = new QuesExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andQuesTypeIdEqualTo(quesTypeId);
+        return quesMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Ques> queryQuesListByIds(List<Long> quesIds) {
+        QuesExample example = new QuesExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andQuesIdIn(quesIds);
+        return quesMapper.selectByExample(example);
+    }
+
+    @Override
+    public int countQues() {
+        QuesExample example = new QuesExample();
+        return quesMapper.countByExample(example);
     }
 
 }

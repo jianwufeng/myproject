@@ -50,20 +50,17 @@
             elem: '#dateTableId'
             ,height: vipTable.getFullHeight()
             ,id: 'dataCheck'
-            ,url: 'http://localhost:8080/crm-web/queryQuesSurveyList' //数据接口
+            ,url: '/crm-web/queryQuesSurveyList' //数据接口
             ,title: '问卷表'
             ,page: true //开启分页
             ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             ,totalRow: true //开启合计行
             , cols: [[                  //标题栏
                 {checkbox: true, sort: true, fixed: true, space: true}
-                , {field: 'quesSurveyId', title: '问卷编号', width: 120}
-                , {field: 'quesSurveyName', title: '问卷名称', width: 120}
-                , {field: 'quesSurveyLogoUrl', title: 'LOGO地址', width: 180}
-                , {field: 'quesSurveyTitle', title: '问卷标题', width: 120}
-                , {field: 'quesSurveyRemarks', title: '问卷说明', width: 160}
-                , {field: 'createTime', title: '创建时间', width: 150}
-                , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {field: 'quesSurveyId', title: '问卷编号', width: 200}
+                , {field: 'quesSurveyName', title: '问卷名称', width: 330}
+                , {field: 'createTime', title: '创建时间', width: 200}
+                , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
         });
 
@@ -83,7 +80,7 @@
                 , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
-            , url: 'http://localhost:8080/crm-web/queryQuesSurveyList'
+            , url: '/crm-web/queryQuesSurveyList'
             , method: 'get'
             , page: true
             , limits: [30, 60, 90, 150, 300]
@@ -118,16 +115,24 @@
           var data = obj.data //获得当前行数据
           ,layEvent = obj.event; //获得 lay-event 对应的值
           if(layEvent === 'detail'){
-            layer.msg('查看操作');
+            //layer.msg('http://' + document.domain + '/crm-web/publishSurvey?quesSurveyId=' + data.quesSurveyId);
+            layer.open({
+        		  type: 1,
+        		  content: '<div style="padding: 20px 100px;">'+ 'http://' + document.domain + '/crm-web/publishSurvey?quesSurveyId=' + data.quesSurveyId +'</div>'
+                ,btn: '关闭'
+                ,btnAlign: 'c' //按钮居中
+                ,shade: 0 //不显示遮罩
+            });     
           } else if(layEvent === 'add'){
         	  //layer.msg('添加操作');
-              	layer.open({
+              	var index = layer.open({
               		  type: 2,
               		  area: ['700px', '300px'],
               		  fixed: false, //不固定
               		  maxmin: true,
-              		  content: 'http://localhost:8080/crm-web/getQuesTypeFtl?quesSurveyId=' + data.quesSurveyId
+              		  content: '/crm-web/getQuesTypeFtl?quesSurveyId=' + data.quesSurveyId
               	});
+              	layer.full(index);
           } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){
               obj.del(); //删除对应行（tr）的DOM结构
@@ -141,20 +146,21 @@
         		  area: ['700px', '350px'],
         		  fixed: false, //不固定
         		  maxmin: true,
-        		  content: 'http://localhost:8080/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
+        		  content: '/crm-web/getQuesSurvey.ftl?quesSurveyId=' + data.quesSurveyId
         	});
           }
         });
 
       
         $('#btn-add').on('click', function () {
-        	layer.open({
+        	var index = layer.open({
         		  type: 2,
         		  area: ['700px', '450px'],
         		  fixed: false, //不固定
-        		  maxmin: true,
-        		  content: './add-edit.html'
+        		  maxmin: true, 
+        		  content: './add-edit-ques-survey.html'
         	});
+        	layer.full(index);
         });
         
 
@@ -168,6 +174,7 @@
 	<a class="layui-btn layui-btn-mini layui-btn-normal" id="ques_type_id_add" lay-event="add">添加题目大类</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" id="ques_survey_id_edit" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" id="ques_survey_id_del" lay-event="del">删除</a>
+	<a class="layui-btn layui-btn-mini" lay-event="detail">分享链接</a>
 </script>
 </body>
 </html>

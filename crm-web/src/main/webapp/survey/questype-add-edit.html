@@ -12,23 +12,61 @@
 </head>
 <body class="body">
 
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form" action="">
 
-	<!-- <div class="layui-form-item">
+	<fieldset class="layui-elem-field layui-field-title">
+	  <legend>问卷信息</legend>
+	</fieldset>
+    <div class="layui-form-item">
         <label class="layui-form-label">问卷名称</label>
 
         <div class="layui-input-block">
-            <input type="text" name="quesSurveyName" autocomplete="off" placeholder="请输入题目大类名称" lay-verify="required"
+            <input type="text" name="quesSurveyName" autocomplete="off" placeholder="请输入问卷名称" lay-verify="required"
                    class="layui-input">
         </div>
-    </div> -->
-    
+    </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">题目大类名称</label>
+        <div class="layui-inline">
+            <label class="layui-form-label">日期选择</label>
+
+            <div class="layui-input-block">
+                <input type="text" name="date" id="date" autocomplete="off" class="layui-input" placeholder=" - ">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">问卷LOGO</label>
 
         <div class="layui-input-block">
-            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入题目大类名称" lay-verify="required"
+            <input type="text" name="quesSurveyLogoUrl" autocomplete="off" placeholder="请输入问卷LOGO链接" lay-verify="required"
                    class="layui-input">
+        </div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">问卷说明</label>
+        <div class="layui-input-block">
+            <!-- <input type="text" name="quesSurveyRemarks" autocomplete="off" placeholder="请输入问卷说明" lay-verify="required"
+                   class="layui-input"> -->
+            <textarea placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required"></textarea>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title">
+	  <legend>大类标题</legend>
+	</fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label">大类标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入问卷标题" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <!-- <input type="text" name="quesSurveyRemarks" autocomplete="off" placeholder="请输入问卷说明" lay-verify="required"
+                   class="layui-input"> -->
+            <textarea placeholder="请输入大类说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required"></textarea>
         </div>
     </div>
     
@@ -79,7 +117,7 @@
                 title: '最终的提交信息'
             });
             
-            asyncXhr('http://localhost:8080/crm-web/addQuesType', JSON.stringify(data.field), "POST", 'application/json', function(data){
+            asyncXhr('/crm-web/addQuesType', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
    	              //parent.location.href="/queryQuesSurveyList";

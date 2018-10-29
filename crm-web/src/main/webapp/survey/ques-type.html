@@ -17,8 +17,8 @@
 <div class="my-btn-box">
     <span class="fl">
         <a class="layui-btn layui-btn-danger radius btn-delect" id="btn-delete-all">批量删除</a>
-        <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
-        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
+        <!-- <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
+        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a> -->
     </span>
     <span class="fr">
         <span class="layui-form-label">搜索条件：</span>
@@ -60,7 +60,7 @@
                 , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
-            , url: 'http://localhost:8080/crm-web/queryQuesTypeList'
+            , url: '/crm-web/queryQuesTypeList'
             , method: 'get'
             , page: true
             /* , limits: [30, 60, 90, 150, 300]
@@ -100,13 +100,14 @@
             layer.msg('查看操作');
           } else if(layEvent === 'add'){
         	  //layer.msg('添加操作');
-              	layer.open({
+              	var index = layer.open({
               		  type: 2,
               		  area: ['700px', '300px'],
               		  fixed: false, //不固定
               		  maxmin: true,
-              		  content: 'http://localhost:8080/crm-web/getQuesFtl?quesSurveyId=' + data.quesSurveyId + '&quesTypeId=' + data.quesTypeId
+              		  content: '/crm-web/getQuesFtl?quesSurveyId=' + data.quesSurveyId + '&quesTypeId=' + data.quesTypeId
               	});
+              	layer.full(index);
           } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){
               obj.del(); //删除对应行（tr）的DOM结构
@@ -120,7 +121,7 @@
         		  area: ['700px', '350px'],
         		  fixed: false, //不固定
         		  maxmin: true,
-        		  content: 'http://localhost:8080/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
+        		  content: '/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
         	});
           }
         });

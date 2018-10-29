@@ -23,11 +23,12 @@
             <input type="password" name="password" id="pwd" required lay-verify="required" placeholder="密码" autocomplete="off"
                    class="layui-input">
         </div>
+        ${message!}
         <div class="layui-input-inline login-btn">
-            <button type="submit" id="login-id" class="layui-btn" lay-submit="" lay-filter="sub">登录</button>
+            <button type="button" id="login-id" class="layui-btn" lay-submit="" lay-filter="sub">登录</button>
         </div>
         <hr/>
-        <p><a href="javascript:;" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+        <!--<p><a href="javascript:;" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>-->
     </form>
 </div>
 

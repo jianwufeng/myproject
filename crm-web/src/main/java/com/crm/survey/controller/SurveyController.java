@@ -3,6 +3,9 @@ package com.crm.survey.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ import com.crm.domain.backend.survey.QuesSurvey;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.User;
+import com.crm.survey.controller.dto.FormData;
+import com.crm.survey.controller.dto.QuesDto;
+import com.crm.survey.controller.dto.QuesSurveyDto;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -70,19 +76,48 @@ public class SurveyController {
         return "login";
     }
 
+    @RequestMapping(value = "index.ftl", method = RequestMethod.GET)
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping(value = "updatePwdFtl.ftl", method = RequestMethod.GET)
+    public String updatePwdFtl(Model model, String userName) {
+        model.addAttribute("userName", userName);
+        return "update-pwd";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "updatePwd.ftl", method = RequestMethod.POST)
+    public RestResponseEntity updatePwd(@RequestBody User user) {
+        userService.updateUserByCondition(user);
+        return RestResponseEntity.getEntity(true);
+    }
+
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public RestResponseEntity login(@RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
-        User user = new User();
-        user.setEmail(email);
+    public RestResponseEntity login(HttpServletRequest request, Model model, @RequestBody User user) {
+        HttpSession session = request.getSession();
         List<User> userList = userService.getUserByCondition(user);
         if (CollectionUtils.isNotEmpty(userList)) {
-            if (!password.equals(userList.get(0).getPassword())) {
-                //return "密码不正确";
+            if (!user.getPassword().equals(userList.get(0).getPassword())) {
+                return RestResponseEntity.getEntity(false);
+            } else {
+                session.setAttribute("loginUser", userList.get(0));
+                model.addAttribute("loginUser", userList.get(0));
+                return RestResponseEntity.getEntity(true);
+
             }
         } else {
-            //return "用户名不存在";
+            return RestResponseEntity.getEntity(false);
         }
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "logout.ftl", method = RequestMethod.POST)
+    public RestResponseEntity logout(HttpServletRequest request, Model model) {
+        request.getSession().invalidate();
         return RestResponseEntity.getEntity(true);
     }
 
@@ -91,9 +126,9 @@ public class SurveyController {
      * String indexFtl() { return "index"; }
      */
 
-    @RequestMapping(value = "addQuesSurvey", method = RequestMethod.POST)
+    @RequestMapping(value = "saveQuesSurvey.ftl", method = RequestMethod.POST)
     @ResponseBody
-    public RestResponseEntity addQuesSurvey(Model model, @RequestBody QuesSurvey quesSurvey) {
+    public RestResponseEntity addQuesSurvey(Model model, @RequestBody QuesSurveyDto quesSurvey) {
 
         //        QuesSurvey quesSurvey = new QuesSurvey();
         //        quesSurvey.setQuesSurveyLogoUrl(quesSurveyLogoUrl);
@@ -101,27 +136,29 @@ public class SurveyController {
         //        quesSurvey.setQuesSurveyRemarks(quesSurveyRemarks);
         //        quesSurvey.setQuesSurveyTitle(quesSurveyTitle);
 
-        quesSurveyService.addQuesSurvey(quesSurvey);
+        if (quesSurvey.getQuesSurveyId() == null) {
+            quesSurveyService.addQuesSurvey(quesSurvey);
+        } else {
+            quesSurveyService.updateByCondition(quesSurvey);
+        }
         model.addAttribute("quesSurvey", "quesSurvey");
 
         return RestResponseEntity.getEntity(true);
     }
 
-    @RequestMapping(value = "editQuesSurvey", method = RequestMethod.GET)
-    public String editQuesSurvey(Model model, Long quesSurveyId) {
+    @RequestMapping(value = "getQuesSurvey.ftl", method = RequestMethod.GET)
+    public String getQuesSurvey(Model model, Long quesSurveyId) {
+        QuesSurvey survey = new QuesSurvey();
+        if (quesSurveyId != null) {
+            QuesSurvey quesSurvey = new QuesSurvey();
+            quesSurvey.setQuesSurveyId(quesSurveyId);
 
-        QuesSurvey quesSurvey = new QuesSurvey();
-        quesSurvey.setQuesSurveyId(quesSurveyId);
-        //        QuesSurvey quesSurvey = new QuesSurvey();
-        //        quesSurvey.setQuesSurveyLogoUrl(quesSurveyLogoUrl);
-        //        quesSurvey.setQuesSurveyName(quesSurveyName);
-        //        quesSurvey.setQuesSurveyRemarks(quesSurveyRemarks);
-        //        quesSurvey.setQuesSurveyTitle(quesSurveyTitle);
+            List<QuesSurvey> quesSurveyList = quesSurveyService.queyQuesSurveyByCondition(quesSurvey);
+            survey = quesSurveyList.get(0);
+        }
+        model.addAttribute("quesSurvey", survey);
 
-        List<QuesSurvey> quesSurveyList = quesSurveyService.queyQuesSurveyByCondition(quesSurvey);
-        model.addAttribute("quesSurvey", quesSurveyList.get(0));
-
-        return "add-edit";
+        return "add-edit-ques-survey";
     }
 
     @RequestMapping(value = "getQuesTypeFtl", method = RequestMethod.GET)
@@ -143,15 +180,28 @@ public class SurveyController {
      */
     @ResponseBody
     @RequestMapping(value = "addQuesType", method = RequestMethod.POST)
-    public RestResponseEntity addQuesType(@RequestBody QuesType quesType) {
-        quesTypeService.addQuesType(quesType);
+    public RestResponseEntity addQuesType(@RequestBody FormData formData) {
+        quesTypeService.addQuesType(formData.getQuesType());
         return RestResponseEntity.getEntity(true);
     }
 
     @ResponseBody
     @RequestMapping(value = "addQues", method = RequestMethod.POST)
-    public RestResponseEntity addQues(@RequestBody Ques ques) {
-        quesService.addQues(ques);
+    public RestResponseEntity addQues(@RequestBody FormData formData) {
+        Long quesId = quesService.addQues(formData.getQues());
+        List<QuesAnswerDetail> quesAnswerDetailList = formData.getQuesAnswerDetailList();
+        if (CollectionUtils.isNotEmpty(quesAnswerDetailList)) {
+            for (QuesAnswerDetail quesAnswerDetail : quesAnswerDetailList) {
+                Ques queryQues = quesService.queryQuesById(quesId);
+                if (queryQues != null) {
+                    quesAnswerDetail.setQuesId(quesId);
+                    quesAnswerDetail.setQuesName(queryQues.getQuesName());
+                    quesAnswerDetail.setQuesSurveyId(queryQues.getQuesSurveyId());
+                    quesAnswerDetail.setQuesTypeId(queryQues.getQuesTypeId());
+                }
+                quesAnswerDetailService.addQuesAnswerDetail(quesAnswerDetail);
+            }
+        }
         return RestResponseEntity.getEntity(true);
     }
 
@@ -171,7 +221,7 @@ public class SurveyController {
         ResultVO vo = new ResultVO();
         vo.setCode("0");
         vo.setMsg("SUCCESS");
-        vo.setCount(11); //TODO
+        vo.setCount(quesSurveyService.countQuesSurvey());
         vo.setData(surveyList);
         return vo;
     }
@@ -184,7 +234,7 @@ public class SurveyController {
         ResultVO vo = new ResultVO();
         vo.setCode("0");
         vo.setMsg("SUCCESS");
-        vo.setCount(10); //TODO
+        vo.setCount(quesTypeService.countQuesType());
         vo.setData(quesTypeList);
         return vo;
     }
@@ -194,7 +244,30 @@ public class SurveyController {
         Ques ques = new Ques();
         ques.setQuesSurveyId(quesSurveyId);
         ques.setQuesTypeId(quesTypeId);
+
+        QuesType quesType = quesTypeService.getById(quesTypeId);
+        List<Ques> quesList = quesService.queryQuesListBy(quesTypeId);
+
+        List<QuesDto> quesDtoList = Lists.newArrayList();
+        if (CollectionUtils.isNotEmpty(quesList)) {
+            List<Long> quesIds = Lists.newArrayList();
+            for (Ques q : quesList) {
+                quesIds.add(q.getQuesId());
+            }
+            Map<Long, List<QuesAnswerDetail>> quesAnswerDetailMap = quesAnswerDetailService.queryQuesAnswerDetailMap(quesSurveyId, quesIds);
+
+            for (Ques q : quesList) {
+                QuesDto dto = new QuesDto();
+                dto.setQues(q);
+                dto.setQuesAnswerDetailList(quesAnswerDetailMap.get(q.getQuesId()));
+                quesDtoList.add(dto);
+            }
+
+        }
+
         model.addAttribute("ques", ques);
+        model.addAttribute("quesType", quesType);
+        model.addAttribute("quesDtoList", quesDtoList);
         return "ques-add";
     }
 
@@ -205,7 +278,7 @@ public class SurveyController {
         ResultVO vo = new ResultVO();
         vo.setCode("0");
         vo.setMsg("SUCCESS");
-        vo.setCount(10); //TODO
+        vo.setCount(quesService.countQues());
         vo.setData(quesList);
         return vo;
     }
@@ -251,6 +324,8 @@ public class SurveyController {
         resultVO.setQuesSurveyId(quesSurveyId);
         if (CollectionUtils.isNotEmpty(queyQuesSurveyList)) {
             quesSurveyName = queyQuesSurveyList.get(0).getQuesSurveyName();
+            String quesSurveyRemarks = queyQuesSurveyList.get(0).getQuesSurveyRemarks();
+            resultVO.setQuesSurveyRemarks(quesSurveyRemarks);
         }
         resultVO.setQuesSurveyName(quesSurveyName);
         List<QuesType> queryQuesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);

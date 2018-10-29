@@ -62,7 +62,7 @@
                 , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
-            , url: 'http://localhost:8080/crm-web/queryQuesAnswerList'
+            , url: '/crm-web/queryQuesAnswerList'
             , method: 'get'
             , page: true
             /* , limits: [30, 60, 90, 150, 300]
@@ -108,7 +108,7 @@
               		  area: ['700px', '300px'],
               		  fixed: false, //不固定
               		  maxmin: true,
-              		  content: 'http://localhost:8080/crm-web/getQuesAnswerFtl?quesId=' + data.quesId
+              		  content: '/crm-web/getQuesAnswerFtl?quesId=' + data.quesId
               	});
           } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){
@@ -123,7 +123,7 @@
         		  area: ['700px', '350px'],
         		  fixed: false, //不固定
         		  maxmin: true,
-        		  content: 'http://localhost:8080/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
+        		  content: '/crm-web/editQuesSurvey?quesSurveyId=' + data.quesSurveyId
         	});
           }
         });

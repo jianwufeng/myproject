@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.backend.survey.mapper.QuesAnswerDetailMapper;
 import com.backend.survey.service.IQuesAnswerDetailService;
+import com.backend.survey.service.IQuesService;
+import com.crm.domain.backend.survey.Ques;
 import com.crm.domain.backend.survey.QuesAnswerDetail;
 import com.crm.domain.backend.survey.QuesAnswerDetailExample;
 import com.crm.util.mybatis.plugin.Limit;
@@ -20,6 +22,9 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
 
     @Autowired
     private QuesAnswerDetailMapper quesAnswerDetailMapper;
+
+    @Autowired
+    private IQuesService           quesService;
 
     @Override
     public void addQuesAnswerDetail(QuesAnswerDetail aser) {
@@ -35,9 +40,9 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
     }
 
     @Override
-    public Map<Long, List<QuesAnswerDetail>> queryQuesAnswerDetailMap(Long querySurveyId, List<Long> quesIds) {
+    public Map<Long, List<QuesAnswerDetail>> queryQuesAnswerDetailMap(Long quesSurveyId, List<Long> quesIds) {
         Map<Long, List<QuesAnswerDetail>> resultMap = Maps.newHashMap();
-        List<QuesAnswerDetail> quesAnswerDetailList = queryQuesAnswerDetailList(querySurveyId, quesIds);
+        List<QuesAnswerDetail> quesAnswerDetailList = queryQuesAnswerDetailList(quesSurveyId, quesIds);
         if (CollectionUtils.isNotEmpty(quesAnswerDetailList)) {
             for (QuesAnswerDetail quesAnswerDetail : quesAnswerDetailList) {
                 if (CollectionUtils.isEmpty(resultMap.get(quesAnswerDetail.getQuesId()))) {
@@ -65,5 +70,33 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
     public int countQuesAnswer() {
         QuesAnswerDetailExample example = new QuesAnswerDetailExample();
         return quesAnswerDetailMapper.countByExample(example);
+    }
+
+    @Override
+    public Map<Ques, List<QuesAnswerDetail>> queryQuesAnswerDetailMapBy(Long quesSurveyId, List<Long> quesIds) {
+        Map<Ques, List<QuesAnswerDetail>> resultMap = Maps.newHashMap();
+        List<QuesAnswerDetail> quesAnswerDetailList = queryQuesAnswerDetailList(quesSurveyId, quesIds);
+
+        Map<Long, Ques> quesMap = Maps.newHashMap();
+        List<Ques> quesList = quesService.queryQuesListByIds(quesIds);
+        if (CollectionUtils.isNotEmpty(quesList)) {
+            for (Ques ques : quesList) {
+                quesMap.put(ques.getQuesId(), ques);
+            }
+        }
+
+        if (CollectionUtils.isNotEmpty(quesAnswerDetailList)) {
+            for (QuesAnswerDetail quesAnswerDetail : quesAnswerDetailList) {
+                if (CollectionUtils.isEmpty(resultMap.get(quesAnswerDetail.getQuesId()))) {
+                    List<QuesAnswerDetail> aswerList = Lists.newArrayList();
+                    aswerList.add(quesAnswerDetail);
+                    resultMap.put(quesMap.get(quesAnswerDetail.getQuesId()), aswerList);
+                } else {
+                    List<QuesAnswerDetail> list = resultMap.get(quesAnswerDetail.getQuesId());
+                    list.add(quesAnswerDetail);
+                }
+            }
+        }
+        return resultMap;
     }
 }

@@ -8,7 +8,7 @@ import com.crm.domain.backend.survey.Ques;
 public interface IQuesService {
     public List<Ques> getQuesByQuesId(Long quesId);
 
-    public void addQues(Ques ques);
+    public Long addQues(Ques ques);
 
     List<Ques> queryQues(Long quesSurveyId, List<Long> quesTypeIds);
 
@@ -17,4 +17,11 @@ public interface IQuesService {
     Ques queryQuesById(Long quesId);
 
     public List<Ques> queryQuesList(int page, int limit);
+
+    public List<Ques> queryQuesListBy(Long quesTypeId);
+
+    public List<Ques> queryQuesListByIds(List<Long> quesIds);
+
+    int countQues();
+
 }

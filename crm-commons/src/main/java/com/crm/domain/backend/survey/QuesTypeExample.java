@@ -339,6 +339,76 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andQuesTypeRemarksIsNull() {
+            addCriterion("ques_type_remarks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksIsNotNull() {
+            addCriterion("ques_type_remarks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksEqualTo(String value) {
+            addCriterion("ques_type_remarks =", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksNotEqualTo(String value) {
+            addCriterion("ques_type_remarks <>", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksGreaterThan(String value) {
+            addCriterion("ques_type_remarks >", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksGreaterThanOrEqualTo(String value) {
+            addCriterion("ques_type_remarks >=", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksLessThan(String value) {
+            addCriterion("ques_type_remarks <", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksLessThanOrEqualTo(String value) {
+            addCriterion("ques_type_remarks <=", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksLike(String value) {
+            addCriterion("ques_type_remarks like", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksNotLike(String value) {
+            addCriterion("ques_type_remarks not like", value, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksIn(List<String> values) {
+            addCriterion("ques_type_remarks in", values, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksNotIn(List<String> values) {
+            addCriterion("ques_type_remarks not in", values, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksBetween(String value1, String value2) {
+            addCriterion("ques_type_remarks between", value1, value2, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeRemarksNotBetween(String value1, String value2) {
+            addCriterion("ques_type_remarks not between", value1, value2, "quesTypeRemarks");
+            return (Criteria) this;
+        }
+
         public Criteria andQuesSurveyIdIsNull() {
             addCriterion("ques_survey_id is null");
             return (Criteria) this;

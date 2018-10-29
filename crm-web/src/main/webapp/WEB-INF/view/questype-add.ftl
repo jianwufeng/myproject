@@ -12,18 +12,78 @@
 </head>
 <body class="body">
 
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form" action="" lay-filter="surveyRes">
 
     <input type="hidden" name="quesSurveyId" value="${survey.quesSurveyId}">
 
-	<div class="layui-form-item">
-        <label class="layui-form-label">题目大类名称</label>
+	<fieldset class="layui-elem-field layui-field-title">
+	  <legend>问卷信息</legend>
+	</fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label">问卷名称</label>
 
         <div class="layui-input-block">
-            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入题目大类名称" lay-verify="required"
+            <input type="text" name="quesSurveyName" autocomplete="off" placeholder="请输入问卷名称" lay-verify="required"
+                   class="layui-input" value="${survey.quesSurveyName}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">日期选择</label>
+
+            <div class="layui-input-inline">
+                <input type="text" name="startDate" id="startDate" autocomplete="off" class="layui-input" placeholder="开始时间" value="${survey.startDate}">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name="endDate" id="endDate" autocomplete="off" class="layui-input" placeholder="结束时间" value="${survey.endDate}">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">问卷LOGO</label>
+
+        <div class="layui-input-block">
+            <input type="text" name="quesSurveyLogoUrl" autocomplete="off" placeholder="请输入问卷LOGO链接" lay-verify="required"
+                   class="layui-input" value="${survey.quesSurveyLogoUrl}">
+        </div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">问卷说明</label>
+        <div class="layui-input-block">
+            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required">${survey.quesSurveyRemarks}</textarea>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title">
+	  <legend>大类信息</legend>
+	</fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label">大类标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入大类标题" lay-verify="required"
                    class="layui-input">
         </div>
     </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required"></textarea>
+        </div>
+    </div>
+    <!-- <div class="layui-form-item">
+        <label class="layui-form-label">题目标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入标题" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入英文标题" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>-->
     
     <div class="layui-form-item">
         <label class="layui-form-label">题目大类排序标识</label>
@@ -35,7 +95,9 @@
     </div>
     
     <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+	    <div class="layui-input-block">
+	        <button class="layui-btn" lay-submit="" lay-filter="sub">提交生成问卷</button>
+	    </div>
     </div>
 </form>
 
@@ -67,22 +129,48 @@
         }); */
 
         //监听提交
-        form.on('submit(sub)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
+        var typeIndex = form.on('submit(sub)', function (data) {
+            /*layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
-            });
+            });*/
             
-            asyncXhr2('http://localhost:8080/crm-web/addQuesType', JSON.stringify(data.field), "POST", 'application/json', function(data){
+            var formData = new FormData();
+            
+            var quesTypeReq = {
+				quesTypeName : data.field.quesTypeName,
+				quesTypeRemarks : data.field.quesTypeRemarks,
+				quesSurveyId : data.field.quesSurveyId,
+				orderById : data.field.orderById
+			}
+			
+			var quesSurveyReq = {
+				quesSurveyId : data.field.quesSurveyId,
+				quesSurveyName : data.field.quesSurveyName,
+				quesSurveyLogoUrl : data.field.quesSurveyLogoUrl,
+				quesSurveyRemarks : data.field.quesSurveyRemarks,
+				startDate : data.field.startDate,
+				endDate : data.field.endDate
+			}
+            formData.quesType = quesTypeReq; 
+            formData.quesSurvey = quesSurveyReq;
+            asyncXhr2('/crm-web/addQuesType', JSON.stringify(formData), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	              //parent.location.href="/queryQuesSurveyList";
+   	              parent.location.href="survey/ques-type.html";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }
       	    });
             return false;
         });
-
+        
+        //layer.close(typeIndex);
+        laydate.render({
+        	elem: '#startDate',
+		});
+		laydate.render({
+		    elem: '#endDate'
+		});
     });
 </script>
 </body>

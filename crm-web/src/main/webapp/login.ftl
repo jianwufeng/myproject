@@ -27,7 +27,7 @@
             <button type="submit" class="layui-btn" lay-submit="" lay-filter="sub">登录</button>
         </div>
         <hr/>
-        <p><a href="javascript:;" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+        <p><a href="javascript:;" class="fr">修改密码？</a></p>
     </form>
 </div>
 
@@ -59,7 +59,7 @@
         // 提交监听
         form.on('submit(sub)', function () {
         	<!-- $.ajax({
-                url:'http://localhost:8080/crm-web/login',
+                url:'/crm-web/login',
                 type:'post',
                 //dataType:'text',
                 data:{
@@ -72,7 +72,7 @@
                     location.href = "index.html";
                 }
             }) -->
-            var REMOVE_URL = "http://localhost:8080/crm-web/login";
+            var REMOVE_URL = "/crm-web/login";
             var email = $('#username').val();
             alert(email);
             var password = $('#pwd').val();

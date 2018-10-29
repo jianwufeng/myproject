@@ -18,27 +18,17 @@
     <div class="layui-header my-header">
         <a href="index.html">
             <!--<img class="my-header-logo" src="" alt="logo">-->
-            <div class="my-header-logo">后台模板 HTML</div>
+            <div class="my-header-logo">问卷调查</div>
         </a>
         <div class="my-header-btn">
             <button class="layui-btn layui-btn-small btn-nav"><i class="layui-icon">&#xe65f;</i></button>
         </div>
 
         <!-- 顶部左侧添加选项卡监听 -->
-        <ul class="layui-nav" lay-filter="side-top-left">
-            <!--<li class="layui-nav-item"><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;"><i class="layui-icon">&#xe621;</i>基础</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>
-                </dl>
-            </li>-->
-        </ul>
 
         <!-- 顶部右侧添加选项卡监听 -->
         <ul class="layui-nav my-header-user-nav" lay-filter="side-top-right">
-            <li class="layui-nav-item"><a href="javascript:;" class="pay" href-url="">支持作者</a></li>
+            <!-- <li class="layui-nav-item"><a href="javascript:;" class="pay" href-url="">支持作者</a></li> -->
             <li class="layui-nav-item">
                 <a class="name" href="javascript:;"><i class="layui-icon">&#xe629;</i>主题</a>
                 <dl class="layui-nav-child">
@@ -50,8 +40,8 @@
             <li class="layui-nav-item">
                 <a class="name" href="javascript:;"><img src="./frame/static/image/code.png" alt="logo"> Admin </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
+                    <!-- <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd> -->
+                    <!-- <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd> -->
                     <dd><a href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>
             </li>
@@ -63,7 +53,7 @@
         <div class="layui-side-scroll">
             <!-- 左侧主菜单添加选项卡监听 -->
             <ul class="layui-nav layui-nav-tree" lay-filter="side-main">
-               <li class="layui-nav-item  layui-nav-itemed">
+               <!-- <li class="layui-nav-item  layui-nav-itemed">
                     <a href="javascript:;"><i class="layui-icon">&#xe620;</i>基础</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" href-url="demo/btn1.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
@@ -88,8 +78,19 @@
                         <dd><a href="javascript:;" href-url="demo/404.html"><i class="layui-icon">&#xe621;</i>404页</a></dd>
                         <dd><a href="javascript:;" href-url="demo/tips.html"><i class="layui-icon">&#xe621;</i>提示页</a></dd>
                     </dl>
+                </li> -->
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon">&#xe628;</i>问卷调查</a>
+                    <dl class="layui-nav-child" id="ques_survey_id_parent">
+                        <dd><a href="javascript:;" id="ques_survey_id" href-url="survey/ques-survey.html"><i class="layui-icon">&#xe621;</i>问卷列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/ques-type.html"><i class="layui-icon">&#xe621;</i>题目大类列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/ques.html"><i class="layui-icon">&#xe621;</i>题目列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/ques-answer.html"><i class="layui-icon">&#xe621;</i>答案列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/add-edit.html"><i class="layui-icon">&#xe621;</i>添加-修改</a></dd>
+                    </dl>
                 </li>
-                <li class="layui-nav-item"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ad6ba602ae228be2222ddb804086e0cfa42da3d74e34b383b665c2bec1adfc6e"><i class="layui-icon">&#xe61e;</i>加入群下载源码</a></li>
+                <!-- <li class="layui-nav-item"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ad6ba602ae228be2222ddb804086e0cfa42da3d74e34b383b665c2bec1adfc6e"><i class="layui-icon">&#xe61e;</i>加入群下载源码</a></li> -->
             </ul>
 
         </div>
@@ -102,7 +103,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe id="iframe" src="demo/welcome.html" frameborder="0"></iframe>
+                    <iframe id="iframe" src="survey/welcome.html" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -114,13 +115,13 @@
 </div>
 
 <!-- pay -->
-<div class="my-pay-box none">
+<!-- <div class="my-pay-box none">
     <div><img src="./frame/static/image/zfb.png" alt="支付宝"><p>支付宝</p></div>
     <div><img src="./frame/static/image/wx.png" alt="微信"><p>微信</p></div>
-</div>
+</div> -->
 
 <!-- 右键菜单 -->
-<div class="my-dblclick-box none">
+<!-- <div class="my-dblclick-box none">
     <table class="layui-tab dblclick-tab">
         <tr class="card-refresh">
             <td><i class="layui-icon">&#x1002;</i>刷新当前标签</td>
@@ -132,10 +133,12 @@
             <td><i class="layui-icon">&#x1006;</i>关闭所有标签</td>
         </tr>
     </table>
-</div>
+</div> -->
 
+<script src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="frame/layui/layui.js"></script>
 <script type="text/javascript" src="./frame/static/js/vip_comm.js"></script>
+<script type="text/javascript" src="./js/survey.js"></script>
 <script type="text/javascript">
 layui.use(['layer','vip_nav'], function () {
 

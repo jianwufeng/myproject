@@ -11,4 +11,8 @@ public interface IQuesSurveyService {
     List<QuesSurvey> queryQuesSurvey();
 
     List<QuesSurvey> queyQuesSurveyByCondition(QuesSurvey quesSurvey);
+
+    int countQuesSurvey();
+
+    void updateByCondition(QuesSurvey quesSurvey);
 }

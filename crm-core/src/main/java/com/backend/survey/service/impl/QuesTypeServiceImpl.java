@@ -9,7 +9,6 @@ import com.backend.survey.mapper.QuesTypeMapper;
 import com.backend.survey.service.IQuesTypeService;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.QuesTypeExample;
-import com.crm.domain.backend.survey.QuesTypeExample.Criteria;
 
 @Service("quesTypeService")
 public class QuesTypeServiceImpl implements IQuesTypeService {
@@ -32,7 +31,17 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     @Override
     public List<QuesType> queryQuesTypeList(int page, int limit) {
         QuesTypeExample example = new QuesTypeExample();
-        Criteria criteria = example.createCriteria();
         return quesTypeMapper.selectByExample(example);
+    }
+
+    @Override
+    public QuesType getById(Long quesTypeId) {
+        return quesTypeMapper.selectByPrimaryKey(quesTypeId);
+    }
+
+    @Override
+    public int countQuesType() {
+        QuesTypeExample example = new QuesTypeExample();
+        return quesTypeMapper.countByExample(example);
     }
 }
