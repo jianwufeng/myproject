@@ -24,7 +24,7 @@
 
         <div class="layui-input-block">
             <input type="text" name="quesSurveyName" autocomplete="off" placeholder="请输入问卷名称" lay-verify="required"
-                   class="layui-input" value="${survey.quesSurveyName}">
+                   class="layui-input" value="${survey.quesSurveyName!}">
         </div>
     </div>
     <div class="layui-form-item">
@@ -51,23 +51,24 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">问卷说明</label>
         <div class="layui-input-block">
-            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required">${survey.quesSurveyRemarks}</textarea>
+            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="content">${survey.quesSurveyRemarks}</textarea>
         </div>
     </div>
     <fieldset class="layui-elem-field layui-field-title">
 	  <legend>大类信息</legend>
 	</fieldset>
+	<input type="hidden" name="quesTypeId" value="${quesType.quesTypeId!}"/>
     <div class="layui-form-item">
         <label class="layui-form-label">大类标题</label>
         <div class="layui-input-block">
             <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入大类标题" lay-verify="required"
-                   class="layui-input">
+                   class="layui-input" value="${quesType.quesTypeName!}">
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">说明</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required"></textarea>
+            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required">${quesType.quesTypeRemarks!}</textarea>
         </div>
     </div>
     <!-- <div class="layui-form-item">
@@ -90,7 +91,7 @@
 
         <div class="layui-input-block">
             <input type="text" name="orderById" autocomplete="off" placeholder="题目大类排序标识(如1,2,3)" lay-verify="required"
-                   class="layui-input">
+                   class="layui-input" value="${quesType.orderById!}">
         </div>
     </div>
     
@@ -116,17 +117,11 @@
         var editIndex = layedit.build('LAY_demo_editor');
 
         //自定义验证规则
-        /* form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
+        form.verify({
+           content: function (value) {
                 layedit.sync(editIndex);
             }
-        }); */
+        });
 
         //监听提交
         var typeIndex = form.on('submit(sub)', function (data) {
@@ -137,6 +132,7 @@
             var formData = new FormData();
             
             var quesTypeReq = {
+            	quesTypeId : data.field.quesTypeId,
 				quesTypeName : data.field.quesTypeName,
 				quesTypeRemarks : data.field.quesTypeRemarks,
 				quesSurveyId : data.field.quesSurveyId,
@@ -153,7 +149,7 @@
 			}
             formData.quesType = quesTypeReq; 
             formData.quesSurvey = quesSurveyReq;
-            asyncXhr2('/crm-web/addQuesType', JSON.stringify(formData), "POST", 'application/json', function(data){
+            asyncXhr2('/crm-web/saveQuesType.ftl', JSON.stringify(formData), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
    	              parent.location.href="survey/ques-type.html";

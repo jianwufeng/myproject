@@ -16,6 +16,7 @@
 	<fieldset class="layui-elem-field layui-field-title">
 	  <legend>问卷信息</legend>
 	</fieldset>
+	<input type="hidden" name="quesSurveyId" value="${quesSurvey.quesSurveyId!}"/>
     <div class="layui-form-item">
         <label class="layui-form-label">问卷名称</label>
 
@@ -48,7 +49,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">问卷说明</label>
         <div class="layui-input-block">
-            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="required">${quesSurvey.quesSurveyRemarks!}</textarea>
+            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="content">${quesSurvey.quesSurveyRemarks!}</textarea>
         </div>
     </div>
     
@@ -74,7 +75,7 @@
         var editIndex = layedit.build('LAY_demo_editor');
 
         //自定义验证规则
-        /* form.verify({
+        form.verify({
             title: function (value) {
                 if (value.length < 5) {
                     return '标题至少得5个字符啊';
@@ -84,13 +85,10 @@
             , content: function (value) {
                 layedit.sync(editIndex);
             }
-        }); */
+        });
 
         //监听提交
         form.on('submit(sub)', function (data) {
-        	alert(JSON.stringify(data.field))
-        	return;
-        
       	    asyncXhr2('/crm-web/saveQuesSurvey.ftl', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');

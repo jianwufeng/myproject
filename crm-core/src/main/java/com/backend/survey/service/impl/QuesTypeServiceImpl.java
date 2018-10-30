@@ -9,6 +9,7 @@ import com.backend.survey.mapper.QuesTypeMapper;
 import com.backend.survey.service.IQuesTypeService;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.QuesTypeExample;
+import com.crm.util.mybatis.plugin.Limit;
 
 @Service("quesTypeService")
 public class QuesTypeServiceImpl implements IQuesTypeService {
@@ -31,6 +32,9 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     @Override
     public List<QuesType> queryQuesTypeList(int page, int limit) {
         QuesTypeExample example = new QuesTypeExample();
+        example.setOrderByClause("ques_type_id desc");
+        example.setLimit(new Limit((page - 1) * limit, limit));
+        example.createCriteria().andIsDeleteEqualTo(false);
         return quesTypeMapper.selectByExample(example);
     }
 
@@ -42,6 +46,14 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     @Override
     public int countQuesType() {
         QuesTypeExample example = new QuesTypeExample();
+        example.createCriteria().andIsDeleteEqualTo(false);
         return quesTypeMapper.countByExample(example);
+    }
+
+    @Override
+    public void updateQuesType(QuesType quesType) {
+        QuesTypeExample example = new QuesTypeExample();
+        example.createCriteria().andQuesTypeIdEqualTo(quesType.getQuesTypeId());
+        quesTypeMapper.updateByExampleSelective(quesType, example);
     }
 }

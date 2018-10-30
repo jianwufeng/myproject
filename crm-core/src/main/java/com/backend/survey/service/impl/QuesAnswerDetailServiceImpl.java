@@ -99,4 +99,9 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
         }
         return resultMap;
     }
+
+    @Override
+    public int updateQuesAnswerDetail(QuesAnswerDetail quesAnswerDetail) {
+        return quesAnswerDetailMapper.updateByPrimaryKeySelective(quesAnswerDetail);
+    }
 }

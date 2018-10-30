@@ -48,7 +48,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">问卷说明</label>
         <div class="layui-input-block">
-            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea"> </textarea>
+            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="content"> </textarea>
         </div>
     </div>
     
@@ -72,11 +72,9 @@
 
         //创建一个编辑器
         var editIndex = layedit.build('LAY_demo_editor');
-        console.log(editIndex);
-        alert($("#LAY_demo_editor").val());
-
+        
         //自定义验证规则
-        /* form.verify({
+        form.verify({
             title: function (value) {
                 if (value.length < 5) {
                     return '标题至少得5个字符啊';
@@ -86,7 +84,7 @@
             , content: function (value) {
                 layedit.sync(editIndex);
             }
-        }); */
+        });
 
         //监听提交
         form.on('submit(sub)', function (data) {
@@ -95,8 +93,8 @@
             });
         	console.log(data.field); */
         	//alert(JSON.stringify(data.field));
+        	data.LAY_demo_editor = layedit.getContent(editIndex);
         	alert(JSON.stringify(data.field));
-        	alert($("textarea[LAY_demo_editor]").val());
         	return ;
       	    asyncXhr2('/crm-web/saveQuesSurvey.ftl', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){

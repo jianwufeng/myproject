@@ -10,7 +10,7 @@ public interface IQuesAnswerDetailService {
 
     void addQuesAnswerDetail(QuesAnswerDetail aser);
 
-    List<QuesAnswerDetail> queryQuesAnswerDetailList(Long querySurveyId, List<Long> quesIds);
+    List<QuesAnswerDetail> queryQuesAnswerDetailList(Long quesSurveyId, List<Long> quesIds);
 
     Map<Long, List<QuesAnswerDetail>> queryQuesAnswerDetailMap(Long quesSurveyId, List<Long> quesIds);
 
@@ -19,5 +19,7 @@ public interface IQuesAnswerDetailService {
     int countQuesAnswer();
 
     Map<Ques, List<QuesAnswerDetail>> queryQuesAnswerDetailMapBy(Long quesSurveyId, List<Long> quesIds);
+
+    int updateQuesAnswerDetail(QuesAnswerDetail quesAnswerDetail);
 
 }

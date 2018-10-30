@@ -8,11 +8,13 @@ public interface IQuesSurveyService {
 
     void addQuesSurvey(QuesSurvey quesSurvey);
 
-    List<QuesSurvey> queryQuesSurvey();
+    List<QuesSurvey> queryQuesSurvey(int page, int limit);
 
     List<QuesSurvey> queyQuesSurveyByCondition(QuesSurvey quesSurvey);
 
     int countQuesSurvey();
 
     void updateByCondition(QuesSurvey quesSurvey);
+
+    QuesSurvey getQuesSurveyById(Long quesSurveyId);
 }

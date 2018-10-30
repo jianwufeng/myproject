@@ -12,6 +12,7 @@ import com.backend.survey.service.IQuesService;
 import com.crm.domain.backend.survey.Ques;
 import com.crm.domain.backend.survey.QuesExample;
 import com.crm.domain.backend.survey.QuesExample.Criteria;
+import com.crm.util.mybatis.plugin.Limit;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -67,7 +68,11 @@ public class QuesServiceImpl implements IQuesService {
     @Override
     public List<Ques> queryQuesList(int page, int limit) {
         QuesExample example = new QuesExample();
+
+        example.setOrderByClause("ques_id desc");
+        example.setLimit(new Limit((page - 1) * limit, limit));
         Criteria criteria = example.createCriteria();
+        criteria.andIsDeleteEqualTo(false);
         return quesMapper.selectByExample(example);
     }
 
@@ -75,7 +80,7 @@ public class QuesServiceImpl implements IQuesService {
     public List<Ques> queryQuesListBy(Long quesTypeId) {
         QuesExample example = new QuesExample();
         Criteria criteria = example.createCriteria();
-        criteria.andQuesTypeIdEqualTo(quesTypeId);
+        criteria.andQuesTypeIdEqualTo(quesTypeId).andIsDeleteEqualTo(false);
         return quesMapper.selectByExample(example);
     }
 
@@ -83,7 +88,7 @@ public class QuesServiceImpl implements IQuesService {
     public List<Ques> queryQuesListByIds(List<Long> quesIds) {
         QuesExample example = new QuesExample();
         Criteria criteria = example.createCriteria();
-        criteria.andQuesIdIn(quesIds);
+        criteria.andQuesIdIn(quesIds).andIsDeleteEqualTo(false);
         return quesMapper.selectByExample(example);
     }
 
@@ -91,6 +96,11 @@ public class QuesServiceImpl implements IQuesService {
     public int countQues() {
         QuesExample example = new QuesExample();
         return quesMapper.countByExample(example);
+    }
+
+    @Override
+    public void editQues(Ques ques) {
+        quesMapper.updateByPrimaryKeySelective(ques);
     }
 
 }

@@ -24,4 +24,6 @@ public interface IQuesService {
 
     int countQues();
 
+    public void editQues(Ques ques);
+
 }

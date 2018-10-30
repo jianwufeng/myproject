@@ -15,4 +15,7 @@ public interface IQuesTypeService {
     QuesType getById(Long quesTypeId);
 
     int countQuesType();
+
+    void updateQuesType(QuesType quesType);
+
 }

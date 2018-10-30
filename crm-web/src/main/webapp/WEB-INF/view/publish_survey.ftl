@@ -44,19 +44,20 @@
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
-			<h3 class="big" style="font-weight:bold;background-color:#FFFF00;">${quesType.quesTypeName}</h3> 
+			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3> 
 			<ul>
 			<#if quesType.quesList?default([])?size !=0>
 			<#list quesType.quesList as ques> 
 				<#assign index =ques_index + 1 > 
 				<div id="an-ques-answer-id">
-					<li><p class="big" style="background-color:#d0d0d0"><font size="3" >${index}. ${ques.quesName}</font></p>
+					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">${index}. ${ques.quesName}</p>
 					<ul id="${ques.quesId}">
 					<input type="hidden" name="quesSurveyId" value="${ques.quesSurveyId}"/>
 					<input type="hidden" name="quesTypeId" value="${ques.quesTypeId}"/>
 					<input type="hidden" name="quesId" value="${ques.quesId}"/>
 					<input type="hidden" name="quesName" value="${ques.quesName}"/>
 					<input type="hidden" name="quesType" value="${ques.quesType}"/>
+					<input type="hidden" name="isRequired" value="${ques.isRequired}"/>
 					<#if ques.quesType == 1>
 						<#if ques.quesAnswerDetailList?default([])?size !=0>
 							<#list ques.quesAnswerDetailList as aswer>
@@ -69,7 +70,7 @@
 						</#if>
 					<#elseif ques.quesType == 3>
 						<div class="big" >
-				            <textarea class="big" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" lay-verify="required" rows="5"cols="100" maxlength="200"></textarea>
+				            <textarea class="big" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" rows="5"cols="100" maxlength="200"></textarea>
 							<#if ques.quesAnswerDetailList?default([])?size !=0>
 									<#list ques.quesAnswerDetailList as aswer> 
 										<input type="hidden" name="${aswer.answerId}-answerId" value="${aswer.answerId}"/>
@@ -97,5 +98,28 @@
 	<script src="frame/layui/layui.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/survey.js"></script>
+	<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate', 'element'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , element = layui.element;
+        
+        // you code ...
+        laydate.render({
+            elem: '#date'
+            //,type: 'datetime'
+            ,range: true
+          });
+        
+        var xuanxiang = 0;
+        $("#button-add").click(function(){
+        	xuanxiang ++ ;
+			$("#answer-add").append("<div class='layui-form-item'><label class='layui-form-label'>选项"+xuanxiang+" :</label><div class='layui-input-block'> <input type='text' name='quesAnswerName"+xuanxiang + "' autocomplete='off' placeholder='请输入答案选项名称' lay-verify='required' class='layui-input'></div></div>");
+		});
+
+    });
+  </script>
 </body>
 </html>

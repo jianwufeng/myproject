@@ -1,5 +1,7 @@
 package com.crm.survey.controller;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,7 @@ import com.crm.domain.backend.survey.User;
 import com.crm.survey.controller.dto.FormData;
 import com.crm.survey.controller.dto.QuesDto;
 import com.crm.survey.controller.dto.QuesSurveyDto;
+import com.crm.util.date.DateUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -161,13 +164,30 @@ public class SurveyController {
         return "add-edit-ques-survey";
     }
 
-    @RequestMapping(value = "getQuesTypeFtl", method = RequestMethod.GET)
-    public String addQuesType(Model model, Long quesSurveyId) {
+    @RequestMapping(value = "getQuesTypeFtl.ftl", method = RequestMethod.GET)
+    public String getQuesTypeFtl(Model model, Long quesSurveyId, Long quesTypeId) {
         QuesSurvey quesSurvey = new QuesSurvey();
         quesSurvey.setQuesSurveyId(quesSurveyId);
         List<QuesSurvey> surveyList = quesSurveyService.queyQuesSurveyByCondition(quesSurvey);
+
+        QuesType quesType = new QuesType();
+        if (quesTypeId != null) {
+            quesType = quesTypeService.getById(quesTypeId);
+        }
+
         model.addAttribute("survey", surveyList.get(0));
+        model.addAttribute("quesType", quesType);
         return "questype-add";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "deleteQuesType.ftl", method = RequestMethod.POST)
+    public RestResponseEntity deleteQuesType(Model model, Long quesTypeId) {
+        QuesType quesType = new QuesType();
+        quesType.setQuesTypeId(quesTypeId);
+        quesType.setIsDelete(true);
+        quesTypeService.updateQuesType(quesType);
+        return RestResponseEntity.getEntity(true);
     }
 
     /**
@@ -179,9 +199,13 @@ public class SurveyController {
      * @since [产品/模块版本](可选)
      */
     @ResponseBody
-    @RequestMapping(value = "addQuesType", method = RequestMethod.POST)
-    public RestResponseEntity addQuesType(@RequestBody FormData formData) {
-        quesTypeService.addQuesType(formData.getQuesType());
+    @RequestMapping(value = "saveQuesType.ftl", method = RequestMethod.POST)
+    public RestResponseEntity saveQuesType(@RequestBody FormData formData) {
+        if (formData.getQuesType().getQuesTypeId() != null) {
+            quesTypeService.updateQuesType(formData.getQuesType());
+        } else {
+            quesTypeService.addQuesType(formData.getQuesType());
+        }
         return RestResponseEntity.getEntity(true);
     }
 
@@ -205,8 +229,43 @@ public class SurveyController {
         return RestResponseEntity.getEntity(true);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "editQues.ftl", method = RequestMethod.POST)
+    public RestResponseEntity editQues(@RequestBody FormData formData) {
+        quesService.editQues(formData.getQues());
+        List<QuesAnswerDetail> quesAnswerDetailList = formData.getQuesAnswerDetailList();
+        if (CollectionUtils.isNotEmpty(quesAnswerDetailList)) {
+            for (QuesAnswerDetail quesAnswerDetail : quesAnswerDetailList) {
+                Ques queryQues = quesService.queryQuesById(formData.getQues().getQuesId());
+                if (queryQues != null) {
+                    quesAnswerDetail.setQuesId(formData.getQues().getQuesId());
+                    quesAnswerDetail.setQuesName(queryQues.getQuesName());
+                    quesAnswerDetail.setQuesSurveyId(queryQues.getQuesSurveyId());
+                    quesAnswerDetail.setQuesTypeId(queryQues.getQuesTypeId());
+                }
+
+                if (quesAnswerDetailService.updateQuesAnswerDetail(quesAnswerDetail) <= 0) {
+                    quesAnswerDetailService.addQuesAnswerDetail(quesAnswerDetail);
+                }
+            }
+        }
+        return RestResponseEntity.getEntity(true);
+    }
+
+    @RequestMapping(value = "getQues.ftl", method = RequestMethod.GET)
+    public String getQuesFtl(Model model, Long quesSurveyId, Long quesId) {
+        Ques ques = quesService.queryQuesById(quesId);
+        List<Long> quesIdList = Lists.newArrayList();
+        quesIdList.add(quesId);
+        List<QuesAnswerDetail> answerDetailList = quesAnswerDetailService.queryQuesAnswerDetailList(quesSurveyId, quesIdList);
+        model.addAttribute("ques", ques);
+        model.addAttribute("answerDetailList", answerDetailList);
+        return "ques-edit";
+    }
+
     @RequestMapping(value = "addQuesAnswerDetail", method = RequestMethod.POST)
     @ResponseBody
+    @Deprecated
     public RestResponseEntity addQuesAnswerDetail(@RequestBody QuesAnswerDetail quesAnswerDetail) {
 
         quesAnswerDetailService.addQuesAnswerDetail(quesAnswerDetail);
@@ -216,7 +275,7 @@ public class SurveyController {
     @ResponseBody
     @RequestMapping(value = "queryQuesSurveyList", method = RequestMethod.GET)
     public ResultVO queryQuesSurveyList(@RequestParam(value = "page", required = true) int page, @RequestParam(value = "limit", required = true) int limit) {
-        List<QuesSurvey> surveyList = quesSurveyService.queryQuesSurvey();
+        List<QuesSurvey> surveyList = quesSurveyService.queryQuesSurvey(page, limit);
         //String jsons = JSON.toJSONString(surveyList);
         ResultVO vo = new ResultVO();
         vo.setCode("0");
@@ -239,6 +298,16 @@ public class SurveyController {
         return vo;
     }
 
+    /**
+     * 大类添加题目
+     *
+     * @param model
+     * @param quesSurveyId
+     * @param quesTypeId
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
     @RequestMapping(value = "getQuesFtl", method = RequestMethod.GET)
     public String addQuesType(Model model, Long quesSurveyId, Long quesTypeId) {
         Ques ques = new Ques();
@@ -384,15 +453,47 @@ public class SurveyController {
      * @param quesSurveyId
      * @param quesSurveyName
      * @return
+     * @throws ParseException
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "publish")
     @ResponseBody
-    public RestResponseEntity publish(Model model, @RequestBody QuesSurveyAnsweredDetail[] ansDetailList) {
-
+    public RestResponseEntity publish(Model model, @RequestBody QuesSurveyAnsweredDetail[] ansDetailList) throws ParseException {
         List<QuesSurveyAnsweredDetail> detailList = Arrays.asList(ansDetailList);
+        QuesSurvey survey = quesSurveyService.getQuesSurveyById(detailList.get(0).getQuesSurveyId());
+        if (survey != null) {
+            String startDate = survey.getStartDate();
+            String endDate = survey.getEndDate();
+            Date sDate = DateUtils.getStartTimeOfDay(DateUtils.parseDate(startDate, "yyyy-MM-dd"));
+            Date eDate = DateUtils.getEndTimeOfDay(DateUtils.parseDate(endDate, "yyyy-MM-dd"));
+            Date now = new Date();
+            if (now.before(sDate) || now.after(eDate)) {
+                return RestResponseEntity.getEntity(false, "1001", "很抱歉，已超出问卷截止时间", false);
+            }
+        }
         quesSurveyAnsweredDetailService.batchInsert(detailList);
+        return RestResponseEntity.getEntity(true);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "deleteSurvey.ftl")
+    public RestResponseEntity deleteSurvey(Model model, Long quesSurveyId) throws ParseException {
+        QuesSurvey quesSurvey = new QuesSurvey();
+        quesSurvey.setQuesSurveyId(quesSurveyId);
+        quesSurvey.setIsDelete(true);
+        quesSurveyService.updateByCondition(quesSurvey);
+        return RestResponseEntity.getEntity(true);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "deleteQues.ftl")
+    public RestResponseEntity deleteQues(Model model, Long quesId) throws ParseException {
+        Ques ques = new Ques();
+        ques.setQuesId(quesId);
+        ques.setIsDelete(true);
+        quesService.editQues(ques);
         return RestResponseEntity.getEntity(true);
     }
 };
