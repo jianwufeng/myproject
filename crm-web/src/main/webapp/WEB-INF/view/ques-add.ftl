@@ -154,13 +154,13 @@
 				        </select>
 			        </div>
 		        </div>
-		        <!--<div class="layui-inline">
+		        <div class="layui-inline">
 		        	<label class="layui-form-label"></label>
 			        <div class="layui-input-inline">
-			            <input type="text" name="quesName" autocomplete="off" placeholder="请输入题目名称" lay-verify="required"
+			            <input type="text" name="quesEnglishName" autocomplete="off" placeholder="请输入题目英文名称" lay-verify="required"
 			                   class="layui-input">
 			        </div>
-			     </div>-->
+			     </div>
 		    </div>
 		    <div class="layui-form-item">
 			    <div class="layui-inline">

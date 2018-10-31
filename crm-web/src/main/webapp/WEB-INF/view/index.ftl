@@ -61,7 +61,7 @@
                         <dd><a href="javascript:;" href-url="survey/ques-type.html"><i class="layui-icon">&#xe621;</i>题目大类列表</a></dd>
                         <dd><a href="javascript:;" href-url="survey/ques.html"><i class="layui-icon">&#xe621;</i>题目列表</a></dd>
                         <!--<dd><a href="javascript:;" href-url="survey/ques-answer.html"><i class="layui-icon">&#xe621;</i>答案列表</a></dd>-->
-                        <dd><a href="javascript:;" href-url="survey/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
+                        <!--<dd><a href="javascript:;" href-url="survey/map.html"><i class="layui-icon">&#xe621;</i>报表数据</a></dd>-->
                         <!--<dd><a href="javascript:;" href-url="survey/add-edit.html"><i class="layui-icon">&#xe621;</i>添加-修改</a></dd>-->
                     </dl>
                 </li>

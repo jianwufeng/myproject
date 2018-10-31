@@ -11,7 +11,7 @@ $(document).ready(function() {
 				if($(this).next().find("input[type='radio']:checked").length == 0){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
-					return;
+					return false;
 				}
 			}
 			
@@ -19,9 +19,10 @@ $(document).ready(function() {
 				if($(this).next().find("textarea").val() == ''){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
-					return;
+					return false;
 				}
 			}
+			
 		});
 		
 		if(isSubmit){
@@ -78,8 +79,8 @@ $(document).ready(function() {
 				dataType:"json",      
 				contentType:"application/json",   
 				data:JSON.stringify(data),
-				success:function(data){		
-					if(data){
+				success:function(data){	
+					if(data.data){
 						alert("提交成功");
 						$("#submitAnswer").attr({"disabled":"disabled"});
 						//window.location.href ="https:" + salesorder_domain + "/order/goSubmitPage";

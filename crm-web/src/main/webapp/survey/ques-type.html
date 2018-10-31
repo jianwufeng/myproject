@@ -14,11 +14,11 @@
 <body class="body">
 
 <!-- 工具集 -->
-<div class="my-btn-box">
+<!-- <div class="my-btn-box">
     <span class="fl">
         <a class="layui-btn layui-btn-danger radius btn-delect" id="btn-delete-all">批量删除</a>
-        <!-- <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
-        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a> -->
+        <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
+        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
     </span>
     <span class="fr">
         <span class="layui-form-label">搜索条件：</span>
@@ -27,7 +27,7 @@
         </div>
         <button class="layui-btn mgl-20">查询</button>
     </span>
-</div>
+</div> -->
 
 <!-- 表格 -->
 <div id="dateTableId" lay-filter="dateTableId"></div>
@@ -36,18 +36,55 @@
 <script type="text/javascript" src="../js/index.js"></script>
 <script src="../js/jquery-1.9.1.min.js"></script>
 <script src="../js/common.js" charset="utf-8"></script>
+<script src="../js/common-date.js" charset="utf-8"></script>
 <script type="text/javascript">
 
     // layui方法
-    layui.use(['table', 'form', 'layer', 'vip_table'], function () {
+    layui.use(['table', 'form', 'layer', 'vip_table','util'], function () {
 
         // 操作对象
         var form = layui.form
                 , table = layui.table
                 , layer = layui.layer
                 , vipTable = layui.vip_table
+                ,util=layui.util
                 , $ = layui.jquery;
 
+      //时间戳的处理
+        layui.laytpl.toDateString = function(d, format){
+          var date = new Date(d || new Date())
+          ,ymd = [
+            this.digit(date.getFullYear(), 4)
+            ,this.digit(date.getMonth() + 1)
+            ,this.digit(date.getDate())
+          ]
+          ,hms = [
+            this.digit(date.getHours())
+            ,this.digit(date.getMinutes())
+            ,this.digit(date.getSeconds())
+          ];
+
+          format = format || 'yyyy-MM-dd HH:mm:ss';
+
+          return format.replace(/yyyy/g, ymd[0])
+          .replace(/MM/g, ymd[1])
+          .replace(/dd/g, ymd[2])
+          .replace(/HH/g, hms[0])
+          .replace(/mm/g, hms[1])
+          .replace(/ss/g, hms[2]);
+        };
+         
+        //数字前置补零
+        layui.laytpl.digit = function(num, length, end){
+          var str = '';
+          num = String(num);
+          length = length || 2;
+          for(var i = num.length; i < length; i++){
+            str += '0';
+          }
+          return num < Math.pow(10, length) ? str + (num|0) : num;
+        };	
+        
         // 表格渲染
         var tableIns = table.render({
             elem: '#dateTableId'                  //指定原始表格元素选择器（推荐id选择器）
@@ -58,8 +95,8 @@
                 , {field: 'quesTypeName', title: '题目大类名称', width: 280}
                 , {field: 'quesSurveyId', title: '所属问卷ID', width: 120}
                 , {field: 'orderById', title: '排序', width: 80}
-                , {field: 'createTime', title: '创建时间', width: 150}
-                , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {field: 'createTime', title: '创建时间', width: 200,templet: '<div>{{ layui.laytpl.toDateString(d.createTime) }}</div>'}
+                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
             , url: '/crm-web/queryQuesTypeList'

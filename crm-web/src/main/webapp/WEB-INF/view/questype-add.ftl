@@ -51,7 +51,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">问卷说明</label>
         <div class="layui-input-block">
-            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="content">${survey.quesSurveyRemarks}</textarea>
+            <textarea id="LAY_demo_editor" placeholder="请输入问卷说明" name="quesSurveyRemarks" class="layui-textarea" lay-verify="content">${survey.quesSurveyRemarks!}</textarea>
         </div>
     </div>
     <fieldset class="layui-elem-field layui-field-title">
@@ -59,10 +59,16 @@
 	</fieldset>
 	<input type="hidden" name="quesTypeId" value="${quesType.quesTypeId!}"/>
     <div class="layui-form-item">
-        <label class="layui-form-label">大类标题</label>
-        <div class="layui-input-block">
-            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入大类标题" lay-verify="required"
-                   class="layui-input" value="${quesType.quesTypeName!}">
+	    <div class="layui-inline">
+	        <label class="layui-form-label">大类标题</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入大类标题" lay-verify="required"
+	                   class="layui-input" value="${quesType.quesTypeName!}">
+	        </div>
+	        <div class="layui-input-inline">
+	            <input type="text" name="quesTypeEnglishName" autocomplete="off" placeholder="请输入大类英文标题" lay-verify="required"
+	                   class="layui-input" value="${quesType.quesTypeEnglishName!}">
+	        </div>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
@@ -134,6 +140,7 @@
             var quesTypeReq = {
             	quesTypeId : data.field.quesTypeId,
 				quesTypeName : data.field.quesTypeName,
+				quesTypeEnglishName : data.field.quesTypeEnglishName,
 				quesTypeRemarks : data.field.quesTypeRemarks,
 				quesSurveyId : data.field.quesSurveyId,
 				orderById : data.field.orderById

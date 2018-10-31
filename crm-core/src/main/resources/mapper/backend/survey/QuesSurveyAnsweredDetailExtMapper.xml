@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.backend.survey.mapper.QuesSurveyAnsweredDetailExtMapper" >
+
+	<select id="getAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
+		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+
+		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
+		
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常同意' GROUP BY ques_type_id) bb
+		
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc limit 5;
+	</select>
+	
+	<select id="getDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
+		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+
+		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
+		
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常不同意' GROUP BY ques_type_id) bb
+		
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc limit 5;
+	</select>
+	
+	<select id="getPerListByAnswer" parameterType="map" resultType="com.crm.dto.Top5Dto">
+		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+
+		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
+		
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = #{answerName} GROUP BY ques_type_id) bb
+		
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count;
+	</select>
+	
+</mapper>

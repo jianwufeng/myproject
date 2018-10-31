@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -36,12 +38,17 @@ import com.crm.domain.backend.survey.QuesSurvey;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.User;
+import com.crm.dto.Top5Dto;
+import com.crm.survey.controller.dto.DataMapDto;
+import com.crm.survey.controller.dto.ExportExcelDto;
 import com.crm.survey.controller.dto.FormData;
 import com.crm.survey.controller.dto.QuesDto;
 import com.crm.survey.controller.dto.QuesSurveyDto;
 import com.crm.util.date.DateUtils;
+import com.crm.util.excel.ExcelUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
@@ -496,4 +503,81 @@ public class SurveyController {
         quesService.editQues(ques);
         return RestResponseEntity.getEntity(true);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "exportExcel.ftl", method = { RequestMethod.POST, RequestMethod.GET })
+    public RestResponseEntity exportExcel(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request, HttpServletResponse response)
+            throws IllegalArgumentException, IllegalAccessException {
+        String[] arr = { "", "非常同意", "同意", "部分同意", "不同意", "非常不同意" };
+
+        List<ExportExcelDto> list = Lists.newArrayList();
+        ExportExcelDto dto = new ExportExcelDto();
+
+        Map<Long, Top5Dto> veryAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常同意");
+        Map<Long, Top5Dto> agreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "同意");
+        Map<Long, Top5Dto> partAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "部分同意");
+        Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意");
+        Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意");
+
+        List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
+        if (CollectionUtils.isNotEmpty(quesTypeList)) {
+            for (QuesType quesType : quesTypeList) {
+                dto.setQuesTypeName(quesType.getQuesTypeName());
+                dto.setVeryAgreePer(veryAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setAgreePer(agreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : agreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setDisAgreePer(disAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : disAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setVeryDisAgreePer(veryDisAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryDisAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setPartAgreePer(partAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : partAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+            }
+        }
+
+        list.add(dto);
+
+        ExcelUtils.export(response, arr, list, ExportExcelDto.class);
+
+        return RestResponseEntity.getEntity(true);
+    }
+
+    @RequestMapping(value = "getDataMapFtl.ftl", method = { RequestMethod.POST, RequestMethod.GET })
+    public String getDataMapFtl(Model model, @RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId) {
+        model.addAttribute("quesSurveyId", quesSurveyId);
+        return "map";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "getDataMap.ftl", method = { RequestMethod.POST, RequestMethod.GET })
+    public RestResponseEntity getDataMap(HttpServletRequest request, HttpServletResponse response, Long quesSurveyId) {
+        DataMapDto dto = new DataMapDto();
+        Set<String> quesTypeNameAgreeList = Sets.newHashSet();
+        Set<String> quesTypePerAgreeList = Sets.newHashSet();
+        Set<String> quesTypeNameDisAgreeList = Sets.newHashSet();
+        Set<String> quesTypePerDisAgreeList = Sets.newHashSet();
+
+        List<Top5Dto> agreeTop5List = quesSurveyAnsweredDetailService.getAgreeTop5(quesSurveyId);
+        List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
+        Map<Long, QuesType> map = Maps.newHashMap();
+        for (QuesType quesType : quesTypeList) {
+            map.put(quesType.getQuesTypeId(), quesType);
+        }
+        if (CollectionUtils.isNotEmpty(agreeTop5List)) {
+            for (Top5Dto top5Dto : agreeTop5List) {
+                quesTypeNameAgreeList.add(map.get(top5Dto.getQuesTypeId()).getQuesTypeName());
+                quesTypePerAgreeList.add(top5Dto.getTopPer());
+            }
+
+        }
+        List<Top5Dto> disAgreeTop5List = quesSurveyAnsweredDetailService.getDisAgreeTop5(quesSurveyId);
+        if (CollectionUtils.isNotEmpty(disAgreeTop5List)) {
+            for (Top5Dto top5Dto : disAgreeTop5List) {
+                quesTypeNameDisAgreeList.add(map.get(top5Dto.getQuesTypeId()).getQuesTypeName());
+                quesTypePerDisAgreeList.add(top5Dto.getTopPer());
+            }
+        }
+        dto.setQuesTypeNameAgreeList(quesTypeNameAgreeList);
+        dto.setQuesTypePerAgreeList(quesTypePerAgreeList);
+        dto.setQuesTypeNameDisAgreeList(quesTypeNameDisAgreeList);
+        dto.setQuesTypePerDisAgreeList(quesTypePerDisAgreeList);
+        return RestResponseEntity.getEntity(dto);
+    }
+
 };

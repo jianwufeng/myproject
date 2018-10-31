@@ -10,7 +10,7 @@
     <style type="text/css">
     	h3.big
 		  {
-		  line-height: 50px
+		  line-height: 40px
 		  }
 		p.small
 		  {
@@ -38,19 +38,21 @@
 	</style>
 </head>
 <body>
-	<div id="survey_remarks_editer_id">${survey.quesSurveyRemarks!}</div>
+	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm">${survey.quesSurveyRemarks!}</div>
 	<h2 class="big" align="center" style="font-weight:bold;margin:10px">${(survey.quesSurveyName)!}</h2>
 	<form action=""method="get" id="formSubmit">
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
-			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3> 
+			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3>
+			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeEnglishName!}</h3>  
 			<ul>
 			<#if quesType.quesList?default([])?size !=0>
 			<#list quesType.quesList as ques> 
 				<#assign index =ques_index + 1 > 
 				<div id="an-ques-answer-id">
 					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">${index}. ${ques.quesName}</p>
+					<p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">  ${ques.quesEnglishName!}</p>
 					<ul id="${ques.quesId}">
 					<input type="hidden" name="quesSurveyId" value="${ques.quesSurveyId}"/>
 					<input type="hidden" name="quesTypeId" value="${ques.quesTypeId}"/>

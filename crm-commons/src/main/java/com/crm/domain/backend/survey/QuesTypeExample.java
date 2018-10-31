@@ -339,6 +339,76 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andQuesTypeEnglishNameIsNull() {
+            addCriterion("ques_type_english_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameIsNotNull() {
+            addCriterion("ques_type_english_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameEqualTo(String value) {
+            addCriterion("ques_type_english_name =", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameNotEqualTo(String value) {
+            addCriterion("ques_type_english_name <>", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameGreaterThan(String value) {
+            addCriterion("ques_type_english_name >", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameGreaterThanOrEqualTo(String value) {
+            addCriterion("ques_type_english_name >=", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameLessThan(String value) {
+            addCriterion("ques_type_english_name <", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameLessThanOrEqualTo(String value) {
+            addCriterion("ques_type_english_name <=", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameLike(String value) {
+            addCriterion("ques_type_english_name like", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameNotLike(String value) {
+            addCriterion("ques_type_english_name not like", value, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameIn(List<String> values) {
+            addCriterion("ques_type_english_name in", values, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameNotIn(List<String> values) {
+            addCriterion("ques_type_english_name not in", values, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameBetween(String value1, String value2) {
+            addCriterion("ques_type_english_name between", value1, value2, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesTypeEnglishNameNotBetween(String value1, String value2) {
+            addCriterion("ques_type_english_name not between", value1, value2, "quesTypeEnglishName");
+            return (Criteria) this;
+        }
+
         public Criteria andQuesTypeRemarksIsNull() {
             addCriterion("ques_type_remarks is null");
             return (Criteria) this;
