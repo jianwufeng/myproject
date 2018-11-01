@@ -599,6 +599,66 @@ public class QuesTypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsBackgroundSurveyIsNull() {
+            addCriterion("is_background_survey is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyIsNotNull() {
+            addCriterion("is_background_survey is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyEqualTo(Boolean value) {
+            addCriterion("is_background_survey =", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyNotEqualTo(Boolean value) {
+            addCriterion("is_background_survey <>", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyGreaterThan(Boolean value) {
+            addCriterion("is_background_survey >", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_background_survey >=", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyLessThan(Boolean value) {
+            addCriterion("is_background_survey <", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_background_survey <=", value, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyIn(List<Boolean> values) {
+            addCriterion("is_background_survey in", values, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyNotIn(List<Boolean> values) {
+            addCriterion("is_background_survey not in", values, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_background_survey between", value1, value2, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBackgroundSurveyNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_background_survey not between", value1, value2, "isBackgroundSurvey");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDeleteIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;

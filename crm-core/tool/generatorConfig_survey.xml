@@ -36,31 +36,31 @@
 			targetProject="src/main/java" type="XMLMAPPER" />
 		<!-- 表 -->
 
-		<table schema="ques_survey" tableName="t_an_ques_survey" domainObjectName="QuesSurvey"> 
+		<!-- <table schema="ques_survey" tableName="t_an_ques_survey" domainObjectName="QuesSurvey"> 
 			 <property name="useActualColumnNames" value="false" /> 
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 				<columnOverride column="ques_survey_remarks" property="quesSurveyRemarks" jdbcType="VARCHAR"/> 
-		</table> 
+		</table> --> 
 
 		<!-- <table schema="ques_survey" tableName="t_an_ques" domainObjectName="Ques">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="ques_id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 				<columnOverride column="is_delete" property="isDelete" jdbcType="INTEGER"/> 
-		</table>
+		</table> -->
 		
 		<table schema="ques_survey" tableName="t_an_ques_type" domainObjectName="QuesType">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 		</table>
-		 -->
-		<!-- <table schema="ques_survey" tableName="t_an_ques_survey_answered_detail" domainObjectName="QuesSurveyAnsweredDetail">
+		
+		<table schema="ques_survey" tableName="t_an_ques_survey_answered_detail" domainObjectName="QuesSurveyAnsweredDetail">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
-		</table> -->
+		</table>
 		
 		<!-- <table schema="ques_survey" tableName="t_an_ques_answer_detail" domainObjectName="QuesAnswerDetail">
 			<property name="useActualColumnNames" value="false" />
