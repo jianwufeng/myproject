@@ -25,6 +25,7 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     @Override
     public List<QuesType> queryQuesTypeList(Long quesSurveyId) {
         QuesTypeExample example = new QuesTypeExample();
+        example.setOrderByClause("order_by_id asc,ques_type_id desc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId).andIsDeleteEqualTo(false);
         return quesTypeMapper.selectByExample(example);
     }
@@ -55,5 +56,13 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
         QuesTypeExample example = new QuesTypeExample();
         example.createCriteria().andQuesTypeIdEqualTo(quesType.getQuesTypeId());
         quesTypeMapper.updateByExampleSelective(quesType, example);
+    }
+
+    @Override
+    public List<QuesType> queryQuesTypeList(QuesType quesType) {
+        QuesTypeExample example = new QuesTypeExample();
+        example.setOrderByClause("order_by_id asc,ques_type_id desc");
+        example.createCriteria().andQuesSurveyIdEqualTo(quesType.getQuesSurveyId()).andIsDeleteEqualTo(false).andIsBackgroundSurveyEqualTo(0);
+        return quesTypeMapper.selectByExample(example);
     }
 }

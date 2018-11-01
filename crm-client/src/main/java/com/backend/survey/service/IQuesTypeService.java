@@ -18,4 +18,6 @@ public interface IQuesTypeService {
 
     void updateQuesType(QuesType quesType);
 
+    List<QuesType> queryQuesTypeList(QuesType quesType);
+
 }

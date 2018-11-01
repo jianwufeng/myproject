@@ -537,7 +537,9 @@ public class SurveyController {
         Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意");
         Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意");
 
-        List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
+        QuesType req = new QuesType();
+        req.setQuesSurveyId(quesSurveyId);
+        List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(req);
         if (CollectionUtils.isNotEmpty(quesTypeList)) {
             for (QuesType quesType : quesTypeList) {
                 ExportExcelDto dto = new ExportExcelDto();
