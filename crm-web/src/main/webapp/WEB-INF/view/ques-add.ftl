@@ -87,8 +87,8 @@
 				        <div class="layui-inline">
 				        	<label class="layui-form-label"></label>
 					        <div class="layui-input-inline">
-					            <input type="text" name="quesName" autocomplete="off" placeholder="请输入题目名称" lay-verify="required"
-					                   class="layui-input" value="${ques.quesName}">
+					            <input type="text" name="quesEnglishName" autocomplete="off" placeholder="请输入题目英文名称" lay-verify="required"
+					                   class="layui-input" value="${ques.quesEnglishName!}">
 					        </div>
 					     </div>
 				    </div>
@@ -236,6 +236,7 @@
 			
 			var quesReq = {
 				quesName:data.field.quesName,
+				quesEnglishName : data.field.quesEnglishName,
 				quesType:data.field.quesType,
 				quesSurveyId:data.field.quesSurveyId,
 				quesTypeId:data.field.quesTypeId,

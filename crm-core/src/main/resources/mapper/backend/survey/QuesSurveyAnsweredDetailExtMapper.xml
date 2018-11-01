@@ -3,7 +3,7 @@
 <mapper namespace="com.backend.survey.mapper.QuesSurveyAnsweredDetailExtMapper" >
 
 	<select id="getAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="getPerListByAnswer" parameterType="map" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  bb.agreeCount/aa.count*100 as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		

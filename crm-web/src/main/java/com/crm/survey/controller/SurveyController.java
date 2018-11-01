@@ -399,9 +399,15 @@ public class SurveyController {
         List<QuesSurvey> queyQuesSurveyList = quesSurveyService.queyQuesSurveyByCondition(quesSurvey);
         resultVO.setQuesSurveyId(quesSurveyId);
         if (CollectionUtils.isNotEmpty(queyQuesSurveyList)) {
-            quesSurveyName = queyQuesSurveyList.get(0).getQuesSurveyName();
-            String quesSurveyRemarks = queyQuesSurveyList.get(0).getQuesSurveyRemarks();
-            resultVO.setQuesSurveyRemarks(quesSurveyRemarks);
+            QuesSurvey quesSurvey2 = queyQuesSurveyList.get(0);
+            if (quesSurvey2 != null) {
+                quesSurveyName = quesSurvey2.getQuesSurveyName();
+                String quesSurveyRemarks = quesSurvey2.getQuesSurveyRemarks();
+                resultVO.setQuesSurveyRemarks(quesSurveyRemarks);
+                resultVO.setStartDate(quesSurvey2.getStartDate());
+                resultVO.setEndDate(quesSurvey2.getEndDate());
+                resultVO.setQuesSurveyLogoUrl(quesSurvey2.getQuesSurveyLogoUrl());
+            }
         }
         resultVO.setQuesSurveyName(quesSurveyName);
         List<QuesType> queryQuesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
@@ -511,7 +517,6 @@ public class SurveyController {
         String[] arr = { "", "非常同意", "同意", "部分同意", "不同意", "非常不同意" };
 
         List<ExportExcelDto> list = Lists.newArrayList();
-        ExportExcelDto dto = new ExportExcelDto();
 
         Map<Long, Top5Dto> veryAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常同意");
         Map<Long, Top5Dto> agreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "同意");
@@ -522,16 +527,16 @@ public class SurveyController {
         List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
         if (CollectionUtils.isNotEmpty(quesTypeList)) {
             for (QuesType quesType : quesTypeList) {
+                ExportExcelDto dto = new ExportExcelDto();
                 dto.setQuesTypeName(quesType.getQuesTypeName());
                 dto.setVeryAgreePer(veryAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setAgreePer(agreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : agreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setDisAgreePer(disAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : disAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setVeryDisAgreePer(veryDisAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryDisAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setPartAgreePer(partAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : partAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                list.add(dto);
             }
         }
-
-        list.add(dto);
 
         ExcelUtils.export(response, arr, list, ExportExcelDto.class);
 

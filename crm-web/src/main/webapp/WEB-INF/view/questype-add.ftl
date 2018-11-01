@@ -159,7 +159,7 @@
             asyncXhr2('/crm-web/saveQuesType.ftl', JSON.stringify(formData), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	              parent.location.href="survey/ques-type.html";
+   	              parent.location.href="survey/ques-survey.html";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }

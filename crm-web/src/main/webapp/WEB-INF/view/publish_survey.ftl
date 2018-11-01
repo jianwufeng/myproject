@@ -38,9 +38,20 @@
 	</style>
 </head>
 <body>
+	<table width="100%">
+	    <tbody>
+		     <tr width="20%">
+			      <th align="left"><img width="180" height="60" src="./frame/static/image/survey.jpg" /></th>
+			      <th align="right">上海波音有限公司</th>
+		     </tr>
+    	</tbody>
+    </table>
+    <hr style="margin-bottom:10px">
 	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm">${survey.quesSurveyRemarks!}</div>
-	<h2 class="big" align="center" style="font-weight:bold;margin:10px">${(survey.quesSurveyName)!}</h2>
+	<br>
+	<div id="survey_valid_data_id" style="text-indent: 0.2cm"><b>问卷有效时间:</b> ${survey.startDate!} 到 ${survey.endDate!}</div>
 	<form action=""method="get" id="formSubmit">
+		<h2 class="big" align="center" style="font-weight:bold;margin:10px">${(survey.quesSurveyName)!}</h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
@@ -52,7 +63,7 @@
 				<#assign index =ques_index + 1 > 
 				<div id="an-ques-answer-id">
 					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">${index}. ${ques.quesName}</p>
-					<p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">  ${ques.quesEnglishName!}</p>
+					<p class="big" style="background-color:#d0d0d0">  ${ques.quesEnglishName!}</p>
 					<ul id="${ques.quesId}">
 					<input type="hidden" name="quesSurveyId" value="${ques.quesSurveyId}"/>
 					<input type="hidden" name="quesTypeId" value="${ques.quesTypeId}"/>

@@ -4,11 +4,12 @@ $(document).ready(function() {
 		
 		var isSubmit = true;
 		$("#formSubmit").find(".ques-required").each(function(){
+			var $this = $(this).next().next();
 			
-			var quesType = $(this).next().find($("input[name='quesType']")).val();
+			var quesType = $this.find($("input[name='quesType']")).val();
 			
 			if(quesType == 1){
-				if($(this).next().find("input[type='radio']:checked").length == 0){
+				if($this.find("input[type='radio']:checked").length == 0){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
 					return false;
@@ -16,7 +17,7 @@ $(document).ready(function() {
 			}
 			
 			if(quesType == 3){
-				if($(this).next().find("textarea").val() == ''){
+				if($this.find("textarea").val() == ''){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
 					return false;
