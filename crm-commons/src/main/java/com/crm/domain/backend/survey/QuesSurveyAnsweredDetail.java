@@ -37,8 +37,8 @@ public class QuesSurveyAnsweredDetail implements Serializable {
     /** 答案分数 */
     private String answerScore;
 
-    /** 是否背景调查 */
-    private Boolean isBackgroundSurvey;
+    /** 是否背景调查 0：否，1：是 */
+    private Integer isBackgroundSurvey;
 
     /** 是否删除 */
     private Boolean isDelete;
@@ -327,7 +327,7 @@ public class QuesSurveyAnsweredDetail implements Serializable {
      *
      * @mbggenerated
      */
-    public Boolean getIsBackgroundSurvey() {
+    public Integer getIsBackgroundSurvey() {
         return isBackgroundSurvey;
     }
 
@@ -339,7 +339,7 @@ public class QuesSurveyAnsweredDetail implements Serializable {
      *
      * @mbggenerated
      */
-    public void setIsBackgroundSurvey(Boolean isBackgroundSurvey) {
+    public void setIsBackgroundSurvey(Integer isBackgroundSurvey) {
         this.isBackgroundSurvey = isBackgroundSurvey;
     }
 

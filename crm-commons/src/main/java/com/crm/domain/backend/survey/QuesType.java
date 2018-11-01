@@ -21,7 +21,7 @@ public class QuesType implements Serializable {
     private Integer orderById;
 
     /** 是否背景调查 */
-    private Boolean isBackgroundSurvey;
+    private Integer isBackgroundSurvey;
 
     /** 是否删除 */
     private Boolean isDelete;
@@ -190,7 +190,7 @@ public class QuesType implements Serializable {
      *
      * @mbggenerated
      */
-    public Boolean getIsBackgroundSurvey() {
+    public Integer getIsBackgroundSurvey() {
         return isBackgroundSurvey;
     }
 
@@ -202,7 +202,7 @@ public class QuesType implements Serializable {
      *
      * @mbggenerated
      */
-    public void setIsBackgroundSurvey(Boolean isBackgroundSurvey) {
+    public void setIsBackgroundSurvey(Integer isBackgroundSurvey) {
         this.isBackgroundSurvey = isBackgroundSurvey;
     }
 

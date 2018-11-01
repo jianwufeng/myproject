@@ -208,12 +208,14 @@ public class SurveyController {
     @ResponseBody
     @RequestMapping(value = "saveQuesType.ftl", method = RequestMethod.POST)
     public RestResponseEntity saveQuesType(@RequestBody FormData formData) {
+        String flag = "add";
         if (formData.getQuesType().getQuesTypeId() != null) {
             quesTypeService.updateQuesType(formData.getQuesType());
+            flag = "update";
         } else {
             quesTypeService.addQuesType(formData.getQuesType());
         }
-        return RestResponseEntity.getEntity(true);
+        return RestResponseEntity.getEntity(true, "0", "SUCCESS", flag);
     }
 
     @ResponseBody
@@ -485,6 +487,17 @@ public class SurveyController {
             if (now.before(sDate) || now.after(eDate)) {
                 return RestResponseEntity.getEntity(false, "1001", "很抱歉，已超出问卷截止时间", false);
             }
+        }
+        List<QuesType> queryQuesTypeList = quesTypeService.queryQuesTypeList(detailList.get(0).getQuesSurveyId());
+        Map<Long, Integer> map = Maps.newHashMap();
+        if (CollectionUtils.isNotEmpty(queryQuesTypeList)) {
+            for (QuesType quesType : queryQuesTypeList) {
+                map.put(quesType.getQuesTypeId(), quesType.getIsBackgroundSurvey());
+            }
+        }
+
+        for (QuesSurveyAnsweredDetail detail : detailList) {
+            detail.setIsBackgroundSurvey(map.get(detail.getQuesTypeId()));
         }
         quesSurveyAnsweredDetailService.batchInsert(detailList);
         return RestResponseEntity.getEntity(true);

@@ -92,6 +92,7 @@
 					        </div>
 					     </div>
 				    </div>
+				    
 				    <div class="layui-form-item">
 					    <div class="layui-inline">
 					        <label class="layui-form-label">答案选项：</label>
@@ -105,21 +106,21 @@
 									<div class="layui-form-item">
 										<label class="layui-form-label">选项${xx!} :</label>
 										<div class="layui-input-block"> 
-											<input type="text" name="answerName${xx!}" autocomplete="off" placeholder="请输入答案选项名称" lay-verify="required" class="layui-input" value="${quesAnswer.answerName}">
+											<input type="text" name="answerName${xx!}" autocomplete="off" placeholder="请输入答案选项名称" lay-verify="required" class="layui-input" value="${quesAnswer.answerName!}">
 										</div>
 									</div>
 								<#elseif ques.quesType == 3>
 									<div class="layui-form-item">
 										<label class="layui-form-label">选项 :</label>
 										<div class="layui-input-block"> 
-											<textarea name="answerName" autocomplete="off" placeholder="请输入答案选项名称" lay-verify="required" class="layui-textarea">${quesAnswer.answerName}</textarea>
+											<textarea name="answerName" autocomplete="off" placeholder="请输入答案选项名称" lay-verify="required" class="layui-textarea" readonly>${quesAnswer.answerName!}</textarea>
 										</div>
 									</div>
 								</#if>
 								
 							</#list>
 						</#if>
-				    </div>
+					</div>
 				    <hr>
 				</div>
 			</div>
@@ -138,7 +139,7 @@
 			        </div>
 			        <label class="layui-form-label">题目类型</label>
 			        <div class="layui-input-inline">
-			            <select id="quesTypeSelectionId" name="quesType">
+			            <select id="quesTypeSelectionId" name="quesType" lay-filter="quesType">
 				          <option value="0">请选择</option>
 				          <option value="1">单选</option>
 				          <!--<option value="2">多选</option>-->
@@ -162,19 +163,21 @@
 			        </div>
 			     </div>
 		    </div>
-		    <div class="layui-form-item">
-			    <div class="layui-inline">
-			        <label class="layui-form-label">答案选项：</label>
-			        <div class="layui-input-inline">
-				        <input type="button" class="layui-btn layui-btn-xs" id="button-add" value="添加选项"></input>
+		    <div id="hidden_id">
+			    <div class="layui-form-item">
+				    <div class="layui-inline">
+				        <label class="layui-form-label">答案选项：</label>
+				        <div class="layui-input-inline">
+					        <input type="button" class="layui-btn layui-btn-xs" id="button-add" value="添加选项"></input>
+					    </div>
 				    </div>
 			    </div>
-		    </div>
-		    <div id="answer-add">
-			    
-		    </div>
+			    <div id="answer-add">
+				    
+			    </div>
+			</div>
 		    <div class="layui-form-item">
-		        <label class="layui-form-label">答案选项排序标识</label>
+		        <label class="layui-form-label">题目排序标识</label>
 		
 		        <div class="layui-input-block">
 		            <input type="text" id="orderById" name="orderById" autocomplete="off" placeholder="题目选项排序标识(如1,2,3)" lay-verify="required"
@@ -297,6 +300,14 @@
         		layer.alert("请选择题目类型！")
         	}
 		});
+		
+		form.on('select(quesType)', function(data){
+		    if($('#quesTypeSelectionId').val() == 3){
+        		$("#hidden_id").attr("style","display:none;");//隐藏div
+        	}else{
+        		$("#hidden_id").attr("style","display:block;");//显示div
+        	}
+		})
         
     });
 </script>

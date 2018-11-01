@@ -69,6 +69,14 @@
 	            <input type="text" name="quesTypeEnglishName" autocomplete="off" placeholder="请输入大类英文标题" lay-verify="required"
 	                   class="layui-input" value="${quesType.quesTypeEnglishName!}">
 	        </div>
+	        <label class="layui-form-label">背景调查</label>
+	        <div class="layui-input-inline">
+	            <select name="isBackgroundSurvey" lay-verify="required">
+		          <option value="">请选择</option>
+		          <option <#if quesType.isBackgroundSurvey??><#if quesType.isBackgroundSurvey == 1>selected="selected"</#if></#if> value="1">是</option>
+		          <option <#if quesType.isBackgroundSurvey??><#if quesType.isBackgroundSurvey == 0>selected="selected"</#if></#if> value="0">否</option>
+		        </select>
+	        </div>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
@@ -77,14 +85,7 @@
             <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required">${quesType.quesTypeRemarks!}</textarea>
         </div>
     </div>
-    <!-- <div class="layui-form-item">
-        <label class="layui-form-label">题目标题</label>
-        <div class="layui-input-block">
-            <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入标题" lay-verify="required"
-                   class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
+    <!--<div class="layui-form-item">
         <label class="layui-form-label"></label>
         <div class="layui-input-block">
             <input type="text" name="quesTypeName" autocomplete="off" placeholder="请输入英文标题" lay-verify="required"
@@ -143,7 +144,8 @@
 				quesTypeEnglishName : data.field.quesTypeEnglishName,
 				quesTypeRemarks : data.field.quesTypeRemarks,
 				quesSurveyId : data.field.quesSurveyId,
-				orderById : data.field.orderById
+				orderById : data.field.orderById,
+				isBackgroundSurvey : data.field.isBackgroundSurvey
 			}
 			
 			var quesSurveyReq = {
@@ -156,10 +158,15 @@
 			}
             formData.quesType = quesTypeReq; 
             formData.quesSurvey = quesSurveyReq;
-            asyncXhr2('/crm-web/saveQuesType.ftl', JSON.stringify(formData), "POST", 'application/json', function(data){
-      	    	if(data){
+            asyncXhr2('/crm-web/saveQuesType.ftl', JSON.stringify(formData), "POST", 'application/json', function(dataStr){
+            	var data =  eval("("+dataStr+")");
+      	    	if(data.success){
    	              layer.msg('添加成功');
-   	              parent.location.href="survey/ques-survey.html";
+      	    		if(data.data == 'add'){
+	   	             	parent.location.href="survey/ques-survey.html";
+      	    		}else{
+      	    			parent.location.href="survey/ques-type.html";
+      	    		}
    	            }else {
    	              layer.msg('添加失败'); 
    	            }

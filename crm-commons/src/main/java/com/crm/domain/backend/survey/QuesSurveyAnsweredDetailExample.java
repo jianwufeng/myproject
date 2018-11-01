@@ -929,52 +929,52 @@ public class QuesSurveyAnsweredDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyEqualTo(Boolean value) {
+        public Criteria andIsBackgroundSurveyEqualTo(Integer value) {
             addCriterion("is_background_survey =", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyNotEqualTo(Boolean value) {
+        public Criteria andIsBackgroundSurveyNotEqualTo(Integer value) {
             addCriterion("is_background_survey <>", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyGreaterThan(Boolean value) {
+        public Criteria andIsBackgroundSurveyGreaterThan(Integer value) {
             addCriterion("is_background_survey >", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsBackgroundSurveyGreaterThanOrEqualTo(Integer value) {
             addCriterion("is_background_survey >=", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyLessThan(Boolean value) {
+        public Criteria andIsBackgroundSurveyLessThan(Integer value) {
             addCriterion("is_background_survey <", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsBackgroundSurveyLessThanOrEqualTo(Integer value) {
             addCriterion("is_background_survey <=", value, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyIn(List<Boolean> values) {
+        public Criteria andIsBackgroundSurveyIn(List<Integer> values) {
             addCriterion("is_background_survey in", values, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyNotIn(List<Boolean> values) {
+        public Criteria andIsBackgroundSurveyNotIn(List<Integer> values) {
             addCriterion("is_background_survey not in", values, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsBackgroundSurveyBetween(Integer value1, Integer value2) {
             addCriterion("is_background_survey between", value1, value2, "isBackgroundSurvey");
             return (Criteria) this;
         }
 
-        public Criteria andIsBackgroundSurveyNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsBackgroundSurveyNotBetween(Integer value1, Integer value2) {
             addCriterion("is_background_survey not between", value1, value2, "isBackgroundSurvey");
             return (Criteria) this;
         }
