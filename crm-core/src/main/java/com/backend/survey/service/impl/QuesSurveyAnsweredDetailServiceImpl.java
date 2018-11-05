@@ -11,6 +11,7 @@ import com.backend.survey.mapper.QuesSurveyAnsweredDetailExtMapper;
 import com.backend.survey.mapper.QuesSurveyAnsweredDetailMapper;
 import com.backend.survey.service.IQuesSurveyAnsweredDetailService;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
+import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 import com.google.common.collect.Maps;
 
@@ -50,5 +51,10 @@ public class QuesSurveyAnsweredDetailServiceImpl implements IQuesSurveyAnsweredD
             }
         }
         return resultMap;
+    }
+
+    @Override
+    public SurveyCompanyPerDto getPerListByCompany(Long quesSurveyId) {
+        return quesSurveyAnsweredDetailExtMapper.getPerListByCompany(quesSurveyId);
     }
 }

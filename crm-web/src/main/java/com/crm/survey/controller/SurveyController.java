@@ -38,6 +38,7 @@ import com.crm.domain.backend.survey.QuesSurvey;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.User;
+import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 import com.crm.survey.controller.dto.DataMapDto;
 import com.crm.survey.controller.dto.ExportExcelDto;
@@ -536,6 +537,15 @@ public class SurveyController {
         Map<Long, Top5Dto> partAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "部分同意");
         Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意");
         Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意");
+        SurveyCompanyPerDto perDto = quesSurveyAnsweredDetailService.getPerListByCompany(quesSurveyId);
+        ExportExcelDto dto1 = new ExportExcelDto();
+        dto1.setQuesTypeName(perDto.getCompanyName());
+        dto1.setVeryAgreePer(perDto.getVeryAgreePer() + "%");
+        dto1.setAgreePer(perDto.getAgreePer() + "%");
+        dto1.setDisAgreePer(perDto.getDisagreePer() + "%");
+        dto1.setVeryDisAgreePer(perDto.getVeryDisagreePer() + "%");
+        dto1.setPartAgreePer(perDto.getPartAgreePer() + "%");
+        list.add(dto1);
 
         QuesType req = new QuesType();
         req.setQuesSurveyId(quesSurveyId);
@@ -544,11 +554,11 @@ public class SurveyController {
             for (QuesType quesType : quesTypeList) {
                 ExportExcelDto dto = new ExportExcelDto();
                 dto.setQuesTypeName(quesType.getQuesTypeName());
-                dto.setVeryAgreePer(veryAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
-                dto.setAgreePer(agreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : agreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
-                dto.setDisAgreePer(disAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : disAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
-                dto.setVeryDisAgreePer(veryDisAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : veryDisAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
-                dto.setPartAgreePer(partAgreeMap.get(quesType.getQuesTypeId()) == null ? "0%" : partAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setVeryAgreePer(veryAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : veryAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setAgreePer(agreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : agreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setDisAgreePer(disAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : disAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setVeryDisAgreePer(veryDisAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : veryDisAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setPartAgreePer(partAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : partAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 list.add(dto);
             }
         }

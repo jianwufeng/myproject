@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
+import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 
 public interface IQuesSurveyAnsweredDetailService {
@@ -15,4 +16,6 @@ public interface IQuesSurveyAnsweredDetailService {
     public List<Top5Dto> getDisAgreeTop5(Long quesSurveyId);
 
     public Map<Long, Top5Dto> getPerListByAnswer(Long quesSurveyId, String answerName);
+
+    public SurveyCompanyPerDto getPerListByCompany(Long quesSurveyId);
 }
