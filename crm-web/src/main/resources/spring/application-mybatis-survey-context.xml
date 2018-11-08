@@ -41,15 +41,30 @@
 	<bean id="surveySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="surveyDataSource" />
 		<!-- 方式一 -->
-		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 方式二 -->
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:mapper/backend/survey/*.xml</value>
 			</list>
 		</property>
+		<property name="plugins">
+	        <array>
+	            <bean class="com.github.pagehelper.PageInterceptor">
+	                <property name="properties">
+	                    <value>
+	                        <!-- helperDialect=mysql -->
+	                        reasonable=true
+	                        supportMethodsArguments=true
+	                        params=count=countSql
+	                        autoRuntimeDialect=true
+	                    </value>
+	                </property>
+	            </bean>
+	        </array>
+	     </property>
 	</bean>
-		
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="surveySqlSessionFactory" />
 		<property name="basePackage" value="

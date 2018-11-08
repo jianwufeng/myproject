@@ -82,7 +82,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">说明</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required">${quesType.quesTypeRemarks!}</textarea>
+            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea">${quesType.quesTypeRemarks!}</textarea>
         </div>
     </div>
     <!--<div class="layui-form-item">
@@ -163,9 +163,9 @@
       	    	if(data.success){
    	              layer.msg('添加成功');
       	    		if(data.data == 'add'){
-	   	             	parent.location.href="survey/ques-survey.html";
+	   	             	parent.location.href="survey/ques-survey.ftl";
       	    		}else{
-      	    			parent.location.href="survey/ques-type.html";
+      	    			parent.location.href="survey/ques-type.ftl";
       	    		}
    	            }else {
    	              layer.msg('添加失败'); 

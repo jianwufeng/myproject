@@ -57,9 +57,9 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe628;</i>问卷调查</a>
                     <dl class="layui-nav-child" id="ques_survey_id_parent">
-                        <dd><a href="javascript:;" id="ques_survey_id" href-url="survey/ques-survey.html"><i class="layui-icon">&#xe621;</i>问卷列表</a></dd>
-                        <dd><a href="javascript:;" href-url="survey/ques-type.html"><i class="layui-icon">&#xe621;</i>题目大类列表</a></dd>
-                        <dd><a href="javascript:;" href-url="survey/ques.html"><i class="layui-icon">&#xe621;</i>题目列表</a></dd>
+                        <dd><a href="javascript:;" id="ques_survey_id" href-url="survey/ques-survey.ftl"><i class="layui-icon">&#xe621;</i>问卷列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/ques-type.ftl"><i class="layui-icon">&#xe621;</i>题目大类列表</a></dd>
+                        <dd><a href="javascript:;" href-url="survey/ques.ftl"><i class="layui-icon">&#xe621;</i>题目列表</a></dd>
                         <!--<dd><a href="javascript:;" href-url="survey/ques-answer.html"><i class="layui-icon">&#xe621;</i>答案列表</a></dd>-->
                         <!--<dd><a href="javascript:;" href-url="survey/map.html"><i class="layui-icon">&#xe621;</i>报表数据</a></dd>-->
                         <!--<dd><a href="javascript:;" href-url="survey/add-edit.html"><i class="layui-icon">&#xe621;</i>添加-修改</a></dd>-->

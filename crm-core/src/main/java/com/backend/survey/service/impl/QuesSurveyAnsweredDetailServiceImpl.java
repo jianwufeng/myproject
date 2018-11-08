@@ -1,5 +1,6 @@
 package com.backend.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.backend.survey.service.IQuesSurveyAnsweredDetailService;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 
 @Service("quesSurveyAnsweredDetailService")
@@ -27,17 +29,21 @@ public class QuesSurveyAnsweredDetailServiceImpl implements IQuesSurveyAnsweredD
     @Override
     public void batchInsert(List<QuesSurveyAnsweredDetail> detailList) {
         for (QuesSurveyAnsweredDetail quesSurveyAnsweredDetail : detailList) {
+            quesSurveyAnsweredDetail.setCreateTime(new Date());
+            quesSurveyAnsweredDetail.setUpdateTime(new Date());
             quesSurveyAnsweredDetailMapper.insertSelective(quesSurveyAnsweredDetail);
         }
     }
 
     @Override
     public List<Top5Dto> getAgreeTop5(Long quesSurveyId) {
+        PageHelper.startPage(1, 5, false);
         return quesSurveyAnsweredDetailExtMapper.getAgreeTop5(quesSurveyId);
     }
 
     @Override
     public List<Top5Dto> getDisAgreeTop5(Long quesSurveyId) {
+        PageHelper.startPage(1, 5, false);
         return quesSurveyAnsweredDetailExtMapper.getDisAgreeTop5(quesSurveyId);
     }
 

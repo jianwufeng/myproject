@@ -130,9 +130,9 @@
 
         //监听提交
         form.on('submit(sub)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
+            /*layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
-            });
+            });*/
             
             var formData = new FormData();
             
@@ -184,11 +184,11 @@
             formData.quesType = quesTypeReq; 
             formData.ques = quesReq; 
             formData.quesAnswerDetailList = quesAnswerDetailListReq; 
-            layer.alert(JSON.stringify(formData));
+            /*layer.alert(JSON.stringify(formData));*/
             asyncXhr2('/crm-web/editQues.ftl', JSON.stringify(formData), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	              parent.location.href="survey/ques.html";
+   	              parent.location.href="survey/ques.ftl";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }

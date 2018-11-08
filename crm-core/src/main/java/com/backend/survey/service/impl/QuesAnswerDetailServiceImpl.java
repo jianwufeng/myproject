@@ -1,5 +1,6 @@
 package com.backend.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import com.backend.survey.service.IQuesService;
 import com.crm.domain.backend.survey.Ques;
 import com.crm.domain.backend.survey.QuesAnswerDetail;
 import com.crm.domain.backend.survey.QuesAnswerDetailExample;
-import com.crm.util.mybatis.plugin.Limit;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -28,6 +29,8 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
 
     @Override
     public void addQuesAnswerDetail(QuesAnswerDetail aser) {
+        aser.setCreateTime(new Date());
+        aser.setUpdateTime(aser.getCreateTime());
         quesAnswerDetailMapper.insertSelective(aser);
     }
 
@@ -62,7 +65,8 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
     public List<QuesAnswerDetail> queryQuesAnswerListPage(int page, int limit) {
         QuesAnswerDetailExample example = new QuesAnswerDetailExample();
         example.setOrderByClause("answer_id desc");
-        example.setLimit(new Limit((page - 1) * limit, limit));
+        //example.setLimit(new Limit((page - 1) * limit, limit));
+        PageHelper.startPage(page, limit, false);
         return quesAnswerDetailMapper.selectByExample(example);
     }
 
@@ -102,6 +106,7 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
 
     @Override
     public int updateQuesAnswerDetail(QuesAnswerDetail quesAnswerDetail) {
+        quesAnswerDetail.setUpdateTime(new Date());
         return quesAnswerDetailMapper.updateByPrimaryKeySelective(quesAnswerDetail);
     }
 }

@@ -87,9 +87,9 @@
 
         //监听提交
         form.on('submit(sub)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
+            /*layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
-            });
+            });*/
             
             asyncXhr2('/crm-web/addQuesAnswerDetail', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){

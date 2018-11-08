@@ -1,5 +1,6 @@
 package com.backend.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import com.backend.survey.mapper.QuesSurveyMapper;
 import com.backend.survey.service.IQuesSurveyService;
 import com.crm.domain.backend.survey.QuesSurvey;
 import com.crm.domain.backend.survey.QuesSurveyExample;
-import com.crm.util.mybatis.plugin.Limit;
+import com.github.pagehelper.PageHelper;
 
 @Service("quesSurveyService")
 public class QuesSurveyServiceImpl implements IQuesSurveyService {
@@ -19,6 +20,8 @@ public class QuesSurveyServiceImpl implements IQuesSurveyService {
 
     @Override
     public void addQuesSurvey(QuesSurvey quesSurvey) {
+        quesSurvey.setCreateTime(new Date());
+        quesSurvey.setUpdateTime(new Date());
         quesSurveyMapper.insertSelective(quesSurvey);
     }
 
@@ -26,7 +29,8 @@ public class QuesSurveyServiceImpl implements IQuesSurveyService {
     public List<QuesSurvey> queryQuesSurvey(int page, int limit) {
         QuesSurveyExample example = new QuesSurveyExample();
         example.setOrderByClause("ques_survey_id desc");
-        example.setLimit(new Limit((page - 1) * limit, limit));
+        //example.setLimit(new Limit((page - 1) * limit, limit));
+        PageHelper.startPage(page, limit, false);
         example.createCriteria().andIsDeleteEqualTo(false);
         return quesSurveyMapper.selectByExample(example);
     }
@@ -47,6 +51,7 @@ public class QuesSurveyServiceImpl implements IQuesSurveyService {
 
     @Override
     public void updateByCondition(QuesSurvey quesSurvey) {
+        quesSurvey.setUpdateTime(new Date());
         QuesSurveyExample example = new QuesSurveyExample();
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurvey.getQuesSurveyId());
         quesSurveyMapper.updateByExampleSelective(quesSurvey, example);

@@ -1,5 +1,6 @@
 package com.backend.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import com.backend.survey.service.IQuesService;
 import com.crm.domain.backend.survey.Ques;
 import com.crm.domain.backend.survey.QuesExample;
 import com.crm.domain.backend.survey.QuesExample.Criteria;
-import com.crm.util.mybatis.plugin.Limit;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -30,6 +31,8 @@ public class QuesServiceImpl implements IQuesService {
 
     @Override
     public Long addQues(Ques ques) {
+        ques.setCreateTime(new Date());
+        ques.setUpdateTime(ques.getCreateTime());
         quesMapper.insertSelective(ques);
         return ques.getQuesId();
     }
@@ -68,9 +71,9 @@ public class QuesServiceImpl implements IQuesService {
     @Override
     public List<Ques> queryQuesList(int page, int limit) {
         QuesExample example = new QuesExample();
-
+        PageHelper.startPage(page, limit, false);
         example.setOrderByClause("ques_id desc");
-        example.setLimit(new Limit((page - 1) * limit, limit));
+        //example.setLimit(new Limit((page - 1) * limit, limit));
         Criteria criteria = example.createCriteria();
         criteria.andIsDeleteEqualTo(false);
         return quesMapper.selectByExample(example);
@@ -100,6 +103,7 @@ public class QuesServiceImpl implements IQuesService {
 
     @Override
     public void editQues(Ques ques) {
+        ques.setUpdateTime(new Date());
         quesMapper.updateByPrimaryKeySelective(ques);
     }
 

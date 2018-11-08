@@ -117,8 +117,6 @@
       	          }  
       	      });  */
         	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引  
-        	alert("index = " + index);
-        	alert(JSON.stringify(data.field));
       	    asyncXhr('/crm-web/addQuesSurvey', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');

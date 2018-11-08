@@ -1,5 +1,6 @@
 package com.backend.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import com.backend.survey.mapper.QuesTypeMapper;
 import com.backend.survey.service.IQuesTypeService;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.QuesTypeExample;
-import com.crm.util.mybatis.plugin.Limit;
+import com.github.pagehelper.PageHelper;
 
 @Service("quesTypeService")
 public class QuesTypeServiceImpl implements IQuesTypeService {
@@ -19,6 +20,8 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
 
     @Override
     public void addQuesType(QuesType quesType) {
+        quesType.setCreateTime(new Date());
+        quesType.setUpdateTime(new Date());
         quesTypeMapper.insertSelective(quesType);
     }
 
@@ -34,7 +37,8 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     public List<QuesType> queryQuesTypeList(int page, int limit) {
         QuesTypeExample example = new QuesTypeExample();
         example.setOrderByClause("ques_type_id desc");
-        example.setLimit(new Limit((page - 1) * limit, limit));
+        //example.setLimit(new Limit((page - 1) * limit, limit));
+        PageHelper.startPage(page, limit, false);
         example.createCriteria().andIsDeleteEqualTo(false);
         return quesTypeMapper.selectByExample(example);
     }
@@ -53,6 +57,7 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
 
     @Override
     public void updateQuesType(QuesType quesType) {
+        quesType.setUpdateTime(new Date());
         QuesTypeExample example = new QuesTypeExample();
         example.createCriteria().andQuesTypeIdEqualTo(quesType.getQuesTypeId());
         quesTypeMapper.updateByExampleSelective(quesType, example);

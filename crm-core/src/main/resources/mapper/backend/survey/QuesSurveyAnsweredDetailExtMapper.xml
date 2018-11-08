@@ -3,37 +3,37 @@
 <mapper namespace="com.backend.survey.mapper.QuesSurveyAnsweredDetailExtMapper" >
 
 	<select id="getAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(convert(float,bb.agreeCount*100)/aa.count,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常同意' and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc limit 5;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc;
 	</select>
 	
 	<select id="getDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(convert(float,bb.agreeCount*100)/aa.count,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常不同意' and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc limit 5;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
 	
 	<select id="getPerListByAnswer" parameterType="map" resultType="com.crm.dto.Top5Dto">
-		SELECT aa.quesTypeId as quesTypeId,  ROUND(bb.agreeCount/aa.count*100,2) as topPer FROM 
+		SELECT aa.quesTypeId as quesTypeId,  ROUND(convert(float,bb.agreeCount*100)/aa.count,2) as topPer FROM 
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = #{answerName} and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
 	
 	<select id="getPerListByCompany" parameterType="java.lang.Long" resultType="com.crm.dto.SurveyCompanyPerDto">
-		select '公司平均值' as companyName, ROUND(veryAgreeCount/total*100,2) as veryAgreePer,ROUND(agreeCount/total*100,2) as agreePer,ROUND(partAgreeCount/total*100,2) as partAgreePer,ROUND(disagreeCount/total*100,2) as disagreePer,ROUND(veryDisagreeCount/total*100,2) as veryDisagreePer FROM 
+		select '公司平均值' as companyName, ROUND(convert(float,veryAgreeCount)/total*100,2) as veryAgreePer,ROUND(convert(float,agreeCount)/total*100,2) as agreePer,ROUND(convert(float,partAgreeCount)/total*100,2) as partAgreePer,ROUND(convert(float,disagreeCount)/total*100,2) as disagreePer,ROUND(convert(float,veryDisagreeCount)/total*100,2) as veryDisagreePer FROM 
 		(SELECT count(1) as total FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0) as total,
 		(SELECT count(1) as veryAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '非常同意') as veryAgreeCount,
 		(SELECT count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '同意') as agreeCount ,

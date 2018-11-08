@@ -1,7 +1,7 @@
 package com.crm.survey.controller.dto;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 public class DataMapDto implements Serializable {
 
@@ -9,43 +9,43 @@ public class DataMapDto implements Serializable {
      */
     private static final long serialVersionUID = 3188928097899987299L;
 
-    private Set<String>       quesTypeNameAgreeList;
+    private List<String>      quesTypeNameAgreeList;
 
-    private Set<String>       quesTypePerAgreeList;
+    private List<String>      quesTypePerAgreeList;
 
-    private Set<String>       quesTypeNameDisAgreeList;
+    private List<String>      quesTypeNameDisAgreeList;
 
-    private Set<String>       quesTypePerDisAgreeList;
+    private List<String>      quesTypePerDisAgreeList;
 
-    public Set<String> getQuesTypeNameAgreeList() {
+    public List<String> getQuesTypeNameAgreeList() {
         return quesTypeNameAgreeList;
     }
 
-    public void setQuesTypeNameAgreeList(Set<String> quesTypeNameAgreeList) {
+    public void setQuesTypeNameAgreeList(List<String> quesTypeNameAgreeList) {
         this.quesTypeNameAgreeList = quesTypeNameAgreeList;
     }
 
-    public Set<String> getQuesTypePerAgreeList() {
+    public List<String> getQuesTypePerAgreeList() {
         return quesTypePerAgreeList;
     }
 
-    public void setQuesTypePerAgreeList(Set<String> quesTypePerAgreeList) {
+    public void setQuesTypePerAgreeList(List<String> quesTypePerAgreeList) {
         this.quesTypePerAgreeList = quesTypePerAgreeList;
     }
 
-    public Set<String> getQuesTypeNameDisAgreeList() {
+    public List<String> getQuesTypeNameDisAgreeList() {
         return quesTypeNameDisAgreeList;
     }
 
-    public void setQuesTypeNameDisAgreeList(Set<String> quesTypeNameDisAgreeList) {
+    public void setQuesTypeNameDisAgreeList(List<String> quesTypeNameDisAgreeList) {
         this.quesTypeNameDisAgreeList = quesTypeNameDisAgreeList;
     }
 
-    public Set<String> getQuesTypePerDisAgreeList() {
+    public List<String> getQuesTypePerDisAgreeList() {
         return quesTypePerDisAgreeList;
     }
 
-    public void setQuesTypePerDisAgreeList(Set<String> quesTypePerDisAgreeList) {
+    public void setQuesTypePerDisAgreeList(List<String> quesTypePerDisAgreeList) {
         this.quesTypePerDisAgreeList = quesTypePerDisAgreeList;
     }
 

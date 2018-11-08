@@ -4,26 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class QuesType implements Serializable {
-    /** 题目大类ID */
     private Long quesTypeId;
 
-    /** 题目大类名称 */
     private String quesTypeName;
 
     private String quesTypeEnglishName;
 
     private String quesTypeRemarks;
 
-    /** 所属问卷ID */
     private Long quesSurveyId;
 
-    /** 排序 */
     private Integer orderById;
 
-    /** 是否背景调查 */
     private Integer isBackgroundSurvey;
 
-    /** 是否删除 */
     private Boolean isDelete;
 
     private Date createTime;

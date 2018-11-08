@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +48,6 @@ import com.crm.util.date.DateUtils;
 import com.crm.util.excel.ExcelUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
@@ -578,10 +576,10 @@ public class SurveyController {
     @RequestMapping(value = "getDataMap.ftl", method = { RequestMethod.POST, RequestMethod.GET })
     public RestResponseEntity getDataMap(HttpServletRequest request, HttpServletResponse response, Long quesSurveyId) {
         DataMapDto dto = new DataMapDto();
-        Set<String> quesTypeNameAgreeList = Sets.newHashSet();
-        Set<String> quesTypePerAgreeList = Sets.newHashSet();
-        Set<String> quesTypeNameDisAgreeList = Sets.newHashSet();
-        Set<String> quesTypePerDisAgreeList = Sets.newHashSet();
+        List<String> quesTypeNameAgreeList = Lists.newArrayList();
+        List<String> quesTypePerAgreeList = Lists.newArrayList();
+        List<String> quesTypeNameDisAgreeList = Lists.newArrayList();
+        List<String> quesTypePerDisAgreeList = Lists.newArrayList();
 
         List<Top5Dto> agreeTop5List = quesSurveyAnsweredDetailService.getAgreeTop5(quesSurveyId);
         List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);

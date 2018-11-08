@@ -95,8 +95,8 @@
                 , {field: 'quesTypeName', title: '题目大类名称', width: 280}
                 , {field: 'quesSurveyId', title: '所属问卷ID', width: 120}
                 , {field: 'orderById', title: '排序', width: 80}
-                , {field: 'createTime', title: '创建时间', width: 200,templet: '<div>{{ layui.laytpl.toDateString(d.createTime) }}</div>'}
-                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {field: 'createTime', title: '创建时间', width: 190,templet: '<div>{{ layui.laytpl.toDateString(d.createTime) }}</div>'}
+                , {fixed: 'right', title: '操作', width: 260, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
             , url: '/crm-web/queryQuesTypeList'

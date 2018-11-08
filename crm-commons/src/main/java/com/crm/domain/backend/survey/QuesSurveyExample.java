@@ -549,6 +549,76 @@ public class QuesSurveyExample {
             return (Criteria) this;
         }
 
+        public Criteria andQuesSurveyRemarksIsNull() {
+            addCriterion("ques_survey_remarks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksIsNotNull() {
+            addCriterion("ques_survey_remarks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksEqualTo(String value) {
+            addCriterion("ques_survey_remarks =", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksNotEqualTo(String value) {
+            addCriterion("ques_survey_remarks <>", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksGreaterThan(String value) {
+            addCriterion("ques_survey_remarks >", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksGreaterThanOrEqualTo(String value) {
+            addCriterion("ques_survey_remarks >=", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksLessThan(String value) {
+            addCriterion("ques_survey_remarks <", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksLessThanOrEqualTo(String value) {
+            addCriterion("ques_survey_remarks <=", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksLike(String value) {
+            addCriterion("ques_survey_remarks like", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksNotLike(String value) {
+            addCriterion("ques_survey_remarks not like", value, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksIn(List<String> values) {
+            addCriterion("ques_survey_remarks in", values, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksNotIn(List<String> values) {
+            addCriterion("ques_survey_remarks not in", values, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksBetween(String value1, String value2) {
+            addCriterion("ques_survey_remarks between", value1, value2, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuesSurveyRemarksNotBetween(String value1, String value2) {
+            addCriterion("ques_survey_remarks not between", value1, value2, "quesSurveyRemarks");
+            return (Criteria) this;
+        }
+
         public Criteria andStartDateIsNull() {
             addCriterion("start_date is null");
             return (Criteria) this;

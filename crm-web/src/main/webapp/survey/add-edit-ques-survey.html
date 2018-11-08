@@ -94,12 +94,12 @@
         	console.log(data.field); */
         	//alert(JSON.stringify(data.field));
         	data.LAY_demo_editor = layedit.getContent(editIndex);
-        	alert(JSON.stringify(data.field));
+        	//alert(JSON.stringify(data.field));
         	return ;
       	    asyncXhr2('/crm-web/saveQuesSurvey.ftl', JSON.stringify(data.field), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	          	  parent.location.href="./ques-survey.html";
+   	          	  parent.location.href="./ques-survey.ftl";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }

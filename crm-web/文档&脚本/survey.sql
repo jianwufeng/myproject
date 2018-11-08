@@ -13,7 +13,7 @@ CREATE TABLE `t_an_ques` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ques_id`),
   UNIQUE KEY `ques_id_uk` (`ques_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='问题模板表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='问题模板表';
 
 CREATE TABLE `t_an_ques_answer_detail` (
   `answer_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '问题答案ID',
@@ -29,7 +29,7 @@ CREATE TABLE `t_an_ques_answer_detail` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`answer_id`),
   UNIQUE KEY `answer_id_uk` (`answer_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COMMENT='题目答案模板表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='题目答案模板表';
 
 CREATE TABLE `t_an_ques_survey` (
   `ques_survey_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '问卷ID',
@@ -45,7 +45,7 @@ CREATE TABLE `t_an_ques_survey` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ques_survey_id`),
   UNIQUE KEY `ques_survey_id_uk` (`ques_survey_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1536647459938 DEFAULT CHARSET=utf8 COMMENT='问卷调查模板表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='问卷调查模板表';
 
 CREATE TABLE `t_an_ques_survey_answered_detail` (
   `ques_survey_answered_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '问卷调查每次作答唯一键',
@@ -65,7 +65,7 @@ CREATE TABLE `t_an_ques_survey_answered_detail` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ques_survey_answered_id`),
   UNIQUE KEY `ques_survey_answered_id_uk` (`ques_survey_answered_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COMMENT='问卷答题明细表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='问卷答题明细表';
 
 CREATE TABLE `t_an_ques_type` (
   `ques_type_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '题目大类ID',
@@ -80,7 +80,7 @@ CREATE TABLE `t_an_ques_type` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ques_type_id`),
   UNIQUE KEY `ques_type_id_uk` (`ques_type_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='问答大类模板表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='问答大类模板表';
 
 CREATE TABLE `t_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -92,5 +92,5 @@ CREATE TABLE `t_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_idx` (`user_name`) USING BTREE,
   UNIQUE KEY `email_idx` (`email`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

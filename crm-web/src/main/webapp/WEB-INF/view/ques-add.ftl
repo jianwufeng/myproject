@@ -30,7 +30,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">说明</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea" lay-verify="required">${quesType.quesTypeRemarks!}</textarea>
+            <textarea placeholder="请输入大类说明" name="quesTypeRemarks" class="layui-textarea">${quesType.quesTypeRemarks!}</textarea>
         </div>
     </div>
     <!--<div class="layui-form-item">
@@ -272,11 +272,11 @@
             formData.quesType = quesTypeReq; 
             formData.ques = quesReq; 
             formData.quesAnswerDetailList = quesAnswerDetailListReq; 
-            layer.alert(JSON.stringify(formData))
+            /*layer.alert(JSON.stringify(formData))*/
             asyncXhr2('/crm-web/addQues', JSON.stringify(formData), "POST", 'application/json', function(data){
       	    	if(data){
    	              layer.msg('添加成功');
-   	              parent.location.href="survey/ques-type.html";
+   	              parent.location.href="survey/ques-type.ftl";
    	            }else {
    	              layer.msg('添加失败'); 
    	            }

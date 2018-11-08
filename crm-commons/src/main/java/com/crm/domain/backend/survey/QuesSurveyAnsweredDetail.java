@@ -4,43 +4,30 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class QuesSurveyAnsweredDetail implements Serializable {
-    /** 问卷调查每次作答唯一键 */
     private Long quesSurveyAnsweredId;
 
-    /** 所属问卷ID */
     private Long quesSurveyId;
 
-    /** 问卷名称 */
     private String quesSurveyName;
 
-    /** 所属题目大类ID */
     private Long quesTypeId;
 
-    /** 题目大类名称 */
     private String quesTypeName;
 
-    /** 题目ID */
     private Long quesId;
 
-    /** 题目名称 */
     private String quesName;
 
-    /** 题目类型 1：单选，2：多选，3：填空 */
     private Integer quesType;
 
-    /** 答案ID */
     private Long answerId;
 
-    /** 答案内容 */
     private String answerName;
 
-    /** 答案分数 */
     private String answerScore;
 
-    /** 是否背景调查 0：否，1：是 */
     private Integer isBackgroundSurvey;
 
-    /** 是否删除 */
     private Boolean isDelete;
 
     private Date createTime;

@@ -4,31 +4,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class QuesAnswerDetail implements Serializable {
-    /** 问题答案ID */
     private Long answerId;
 
-    /** 问题答案名称 */
     private String answerName;
 
-    /** 选项 1,2,3,4 或A,B,C,D */
     private String optionId;
 
-    /** 题目ID */
     private Long quesId;
 
-    /** 题目名称 */
     private String quesName;
 
-    /** 所属问卷ID */
     private Long quesSurveyId;
 
-    /** 所属题目大类ID */
     private Long quesTypeId;
 
-    /** 排序1,2,3,4 */
     private Integer orderById;
 
-    /** 是否删除 */
     private Boolean isDelete;
 
     private Date createTime;
