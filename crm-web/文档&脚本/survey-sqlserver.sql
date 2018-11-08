@@ -14,6 +14,8 @@ File Encoding         : 65001
 Date: 2018-11-08 14:33:25
 */
 
+CREATE DATABASE ques_survey;
+USE ques_survey;
 
 -- ----------------------------
 -- Table structure for t_an_ques
