@@ -9,7 +9,7 @@
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常同意' and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY bb.agreeCount/aa.count desc;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
 	
 	<select id="getDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
