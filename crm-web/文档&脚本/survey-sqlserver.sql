@@ -22,8 +22,8 @@ USE ques_survey;
 -- ----------------------------
 CREATE TABLE [dbo].[t_an_ques] (
 [ques_id] bigint NOT NULL IDENTITY(1,1) ,
-[ques_name] varchar(64) NOT NULL ,
-[ques_english_name] varchar(500) NULL ,
+[ques_name] varchar(2048) NOT NULL ,
+[ques_english_name] varchar(2048) NULL ,
 [ques_type] int NULL ,
 [ques_survey_id] bigint NULL ,
 [ques_type_id] bigint NULL ,
