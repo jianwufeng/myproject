@@ -1,7 +1,7 @@
 CREATE TABLE `t_an_ques` (
   `ques_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '题目ID',
-  `ques_name` varchar(64) NOT NULL COMMENT '题目名称',
-  `ques_english_name` varchar(500) DEFAULT NULL,
+  `ques_name` varchar(2048) NOT NULL COMMENT '题目名称',
+  `ques_english_name` varchar(2048) DEFAULT NULL,
   `ques_type` int(11) NOT NULL DEFAULT '0' COMMENT '题目类型 1：单选，2：多选，3：问答',
   `ques_survey_id` bigint(20) DEFAULT NULL COMMENT '所属问卷ID',
   `ques_type_id` bigint(20) DEFAULT NULL COMMENT '所属题目大类ID',
