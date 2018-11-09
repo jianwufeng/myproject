@@ -98,6 +98,7 @@ public class QuesServiceImpl implements IQuesService {
     @Override
     public int countQues() {
         QuesExample example = new QuesExample();
+        example.createCriteria().andIsDeleteEqualTo(false);
         return quesMapper.countByExample(example);
     }
 

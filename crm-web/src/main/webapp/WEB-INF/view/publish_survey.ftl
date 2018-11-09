@@ -41,8 +41,8 @@
 	<table width="100%">
 	    <tbody>
 		     <tr width="20%">
-			      <th align="left"><img width="180" height="60" src="./frame/static/image/survey.jpg" /></th>
-			      <th align="right">上海波音有限公司</th>
+			      <th align="left"><img width="360" height="120" src="./frame/static/image/survey.jpg" /></th>
+			      <th align="right">上海波音航空改装维修工程有限公司</th>
 		     </tr>
     	</tbody>
     </table>
