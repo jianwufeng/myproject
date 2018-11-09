@@ -105,6 +105,7 @@
 		<br><br>
 		<input type="button" id="submitAnswer" value="提交" style="margin-left:40px;height:30px;width:50px;">
 		<input type="reset" style="height:30px;width:50px;">
+		<br><br>
 		</div>
 	</form>
 	<script src="js/jquery-1.9.1.min.js"></script>
