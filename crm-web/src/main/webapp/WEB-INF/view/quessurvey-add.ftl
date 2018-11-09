@@ -41,7 +41,7 @@
 
         <div class="layui-input-block">
             <input type="text" name="quesSurveyLogoUrl" autocomplete="off" placeholder="请输入问卷LOGO链接" lay-verify="required"
-                   class="layui-input">
+                   class="layui-input" value="/crm-web/images/bsh-logo.jpg">
         </div>
     </div>
     

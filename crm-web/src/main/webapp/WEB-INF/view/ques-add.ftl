@@ -113,7 +113,7 @@
 									<div class="layui-form-item">
 										<label class="layui-form-label">选项 :</label>
 										<div class="layui-input-block"> 
-											<textarea name="answerName" autocomplete="off" placeholder="请输入答案选项名称" lay-verify="required" class="layui-textarea" readonly>${quesAnswer.answerName!}</textarea>
+											<textarea name="answerName" autocomplete="off" placeholder="问答题不需要输入" class="layui-textarea">${quesAnswer.answerName!}</textarea>
 										</div>
 									</div>
 								</#if>
@@ -181,7 +181,7 @@
 		
 		        <div class="layui-input-block">
 		            <input type="text" id="orderById" name="orderById" autocomplete="off" placeholder="题目选项排序标识(如1,2,3)" lay-verify="required"
-		                   class="layui-input">
+		                   class="layui-input" value="50">
 		        </div>
 		    </div>
 		</div>

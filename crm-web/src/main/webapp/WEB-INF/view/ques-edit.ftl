@@ -206,7 +206,7 @@
 	        	xuanxiang ++ ;
 				$("#answer-add").append("<div class='layui-form-item'><label class='layui-form-label'>选项"+xuanxiang+" :</label><div class='layui-input-block'> <input type='text' name='quesAnswerName"+xuanxiang + "' autocomplete='off' placeholder='请输入答案选项名称' lay-verify='required' class='layui-input'></div></div>");
         	}else if($('#quesTypeSelectionId').val() == 3){
-        		$("#answer-add").html("<div class='layui-form-item'><label class='layui-form-label'>选项 :</label><div class='layui-input-block'> <textarea id='quesAnswerId' name='quesAnswerName' autocomplete='off' placeholder='请输入答案选项名称' lay-verify='required' class='layui-textarea' disabled></textarea></div></div>");
+        		$("#answer-add").html("<div class='layui-form-item'><label class='layui-form-label'>选项 :</label><div class='layui-input-block'> <textarea id='quesAnswerId' name='quesAnswerName' autocomplete='off' placeholder='问答题不需要输入' class='layui-textarea'></textarea></div></div>");
         		$("#answer-add").attr({"disabled":"disabled"});
         	}else {
         		layer.alert("请选择题目类型！")

@@ -98,7 +98,7 @@
 
         <div class="layui-input-block">
             <input type="text" name="orderById" autocomplete="off" placeholder="题目大类排序标识(如1,2,3)" lay-verify="required"
-                   class="layui-input" value="${quesType.orderById!}">
+                   class="layui-input" value="50">
         </div>
     </div>
     
