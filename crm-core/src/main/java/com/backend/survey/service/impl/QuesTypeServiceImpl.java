@@ -28,7 +28,7 @@ public class QuesTypeServiceImpl implements IQuesTypeService {
     @Override
     public List<QuesType> queryQuesTypeList(Long quesSurveyId) {
         QuesTypeExample example = new QuesTypeExample();
-        example.setOrderByClause("order_by_id asc,ques_type_id desc");
+        example.setOrderByClause("order_by_id asc,ques_type_id asc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId).andIsDeleteEqualTo(false);
         return quesTypeMapper.selectByExample(example);
     }
