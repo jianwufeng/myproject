@@ -530,11 +530,11 @@ public class SurveyController {
 
         List<ExportExcelDto> list = Lists.newArrayList();
 
-        Map<Long, Top5Dto> veryAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常同意");
-        Map<Long, Top5Dto> agreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "同意");
-        Map<Long, Top5Dto> partAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "部分同意");
-        Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意");
-        Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意");
+        Map<Long, Top5Dto> veryAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常同意%");
+        Map<Long, Top5Dto> agreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "同意%");
+        Map<Long, Top5Dto> partAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "部分同意%");
+        Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意%");
+        Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意%");
         SurveyCompanyPerDto perDto = quesSurveyAnsweredDetailService.getPerListByCompany(quesSurveyId);
         ExportExcelDto dto1 = new ExportExcelDto();
         dto1.setQuesTypeName(perDto.getCompanyName());

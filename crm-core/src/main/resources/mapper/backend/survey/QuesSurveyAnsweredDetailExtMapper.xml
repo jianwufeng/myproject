@@ -7,7 +7,7 @@
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
-		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常同意' and ques_type = 1 GROUP BY ques_type_id) bb
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like '非常同意%' and ques_type = 1 GROUP BY ques_type_id) bb
 		
 		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
@@ -17,7 +17,7 @@
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
-		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = '非常不同意' and ques_type = 1 GROUP BY ques_type_id) bb
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like '非常不同意%' and ques_type = 1 GROUP BY ques_type_id) bb
 		
 		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
@@ -27,19 +27,19 @@
 
 		(SELECT ques_type_id as quesTypeId,count(1) as count FROM t_an_ques_survey_answered_detail GROUP BY ques_type_id) aa,
 		
-		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name = #{answerName} and ques_type = 1 GROUP BY ques_type_id) bb
+		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like #{answerName} and ques_type = 1 GROUP BY ques_type_id) bb
 		
 		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
 	</select>
 	
 	<select id="getPerListByCompany" parameterType="java.lang.Long" resultType="com.crm.dto.SurveyCompanyPerDto">
-		select '公司平均值' as companyName, ROUND((veryAgreeCount)/total*100,2) as veryAgreePer,ROUND(convert(float,agreeCount)/total*100,2) as agreePer,ROUND(convert(float,partAgreeCount)/total*100,2) as partAgreePer,ROUND(convert(float,disagreeCount)/total*100,2) as disagreePer,ROUND(convert(float,veryDisagreeCount)/total*100,2) as veryDisagreePer FROM
-		(SELECT count(1) as total FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0) as total,
-		(SELECT count(1) as veryAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '非常同意') as veryAgreeCount,
-		(SELECT count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '同意') as agreeCount ,
-		(SELECT count(1) as partAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '部分同意') as partAgreeCount ,
-		(SELECT count(1) as disagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '不同意') as disagreeCount,
-		(SELECT count(1) as veryDisagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name = '非常不同意') as veryDisagreeCount
+		select '公司平均值' as companyName, ROUND((veryAgreeCount*100)/total,2) as veryAgreePer,ROUND(agreeCount*100/total,2) as agreePer,ROUND(partAgreeCount*100/total,2) as partAgreePer,ROUND(disagreeCount*100/total,2) as disagreePer,ROUND(veryDisagreeCount*100/total,2) as veryDisagreePer FROM
+		(SELECT count(1) as total FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 and ques_type = 1) as total,
+		(SELECT count(1) as veryAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '非常同意%') as veryAgreeCount,
+		(SELECT count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '同意%') as agreeCount ,
+		(SELECT count(1) as partAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '部分同意%') as partAgreeCount ,
+		(SELECT count(1) as disagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '不同意%') as disagreeCount,
+		(SELECT count(1) as veryDisagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '非常不同意%') as veryDisagreeCount
 	</select>
 	
 </mapper>
