@@ -12,6 +12,8 @@ $(document).ready(function() {
 				if($this.find("input[type='radio']:checked").length == 0){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
+					$this.find($("input[type='radio']")).focus();
+					//$this.parent().after("<P style='font-weight:bold;margin:10px';color='#FF0000'>请选择答案!<p>");
 					return false;
 				}
 			}
@@ -20,6 +22,7 @@ $(document).ready(function() {
 				if($this.find("textarea").val() == ''){
 					isSubmit = false;
 					alert($(this).html() + ": 答案不能为空!");
+					$this.find($("input[type='radio']")).focus();
 					return false;
 				}
 			}
@@ -84,6 +87,7 @@ $(document).ready(function() {
 					if(data.data){
 						alert("提交成功");
 						$("#submitAnswer").attr({"disabled":"disabled"});
+						parent.location.href="survey/thanks.html";
 						//window.location.href ="https:" + salesorder_domain + "/order/goSubmitPage";
 					}else{
 						alert(data.message);
