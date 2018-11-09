@@ -9,7 +9,7 @@
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like '非常同意%' and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc
 	</select>
 	
 	<select id="getDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.Top5Dto">
@@ -19,7 +19,7 @@
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like '非常不同意%' and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc
 	</select>
 	
 	<select id="getPerListByAnswer" parameterType="map" resultType="com.crm.dto.Top5Dto">
@@ -29,7 +29,7 @@
 		
 		(SELECT ques_type_id as quesTypeId,count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} and answer_name like #{answerName} and ques_type = 1 GROUP BY ques_type_id) bb
 		
-		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc;
+		WHERE aa.quesTypeId = bb.quesTypeId ORDER BY topPer desc
 	</select>
 	
 	<select id="getPerListByCompany" parameterType="java.lang.Long" resultType="com.crm.dto.SurveyCompanyPerDto">
