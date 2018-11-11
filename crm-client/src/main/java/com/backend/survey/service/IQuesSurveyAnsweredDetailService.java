@@ -18,4 +18,7 @@ public interface IQuesSurveyAnsweredDetailService {
     public Map<Long, Top5Dto> getPerListByAnswer(Long quesSurveyId, String answerName);
 
     public SurveyCompanyPerDto getPerListByCompany(Long quesSurveyId);
+
+    public List<QuesSurveyAnsweredDetail> getAnsweredDetailList(Long quesSurveyId);
+
 }

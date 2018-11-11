@@ -43,6 +43,7 @@ import com.crm.survey.controller.dto.DataMapDto;
 import com.crm.survey.controller.dto.ExportExcelDto;
 import com.crm.survey.controller.dto.FormData;
 import com.crm.survey.controller.dto.QuesDto;
+import com.crm.survey.controller.dto.QuesSurveyAnsweredDetailDto;
 import com.crm.survey.controller.dto.QuesSurveyDto;
 import com.crm.util.date.DateUtils;
 import com.crm.util.excel.ExcelUtils;
@@ -606,6 +607,30 @@ public class SurveyController {
         dto.setQuesTypeNameDisAgreeList(quesTypeNameDisAgreeList);
         dto.setQuesTypePerDisAgreeList(quesTypePerDisAgreeList);
         return RestResponseEntity.getEntity(dto);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "exportAnswerdDetail.ftl", method = { RequestMethod.POST, RequestMethod.GET })
+    public RestResponseEntity exportAnswerdDetail(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request,
+                                                  HttpServletResponse response)
+            throws IllegalArgumentException, IllegalAccessException {
+        String[] arr = { "问卷id", "大类id", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调" };
+
+        List<QuesSurveyAnsweredDetail> detailList = quesSurveyAnsweredDetailService.getAnsweredDetailList(quesSurveyId);
+
+        List<QuesSurveyAnsweredDetailDto> resultList = Lists.newArrayList();
+        if (CollectionUtils.isNotEmpty(detailList)) {
+            for (QuesSurveyAnsweredDetail quesSurveyAnsweredDetail : detailList) {
+                QuesSurveyAnsweredDetailDto dto = new QuesSurveyAnsweredDetailDto();
+                BeanUtils.copyProperties(quesSurveyAnsweredDetail, dto);
+                dto.setTypeName(quesSurveyAnsweredDetail.getQuesType() == 1 ? "单选题" : "问答题");
+                resultList.add(dto);
+            }
+        }
+
+        ExcelUtils.export(response, arr, resultList, QuesSurveyAnsweredDetailDto.class);
+
+        return RestResponseEntity.getEntity(true);
     }
 
 };

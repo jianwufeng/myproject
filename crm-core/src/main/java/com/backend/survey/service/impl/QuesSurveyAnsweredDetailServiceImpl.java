@@ -12,6 +12,7 @@ import com.backend.survey.mapper.QuesSurveyAnsweredDetailExtMapper;
 import com.backend.survey.mapper.QuesSurveyAnsweredDetailMapper;
 import com.backend.survey.service.IQuesSurveyAnsweredDetailService;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
+import com.crm.domain.backend.survey.QuesSurveyAnsweredDetailExample;
 import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 import com.github.pagehelper.PageHelper;
@@ -62,5 +63,12 @@ public class QuesSurveyAnsweredDetailServiceImpl implements IQuesSurveyAnsweredD
     @Override
     public SurveyCompanyPerDto getPerListByCompany(Long quesSurveyId) {
         return quesSurveyAnsweredDetailExtMapper.getPerListByCompany(quesSurveyId);
+    }
+
+    @Override
+    public List<QuesSurveyAnsweredDetail> getAnsweredDetailList(Long quesSurveyId) {
+        QuesSurveyAnsweredDetailExample example = new QuesSurveyAnsweredDetailExample();
+        example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId);
+        return quesSurveyAnsweredDetailExtMapper.selectByExample(example);
     }
 }

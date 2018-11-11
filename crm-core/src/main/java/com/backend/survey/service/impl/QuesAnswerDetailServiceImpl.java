@@ -38,6 +38,7 @@ public class QuesAnswerDetailServiceImpl implements IQuesAnswerDetailService {
     public List<QuesAnswerDetail> queryQuesAnswerDetailList(Long quesSurveyId, List<Long> quesIds) {
 
         QuesAnswerDetailExample example = new QuesAnswerDetailExample();
+        example.setOrderByClause("order_by_id asc,answer_id asc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId).andQuesIdIn(quesIds);
         return quesAnswerDetailMapper.selectByExample(example);
     }

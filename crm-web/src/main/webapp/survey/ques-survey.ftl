@@ -94,10 +94,10 @@
             ,totalRow: true //开启合计行
             , cols: [[                  //标题栏
                 {checkbox: true, sort: true, fixed: true, space: true}
-                , {field: 'quesSurveyId', title: '问卷编号', width: 200}
+                , {field: 'quesSurveyId', title: '问卷编号', width: 160}
                 , {field: 'quesSurveyName', title: '问卷名称', width: 230}
                 , {field: 'createTime', title: '创建时间', width: 160,templet: '<div>{{ layui.laytpl.toDateString(d.createTime) }}</div>'}
-                , {fixed: 'right', title: '操作', width: 460, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 500, align: 'center', toolbar: '#barOption'} //这里的toolbar值是模板元素的选择器
             ]]
         });
 
@@ -197,7 +197,7 @@
           }else if(layEvent === 'detail'){
         	  alert("detail");
           }else if(layEvent === 'download'){
-        	  sync('/crm-web/exportExcel.ftl?quesSurveyId='+data.quesSurveyId, '', "POST");
+        	  //sync('/crm-web/exportExcel.ftl?quesSurveyId='+data.quesSurveyId, '', "POST");
         	  window.open('/crm-web/exportExcel.ftl?quesSurveyId='+data.quesSurveyId);
           }else if(layEvent === 'datareport'){
         	  //sync('/crm-web/getDataMapFtl.ftl?quesSurveyId='+data.quesSurveyId, '', "GET");
@@ -209,6 +209,9 @@
         		  content: '/crm-web/getDataMapFtl.ftl?quesSurveyId=' + data.quesSurveyId
         	});
             layer.full(index);
+          }else if(layEvent === 'datareportdetail'){
+        	  //sync('/crm-web/exportAnswerdDetail.ftl?quesSurveyId='+data.quesSurveyId, '', "POST");
+        	  window.open('/crm-web/exportAnswerdDetail.ftl?quesSurveyId='+data.quesSurveyId);
           }
         });
 
@@ -238,6 +241,7 @@
 	<a class="layui-btn layui-btn-mini" lay-event="share">分享链接</a>
 	<a class="layui-btn layui-btn-mini" lay-event="download">下载数据</a>
 	<a class="layui-btn layui-btn-mini" lay-event="datareport">查看报表</a>
+	<a class="layui-btn layui-btn-mini" lay-event="datareportdetail">查看报表明细</a>
 </script>
 </body>
 </html>

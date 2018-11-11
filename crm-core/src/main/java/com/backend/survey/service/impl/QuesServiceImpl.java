@@ -40,6 +40,7 @@ public class QuesServiceImpl implements IQuesService {
     @Override
     public List<Ques> queryQues(Long quesSurveyId, List<Long> quesTypeIds) {
         QuesExample example = new QuesExample();
+        example.setOrderByClause("order_by_id asc,ques_id asc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId).andIsDeleteEqualTo(false).andQuesTypeIdIn(quesTypeIds);
         return quesMapper.selectByExample(example);
     }
