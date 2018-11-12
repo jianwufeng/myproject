@@ -2,6 +2,8 @@ package com.crm.survey.controller.dto;
 
 import java.io.Serializable;
 
+import com.crm.util.excel.ExportExcelPar;
+
 public class QuesSurveyAnsweredDetailDto implements Serializable {
     /**
      */
@@ -9,7 +11,10 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     private Long              quesSurveyId;
 
+    @ExportExcelPar(ifExport = false)
     private Long              quesTypeId;
+
+    private String            quesTypeName;
 
     private Long              quesId;
 
@@ -19,7 +24,10 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     private String            answerName;
 
+    @ExportExcelPar(ifExport = false)
     private Integer           isBackgroundSurvey;
+
+    private String            isBackgroundSurveyStr;
 
     public Long getQuesSurveyId() {
         return quesSurveyId;
@@ -75,6 +83,22 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getQuesTypeName() {
+        return quesTypeName;
+    }
+
+    public void setQuesTypeName(String quesTypeName) {
+        this.quesTypeName = quesTypeName;
+    }
+
+    public String getIsBackgroundSurveyStr() {
+        return isBackgroundSurveyStr;
+    }
+
+    public void setIsBackgroundSurveyStr(String isBackgroundSurveyStr) {
+        this.isBackgroundSurveyStr = isBackgroundSurveyStr;
     }
 
 }

@@ -614,9 +614,17 @@ public class SurveyController {
     public RestResponseEntity exportAnswerdDetail(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request,
                                                   HttpServletResponse response)
             throws IllegalArgumentException, IllegalAccessException {
-        String[] arr = { "问卷id", "大类id", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调" };
+        String[] arr = { "问卷id", "大类名称", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调" };
 
         List<QuesSurveyAnsweredDetail> detailList = quesSurveyAnsweredDetailService.getAnsweredDetailList(quesSurveyId);
+
+        List<QuesType> queryQuesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
+        Map<Long, String> quesTypeMap = Maps.newHashMap();
+        if (CollectionUtils.isNotEmpty(queryQuesTypeList)) {
+            for (QuesType quesType : queryQuesTypeList) {
+                quesTypeMap.put(quesType.getQuesTypeId(), quesType.getQuesTypeName());
+            }
+        }
 
         List<QuesSurveyAnsweredDetailDto> resultList = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(detailList)) {
@@ -624,6 +632,8 @@ public class SurveyController {
                 QuesSurveyAnsweredDetailDto dto = new QuesSurveyAnsweredDetailDto();
                 BeanUtils.copyProperties(quesSurveyAnsweredDetail, dto);
                 dto.setTypeName(quesSurveyAnsweredDetail.getQuesType() == 1 ? "单选题" : "问答题");
+                dto.setIsBackgroundSurveyStr(quesSurveyAnsweredDetail.getIsBackgroundSurvey() == 0 ? "否" : "是");
+                dto.setQuesTypeName(quesTypeMap.get(quesSurveyAnsweredDetail.getQuesTypeId()));
                 resultList.add(dto);
             }
         }

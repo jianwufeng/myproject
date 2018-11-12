@@ -68,6 +68,7 @@ public class QuesSurveyAnsweredDetailServiceImpl implements IQuesSurveyAnsweredD
     @Override
     public List<QuesSurveyAnsweredDetail> getAnsweredDetailList(Long quesSurveyId) {
         QuesSurveyAnsweredDetailExample example = new QuesSurveyAnsweredDetailExample();
+        example.setOrderByClause("ques_type_id asc,ques_id asc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId);
         return quesSurveyAnsweredDetailExtMapper.selectByExample(example);
     }
