@@ -157,10 +157,10 @@ GO
 -- ----------------------------
 CREATE TABLE [dbo].[t_an_ques_answer_detail] (
 [answer_id] bigint NOT NULL IDENTITY(1,1) ,
-[answer_name] varchar(256) NULL ,
+[answer_name] varchar(2048) NULL ,
 [option_id] varchar(8) NULL ,
 [ques_id] bigint NOT NULL ,
-[ques_name] varchar(64) NOT NULL ,
+[ques_name] varchar(2048) NOT NULL ,
 [ques_survey_id] bigint NOT NULL ,
 [ques_type_id] bigint NULL ,
 [order_by_id] int NULL ,
@@ -317,10 +317,10 @@ GO
 -- ----------------------------
 CREATE TABLE [dbo].[t_an_ques_survey] (
 [ques_survey_id] bigint NOT NULL IDENTITY(1,1) ,
-[ques_survey_name] varchar(64) NULL ,
-[ques_survey_english_name] varchar(200) NULL ,
-[ques_survey_logo_url] varchar(255) NULL ,
-[ques_survey_title] varchar(255) NULL ,
+[ques_survey_name] varchar(2048) NULL ,
+[ques_survey_english_name] varchar(2048) NULL ,
+[ques_survey_logo_url] varchar(2048) NULL ,
+[ques_survey_title] varchar(2048) NULL ,
 [ques_survey_remarks] varchar(MAX) NULL ,
 [start_date] varchar(10) NULL ,
 [end_date] varchar(10) NULL ,
@@ -434,14 +434,14 @@ GO
 CREATE TABLE [dbo].[t_an_ques_survey_answered_detail] (
 [ques_survey_answered_id] bigint NOT NULL IDENTITY(1,1) ,
 [ques_survey_id] bigint NOT NULL ,
-[ques_survey_name] varchar(64) NULL ,
+[ques_survey_name] varchar(2048) NULL ,
 [ques_type_id] bigint NULL ,
-[ques_type_name] varchar(64) NULL ,
+[ques_type_name] varchar(2048) NULL ,
 [ques_id] bigint NOT NULL ,
-[ques_name] varchar(64) NULL ,
+[ques_name] varchar(2048) NULL ,
 [ques_type] int NOT NULL ,
 [answer_id] bigint NULL ,
-[answer_name] varchar(256) NULL ,
+[answer_name] varchar(2048) NULL ,
 [answer_score] varchar(64) NULL ,
 [is_background_survey] int NOT NULL DEFAULT ((0)) ,
 [is_delete] bit NOT NULL DEFAULT ((0)) ,
@@ -653,9 +653,9 @@ GO
 -- ----------------------------
 CREATE TABLE [dbo].[t_an_ques_type] (
 [ques_type_id] bigint NOT NULL IDENTITY(1,1) ,
-[ques_type_name] varchar(64) NULL ,
-[ques_type_english_name] varchar(200) NULL ,
-[ques_type_remarks] varchar(500) NULL ,
+[ques_type_name] varchar(2048) NULL ,
+[ques_type_english_name] varchar(2048) NULL ,
+[ques_type_remarks] varchar(2048) NULL ,
 [ques_survey_id] bigint NOT NULL ,
 [order_by_id] int NULL ,
 [is_background_survey] int NOT NULL DEFAULT ((0)) ,
@@ -770,8 +770,8 @@ GO
 -- ----------------------------
 CREATE TABLE [dbo].[t_user] (
 [id] bigint NOT NULL IDENTITY(1,1) ,
-[user_name] nvarchar(64) NOT NULL ,
-[email] nvarchar(64) NULL ,
+[user_name] nvarchar(128) NOT NULL ,
+[email] nvarchar(128) NULL ,
 [password] nvarchar(255) NULL ,
 [create_time] datetime2(7) NULL ,
 [update_time] datetime2(7) NULL 
