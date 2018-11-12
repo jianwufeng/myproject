@@ -90,6 +90,14 @@
 					</#list>
 				</#if>
 		    </div>
+		    <div class="layui-form-item">
+		        <label class="layui-form-label">题目排序标识</label>
+		
+		        <div class="layui-input-block">
+		            <input type="text" name="orderById" autocomplete="off" placeholder="题目排序标识(如1,2,3)" lay-verify="required"
+		                   class="layui-input" value="${ques.orderById!50}">
+		        </div>
+		    </div>
 		    <hr>
 		</div>
 	</div>
@@ -181,7 +189,7 @@
 				quesAnswerDetailListReq.push(quesAnswerDetailReq);
 			}
 			
-            formData.quesType = quesTypeReq; 
+            //formData.quesType = quesTypeReq; 
             formData.ques = quesReq; 
             formData.quesAnswerDetailList = quesAnswerDetailListReq; 
             /*layer.alert(JSON.stringify(formData));*/
