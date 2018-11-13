@@ -47,11 +47,11 @@
     	</tbody>
     </table>
     <hr style="margin-bottom:10px">
-	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm">${survey.quesSurveyRemarks!}</div>
+	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px">${survey.quesSurveyRemarks!}</div>
 	<br>
 	<div id="survey_valid_data_id" style="text-indent: 0.2cm"><b>问卷有效时间:</b> ${survey.startDate!} 到 ${survey.endDate!}</div>
 	<form action=""method="get" id="formSubmit">
-		<h2 class="big" align="center" style="font-weight:bold;margin:10px">${(survey.quesSurveyName)!}</h2>
+		<h2 class="big" align="center" style="font-weight:bold;margin:20px">${(survey.quesSurveyName)!}</h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
