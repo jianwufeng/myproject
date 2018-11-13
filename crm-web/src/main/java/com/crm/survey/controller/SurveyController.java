@@ -527,7 +527,7 @@ public class SurveyController {
     @RequestMapping(value = "exportExcel.ftl", method = { RequestMethod.POST, RequestMethod.GET })
     public RestResponseEntity exportExcel(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request, HttpServletResponse response)
             throws IllegalArgumentException, IllegalAccessException {
-        String[] arr = { "", "非常同意", "同意", "部分同意", "不同意", "非常不同意" };
+        String[] arr = { "", "非常同意", "同意", "部分同意", "不同意", "非常不同意", "不清楚/不适用" };
 
         List<ExportExcelDto> list = Lists.newArrayList();
 
@@ -536,14 +536,16 @@ public class SurveyController {
         Map<Long, Top5Dto> partAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "部分同意%");
         Map<Long, Top5Dto> disAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "不同意%");
         Map<Long, Top5Dto> veryDisAgreeMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "非常不同意%");
+        Map<Long, Top5Dto> dontKonwMap = quesSurveyAnsweredDetailService.getPerListByAnswer(quesSurveyId, "%不清楚%");
         SurveyCompanyPerDto perDto = quesSurveyAnsweredDetailService.getPerListByCompany(quesSurveyId);
         ExportExcelDto dto1 = new ExportExcelDto();
         dto1.setQuesTypeName(perDto.getCompanyName());
-        dto1.setVeryAgreePer(perDto.getVeryAgreePer() + "%");
-        dto1.setAgreePer(perDto.getAgreePer() + "%");
-        dto1.setDisAgreePer(perDto.getDisagreePer() + "%");
-        dto1.setVeryDisAgreePer(perDto.getVeryDisagreePer() + "%");
-        dto1.setPartAgreePer(perDto.getPartAgreePer() + "%");
+        dto1.setVeryAgreePer("0".equals(perDto.getVeryAgreePer()) ? "0.00%" : perDto.getVeryAgreePer() + "%");
+        dto1.setAgreePer("0".equals(perDto.getAgreePer()) ? "0.00%" : perDto.getAgreePer() + "%");
+        dto1.setDisAgreePer("0".equals(perDto.getDisagreePer()) ? "0.00%" : perDto.getDisagreePer() + "%");
+        dto1.setVeryDisAgreePer("0".equals(perDto.getVeryDisagreePer()) ? "0.00%" : perDto.getVeryDisagreePer() + "%");
+        dto1.setPartAgreePer("0".equals(perDto.getPartAgreePer()) ? "0.00%" : perDto.getPartAgreePer() + "%");
+        dto1.setDontKnowPer("0".equals(perDto.getDontKnowPer()) ? "0.00%" : perDto.getDontKnowPer() + "%");
         list.add(dto1);
 
         QuesType req = new QuesType();
@@ -558,6 +560,7 @@ public class SurveyController {
                 dto.setDisAgreePer(disAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : disAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setVeryDisAgreePer(veryDisAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : veryDisAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 dto.setPartAgreePer(partAgreeMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : partAgreeMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
+                dto.setDontKnowPer(dontKonwMap.get(quesType.getQuesTypeId()) == null ? "0.00%" : dontKonwMap.get(quesType.getQuesTypeId()).getTopPer() + "%");
                 list.add(dto);
             }
         }

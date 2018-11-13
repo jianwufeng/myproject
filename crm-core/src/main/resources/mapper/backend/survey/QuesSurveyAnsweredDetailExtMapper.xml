@@ -33,13 +33,21 @@
 	</select>
 	
 	<select id="getPerListByCompany" parameterType="java.lang.Long" resultType="com.crm.dto.SurveyCompanyPerDto">
-		select '公司平均值' as companyName, ROUND((veryAgreeCount*100)/total,2) as veryAgreePer,ROUND(agreeCount*100/total,2) as agreePer,ROUND(partAgreeCount*100/total,2) as partAgreePer,ROUND(disagreeCount*100/total,2) as disagreePer,ROUND(veryDisagreeCount*100/total,2) as veryDisagreePer FROM
+		select '公司平均值' as companyName, 
+				(CASE WHEN total = 0 then 0 ELSE ROUND((veryAgreeCount*100)/total,2) END) as veryAgreePer,
+				(CASE WHEN total = 0 then 0 ELSE ROUND(agreeCount*100/total,2) END) as agreePer,
+				(CASE WHEN total = 0 then 0 ELSE ROUND(partAgreeCount*100/total,2) END) as partAgreePer,
+				(CASE WHEN total = 0 then 0 ELSE ROUND(disagreeCount*100/total,2) END) as disagreePer,
+				(CASE WHEN total = 0 then 0 ELSE ROUND(veryDisagreeCount*100/total,2) END) as veryDisagreePer,
+				(CASE WHEN total = 0 then 0 ELSE ROUND(dontKnowCount*100/total,2) END) as dontKnowPer 
+		FROM
 		(SELECT count(1) as total FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 and ques_type = 1) as total,
 		(SELECT count(1) as veryAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '非常同意%') as veryAgreeCount,
 		(SELECT count(1) as agreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '同意%') as agreeCount ,
 		(SELECT count(1) as partAgreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '部分同意%') as partAgreeCount ,
 		(SELECT count(1) as disagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '不同意%') as disagreeCount,
-		(SELECT count(1) as veryDisagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '非常不同意%') as veryDisagreeCount
+		(SELECT count(1) as veryDisagreeCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '非常不同意%') as veryDisagreeCount,
+		(SELECT count(1) as dontKnowCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '%不清楚%') as dontKnowCount
 	</select>
 	
 </mapper>

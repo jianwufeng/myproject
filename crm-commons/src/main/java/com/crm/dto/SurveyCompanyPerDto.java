@@ -20,6 +20,8 @@ public class SurveyCompanyPerDto implements Serializable {
 
     private String            veryDisagreePer;
 
+    private String            dontKnowPer;
+
     public String getCompanyName() {
         return companyName;
     }
@@ -66,6 +68,14 @@ public class SurveyCompanyPerDto implements Serializable {
 
     public void setVeryDisagreePer(String veryDisagreePer) {
         this.veryDisagreePer = veryDisagreePer;
+    }
+
+    public String getDontKnowPer() {
+        return dontKnowPer;
+    }
+
+    public void setDontKnowPer(String dontKnowPer) {
+        this.dontKnowPer = dontKnowPer;
     }
 
 }

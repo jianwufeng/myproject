@@ -20,6 +20,8 @@ public class ExportExcelDto implements Serializable {
 
     private String            veryDisAgreePer;
 
+    private String            dontKnowPer;
+
     public String getQuesTypeName() {
         return quesTypeName;
     }
@@ -66,6 +68,14 @@ public class ExportExcelDto implements Serializable {
 
     public void setVeryDisAgreePer(String veryDisAgreePer) {
         this.veryDisAgreePer = veryDisAgreePer;
+    }
+
+    public String getDontKnowPer() {
+        return dontKnowPer;
+    }
+
+    public void setDontKnowPer(String dontKnowPer) {
+        this.dontKnowPer = dontKnowPer;
     }
 
 }
