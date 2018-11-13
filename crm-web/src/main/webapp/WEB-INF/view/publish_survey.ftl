@@ -35,23 +35,25 @@
 		  }
 		li {text-indent: 1.2cm}
 		h3 {text-indent: 0.2cm}
+		body {background-color: #f0f0f0}
+		textarea {background-color: #f0f0f0}
 	</style>
 </head>
 <body>
 	<table width="100%">
 	    <tbody>
 		     <tr width="20%">
-			      <th align="left"><img width="360" height="120" src="./frame/static/image/survey.jpg" /></th>
-			      <th align="right">上海波音航空改装维修工程有限公司</th>
+			      <th align="left"><img width="360" height="135" src="./frame/static/image/survey.jpg" /></th>
+			      <th align="right" style="font-weight:bold;margin:20px;letter-spacing:10px"><i>上海波音航空改装维修工程有限公司</i></th>
 		     </tr>
     	</tbody>
     </table>
     <hr style="margin-bottom:10px">
 	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px">${survey.quesSurveyRemarks!}</div>
 	<br>
-	<div id="survey_valid_data_id" style="text-indent: 0.2cm"><b>问卷有效时间:</b> ${survey.startDate!} 到 ${survey.endDate!}</div>
+	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
 	<form action=""method="get" id="formSubmit">
-		<h2 class="big" align="center" style="font-weight:bold;margin:20px">${(survey.quesSurveyName)!}</h2>
+		<h2 class="big" align="center" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"> ${(survey.quesSurveyName)!}</font></h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
@@ -83,7 +85,7 @@
 						</#if>
 					<#elseif ques.quesType == 3>
 						<div class="big" >
-				            <textarea class="big" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" rows="5"cols="100" maxlength="200"></textarea>
+				            <textarea class="big" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" rows="5"cols="100" maxlength="2000"></textarea>
 							<#if ques.quesAnswerDetailList?default([])?size !=0>
 									<#list ques.quesAnswerDetailList as aswer> 
 										<input type="hidden" name="${aswer.answerId}-answerId" value="${aswer.answerId}"/>
@@ -102,7 +104,7 @@
 		</ul>
 		</#list>
 		</#if>
-		<br><br>
+		<br>
 		<input type="button" id="submitAnswer" value="提交" style="margin-left:40px;height:30px;width:50px;">
 		<input type="reset" style="height:30px;width:50px;">
 		<br><br>
