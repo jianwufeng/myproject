@@ -35,8 +35,19 @@
 		  }
 		li {text-indent: 1.2cm}
 		h3 {text-indent: 0.2cm}
-		body {background-color: #f0f0f0}
-		textarea {background-color: #f0f0f0}
+		body {background-color: #FCFCFC}
+		textarea {background-color: #FCFCFC}
+		.button_style {display: inline-block;
+			    padding: .3em .5em;
+			    background-image: linear-gradient(#ddd, #bbb);
+			    border: 1px solid rgba(0,0,0,.2);
+			    border-radius: .3em;
+			    box-shadow: 0 1px white inset;
+			    text-align: center;
+			    text-shadow: 0 1px 1px black;
+			    color:white;
+			    font-weight: bold;
+			}
 	</style>
 </head>
 <body>
@@ -105,8 +116,8 @@
 		</#list>
 		</#if>
 		<br>
-		<input type="button" id="submitAnswer" value="提交" style="margin-left:40px;height:30px;width:50px;">
-		<input type="reset" style="height:30px;width:50px;">
+		<input type="button" class="button_style" id="submitAnswer" value="提交/submit" style="margin-left:40px;height:40px;width:120px;">
+		<!--<input type="reset" style="height:30px;width:50px;">-->
 		<br><br>
 		</div>
 	</form>
