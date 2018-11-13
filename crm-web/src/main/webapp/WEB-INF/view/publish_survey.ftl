@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>${(survey.quesSurveyName)!}</title>
     <link rel="stylesheet" href="frame/static/css/base.css">
+    <link rel="stylesheet" href="frame/layui/css/layui.css">
+    <link rel="stylesheet" href="frame/static/css/style.css">
     <style type="text/css">
     	h3.big
 		  {
@@ -48,6 +50,12 @@
 			    color:white;
 			    font-weight: bold;
 			}
+		.layui-elem-quote_ext {
+		    line-height: 30px;
+		    border-left: 10px solid #009688;
+		    border-radius: 0 2px 2px 0;
+		    background-color: #f2f2f2;
+		}
 	</style>
 </head>
 <body>
@@ -60,16 +68,18 @@
     	</tbody>
     </table>
     <hr style="margin-bottom:10px">
-	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px">${survey.quesSurveyRemarks!}</div>
+	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px;margin:10px">${survey.quesSurveyRemarks!}</div>
 	<br>
-	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
+	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;margin:10px"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
 	<form action=""method="get" id="formSubmit">
-		<h2 class="big" align="center" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"> ${(survey.quesSurveyName)!}</font></h2>
+		<h2 class="big" align="center" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"> <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe6b2;</i>${(survey.quesSurveyName)!}</font></h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
-			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3>
-			<h3 class="big" style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeEnglishName!}</h3>  
+			<div class="layui-elem-quote_ext" class="big">
+				<h3 style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3>
+				<h3 style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeEnglishName!}</h3>  
+			</div>
 			<ul>
 			<#if quesType.quesList?default([])?size !=0>
 			<#list quesType.quesList as ques> 
