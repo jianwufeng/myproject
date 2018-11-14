@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.codehaus.plexus.util.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -620,9 +621,22 @@ public class SurveyController {
     public RestResponseEntity exportAnswerdDetail(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request,
                                                   HttpServletResponse response)
             throws IllegalArgumentException, IllegalAccessException {
-        String[] arr = { "问卷id", "大类名称", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调", "用户标识" };
+        String[] arr = { "问卷id", "大类名称", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调", "用户标识", "部门" };
 
         List<QuesSurveyAnsweredDetail> detailList = quesSurveyAnsweredDetailService.getAnsweredDetailList(quesSurveyId);
+
+        Map<String, String> departmentMap = Maps.newHashMap();
+        if (CollectionUtils.isNotEmpty(detailList)) {
+            for (QuesSurveyAnsweredDetail detail : detailList) {
+                if (detail.getIsBackgroundSurvey() == 1) {
+                    if (detail.getQuesName().contains("您的部门是")) {
+                        if (StringUtils.isEmpty(departmentMap.get(detail.getUserId()))) {
+                            departmentMap.put(detail.getUserId(), detail.getAnswerName());
+                        }
+                    }
+                }
+            }
+        }
 
         List<QuesType> queryQuesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
         Map<Long, String> quesTypeMap = Maps.newHashMap();
@@ -640,6 +654,7 @@ public class SurveyController {
                 dto.setTypeName(quesSurveyAnsweredDetail.getQuesType() == 1 ? "单选题" : "问答题");
                 dto.setIsBackgroundSurveyStr(quesSurveyAnsweredDetail.getIsBackgroundSurvey() == 0 ? "否" : "是");
                 dto.setQuesTypeName(quesTypeMap.get(quesSurveyAnsweredDetail.getQuesTypeId()));
+                dto.setDepartmentName(departmentMap.get(quesSurveyAnsweredDetail.getUserId()));
                 resultList.add(dto);
             }
         }

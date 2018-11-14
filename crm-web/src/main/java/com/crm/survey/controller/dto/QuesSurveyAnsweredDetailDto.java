@@ -31,6 +31,8 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     private String            userId;
 
+    private String            departmentName;
+
     public Long getQuesSurveyId() {
         return quesSurveyId;
     }
@@ -109,6 +111,14 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
 }
