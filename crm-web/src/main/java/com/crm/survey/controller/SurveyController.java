@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -496,8 +497,10 @@ public class SurveyController {
             }
         }
 
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         for (QuesSurveyAnsweredDetail detail : detailList) {
             detail.setIsBackgroundSurvey(map.get(detail.getQuesTypeId()));
+            detail.setUserId(uuid);
         }
         quesSurveyAnsweredDetailService.batchInsert(detailList);
         return RestResponseEntity.getEntity(true);

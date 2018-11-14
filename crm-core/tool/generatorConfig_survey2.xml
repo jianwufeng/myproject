@@ -36,7 +36,7 @@
 			targetProject="src/main/java" type="XMLMAPPER" />
 		<!-- 表 -->
 
-		<table  tableName="t_an_ques_survey" domainObjectName="QuesSurvey"> 
+		<!-- <table  tableName="t_an_ques_survey" domainObjectName="QuesSurvey"> 
 			 <property name="useActualColumnNames" value="false" /> 
 			<generatedKey column="ques_survey_id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
@@ -57,21 +57,21 @@
 			<generatedKey column="ques_type_id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 				<columnOverride column="is_delete" property="isDelete" jdbcType="BIT"/>  
-		</table>
+		</table> -->
 		
 		<table tableName="t_an_ques_survey_answered_detail" domainObjectName="QuesSurveyAnsweredDetail">
 			<property name="useActualColumnNames" value="false" />
-			<generatedKey column="ques_survey_answered_id" sqlStatement="SELECT LAST_INSERT_ID()"
-				identity="true" type="post" />
+			<!-- <generatedKey column="ques_survey_answered_id" sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true" type="post" /> -->
 				<columnOverride column="is_delete" property="isDelete" jdbcType="BIT"/>  
 		</table>
 		
-		<table tableName="t_an_ques_answer_detail" domainObjectName="QuesAnswerDetail">
+		<!-- <table tableName="t_an_ques_answer_detail" domainObjectName="QuesAnswerDetail">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="answer_id" sqlStatement="SELECT LAST_INSERT_ID()"
 				identity="true" type="post" />
 				<columnOverride column="is_delete" property="isDelete" jdbcType="BIT"/>  
-		</table>
+		</table> -->
 		<!-- <table schema="ques_survey" tableName="t_user" domainObjectName="User">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"

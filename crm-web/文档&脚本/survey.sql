@@ -94,3 +94,5 @@ CREATE TABLE `t_user` (
   UNIQUE KEY `email_idx` (`email`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+ALTER TABLE `t_an_ques_survey_answered_detail`
+ADD COLUMN `user_id`  varchar(40) NULL COMMENT '一次问卷提交标识' AFTER `is_background_survey`;

@@ -866,3 +866,7 @@ GO
 
 INSERT INTO [t_user] ([user_name], [email], [password], [create_time], [update_time]) VALUES ( 'admin', 'admin@163.com', '123456', '2018-11-8 15:02:36', '2018-11-8 15:02:38');
 GO
+
+ALTER TABLE [dbo].[t_an_ques_survey_answered_detail]
+ADD [user_id] varchar(40) NULL 
+GO
