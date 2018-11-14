@@ -30,6 +30,7 @@ $(document).ready(function() {
 		});
 		
 		if(isSubmit){
+			$("#submitAnswer").attr({"disabled":"disabled"});
 			var REMOVE_URL = "/crm-web/publish";
 			var data = [];
 			$("#formSubmit").find("input[type='radio'],textarea").each(function(){

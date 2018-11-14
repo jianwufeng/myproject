@@ -72,8 +72,8 @@
 			<#list quesType.quesList as ques> 
 				<#assign index =ques_index + 1 > 
 				<div id="an-ques-answer-id">
-					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="margin-top:10px"><b>${index}. ${ques.quesName}</b></p>
-					<p class="big" style="margin-bottom:10px"><b>  ${ques.quesEnglishName!}</b></p>
+					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="margin-top:10px;font-weight:bold;">${index}. ${ques.quesName}</p>
+					<p class="big" style="margin-bottom:10px;font-weight:bold;">  ${ques.quesEnglishName!}</p>
 					<ul id="${ques.quesId}">
 					<input type="hidden" name="quesSurveyId" value="${ques.quesSurveyId}"/>
 					<input type="hidden" name="quesTypeId" value="${ques.quesTypeId}"/>
@@ -85,7 +85,7 @@
 						<#if ques.quesAnswerDetailList?default([])?size !=0>
 							<#list ques.quesAnswerDetailList as aswer>
 								<li class="big" style="margin-left:20px" id="${aswer.answerId}">
-									 <input type="radio" name="${ques.quesId}-answerName" value="${aswer.answerName}" style="margin-right:10px;" />${aswer.answerName}
+									 <label><input type="radio" name="${ques.quesId}-answerName" value="${aswer.answerName}" style="margin-right:10px;" />${aswer.answerName}</label>
 									 <input type="hidden" name="${aswer.answerId}-answerId" value="${aswer.answerId}"/>
 									 <input type="hidden" name="${aswer.answerId}-answerScore" value="0"/>
 								</li>
