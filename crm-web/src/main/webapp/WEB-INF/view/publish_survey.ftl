@@ -45,13 +45,13 @@
 			    border-radius: .3em;
 			    box-shadow: 0 1px white inset;
 			    text-align: center;
-			    text-shadow: 0 1px 1px black;
-			    color:white;
+			    text-shadow: 0 1px 1px blue;
+			    color:black;
 			    font-weight: bold;
 			}
 		.layui-elem-quote_ext {
 		    line-height: 30px;
-		    border-left: 10px solid #009688;
+		    border-left: 5px solid #009688;
 		    border-radius: 0 2px 2px 0;
 		    background-color: #f2f2f2;
 		}
@@ -62,7 +62,7 @@
 	    <tbody>
 		     <tr width="20%">
 			      <th align="left"><img width="360" height="135" src="./frame/static/image/survey.jpg" /></th>
-			      <th align="right" style="font-weight:bold;margin:20px;letter-spacing:10px"><i>上海波音航空改装维修工程有限公司</i></th>
+			      <th align="right" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"><i>上海波音航空改装维修工程有限公司</i></font></th>
 		     </tr>
     	</tbody>
     </table>
@@ -71,7 +71,7 @@
 	<br>
 	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;margin:10px"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
 	<form action=""method="get" id="formSubmit">
-		<h2 class="big" align="center" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"> <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe6b2;</i>${(survey.quesSurveyName)!}</font></h2>
+		<h2 class="big" align="center" style="font-weight:bold;margin:40px;letter-spacing:10px"><font size="5"> <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe6b2;</i>${(survey.quesSurveyName)!}</font></h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
