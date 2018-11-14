@@ -620,7 +620,7 @@ public class SurveyController {
     public RestResponseEntity exportAnswerdDetail(@RequestParam(value = "quesSurveyId", required = true) Long quesSurveyId, HttpServletRequest request,
                                                   HttpServletResponse response)
             throws IllegalArgumentException, IllegalAccessException {
-        String[] arr = { "问卷id", "大类名称", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调" };
+        String[] arr = { "问卷id", "大类名称", "题目id", "题目名称", "题目类型", "所选问题答案名称", "是否背调", "用户标识" };
 
         List<QuesSurveyAnsweredDetail> detailList = quesSurveyAnsweredDetailService.getAnsweredDetailList(quesSurveyId);
 

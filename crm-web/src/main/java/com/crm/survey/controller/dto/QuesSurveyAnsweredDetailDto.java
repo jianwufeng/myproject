@@ -29,6 +29,8 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     private String            isBackgroundSurveyStr;
 
+    private String            userId;
+
     public Long getQuesSurveyId() {
         return quesSurveyId;
     }
@@ -99,6 +101,14 @@ public class QuesSurveyAnsweredDetailDto implements Serializable {
 
     public void setIsBackgroundSurveyStr(String isBackgroundSurveyStr) {
         this.isBackgroundSurveyStr = isBackgroundSurveyStr;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }

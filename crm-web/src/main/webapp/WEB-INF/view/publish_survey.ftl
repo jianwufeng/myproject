@@ -37,8 +37,7 @@
 		  }
 		li {text-indent: 1.2cm}
 		h3 {text-indent: 0.2cm}
-		body {background-color: #FCFCFC}
-		textarea {background-color: #FCFCFC}
+		body {width: 1000px; margin: 0 auto;}
 		.button_style {display: inline-block;
 			    padding: .3em .5em;
 			    background-image: linear-gradient(#ddd, #bbb);
@@ -68,7 +67,7 @@
     	</tbody>
     </table>
     <hr style="margin-bottom:10px">
-	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px;margin:10px">${survey.quesSurveyRemarks!}</div>
+	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px;margin:10px"><font color="#666">${survey.quesSurveyRemarks!}</font></div>
 	<br>
 	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;margin:10px"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
 	<form action=""method="get" id="formSubmit">
@@ -77,16 +76,15 @@
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
 			<div class="layui-elem-quote_ext" class="big">
-				<h3 style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeName}</h3>
-				<h3 style="font-weight:bold;background-color:#BEBEBE">${quesType.quesTypeEnglishName!}</h3>  
+				<h3 style="font-weight:bold;line-height: 50px;margin:10px;font-size: 18px;">${quesType.quesTypeName} ${quesType.quesTypeEnglishName!}</h3>
 			</div>
 			<ul>
 			<#if quesType.quesList?default([])?size !=0>
 			<#list quesType.quesList as ques> 
 				<#assign index =ques_index + 1 > 
 				<div id="an-ques-answer-id">
-					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="background-color:#d0d0d0">${index}. ${ques.quesName}</p>
-					<p class="big" style="background-color:#d0d0d0">  ${ques.quesEnglishName!}</p>
+					<li><p class="big<#if ques.isRequired==1> ques-required</#if>" style="margin-top:10px"><b>${index}. ${ques.quesName}</b></p>
+					<p class="big" style="margin-bottom:10px"><b>  ${ques.quesEnglishName!}</b></p>
 					<ul id="${ques.quesId}">
 					<input type="hidden" name="quesSurveyId" value="${ques.quesSurveyId}"/>
 					<input type="hidden" name="quesTypeId" value="${ques.quesTypeId}"/>
@@ -97,7 +95,7 @@
 					<#if ques.quesType == 1>
 						<#if ques.quesAnswerDetailList?default([])?size !=0>
 							<#list ques.quesAnswerDetailList as aswer>
-								<li class="big" id="${aswer.answerId}">
+								<li class="big" style="margin-left:20px" id="${aswer.answerId}">
 									 <input type="radio" name="${ques.quesId}-answerName" value="${aswer.answerName}" style="margin-right:10px;" />${aswer.answerName}
 									 <input type="hidden" name="${aswer.answerId}-answerId" value="${aswer.answerId}"/>
 									 <input type="hidden" name="${aswer.answerId}-answerScore" value="0"/>
