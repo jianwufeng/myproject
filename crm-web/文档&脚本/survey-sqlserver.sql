@@ -445,8 +445,8 @@ CREATE TABLE [dbo].[t_an_ques_survey_answered_detail] (
 [answer_score] varchar(64) NULL ,
 [is_background_survey] int NOT NULL DEFAULT ((0)) ,
 [is_delete] bit NOT NULL DEFAULT ((0)) ,
-[create_time] datetime2(7) NULL ,
-[update_time] datetime2(7) NULL 
+[create_time] datetime NULL ,
+[update_time] datetime NULL 
 )
 
 
@@ -660,8 +660,8 @@ CREATE TABLE [dbo].[t_an_ques_type] (
 [order_by_id] int NULL ,
 [is_background_survey] int NOT NULL DEFAULT ((0)) ,
 [is_delete] bit NOT NULL DEFAULT ((0)) ,
-[create_time] datetime2(7) NULL ,
-[update_time] datetime2(7) NULL 
+[create_time] datetime NULL ,
+[update_time] datetime NULL 
 )
 
 
@@ -773,8 +773,8 @@ CREATE TABLE [dbo].[t_user] (
 [user_name] nvarchar(128) NOT NULL ,
 [email] nvarchar(128) NULL ,
 [password] nvarchar(255) NULL ,
-[create_time] datetime2(7) NULL ,
-[update_time] datetime2(7) NULL 
+[create_time] datetime NULL ,
+[update_time] datetime NULL 
 )
 
 
