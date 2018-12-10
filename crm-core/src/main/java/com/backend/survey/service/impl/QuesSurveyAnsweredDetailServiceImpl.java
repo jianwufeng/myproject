@@ -13,6 +13,7 @@ import com.backend.survey.mapper.QuesSurveyAnsweredDetailMapper;
 import com.backend.survey.service.IQuesSurveyAnsweredDetailService;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetailExample;
+import com.crm.dto.QuesTop5Dto;
 import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 import com.github.pagehelper.PageHelper;
@@ -71,5 +72,17 @@ public class QuesSurveyAnsweredDetailServiceImpl implements IQuesSurveyAnsweredD
         example.setOrderByClause("ques_type_id asc,ques_id asc");
         example.createCriteria().andQuesSurveyIdEqualTo(quesSurveyId);
         return quesSurveyAnsweredDetailExtMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<QuesTop5Dto> getQuesAgreeTop5(Long quesSurveyId) {
+        PageHelper.startPage(1, 5, false);
+        return quesSurveyAnsweredDetailExtMapper.getQuesAgreeTop5(quesSurveyId);
+    }
+
+    @Override
+    public List<QuesTop5Dto> getQuesDisAgreeTop5(Long quesSurveyId) {
+        PageHelper.startPage(1, 5, false);
+        return quesSurveyAnsweredDetailExtMapper.getQuesDisAgreeTop5(quesSurveyId);
     }
 }

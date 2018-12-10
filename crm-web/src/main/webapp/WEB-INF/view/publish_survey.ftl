@@ -44,47 +44,23 @@
 		    border-radius: 0 2px 2px 0;
 		    background-color: #f2f2f2;
 		}
-		body {
-		    background: #e4ce83 url(//image.wjx.com/images/newbg/Nview.jpg) no-repeat fixed top center;
-		}
-		
-		#mainCss {
-		    background: white;
-		    width: 920px;
-		    margin: 0 auto;
-		}
-		#jqContent {
-		    margin: 68px auto 68px !important;
-		    padding-top: 0px;
-		}
-		#headerCss {
-			margin: 68px auto 0px !important;
-		}
-		#mainBodyCss {
-			margin: 30px 30px 30px !important;
-		}
 	</style>
 </head>
 <body>
-	<div id="jqContent">
-    <div id="mainCss">
-    <div id="headerCss">
-		<table width="100%">
-		    <tbody>
-			     <tr width="20%" style="margin:30px">
-				      <th><img width="360" height="135" style="margin-top:30px" src="./frame/static/image/survey.jpg" /></th>
-				      <th style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="4"><i>上海波音航空改装维修工程有限公司</i></font></th>
-			     </tr>
-	    	</tbody>
-	    </table>
-	    <hr style="margin-bottom:10px">
-    </div>
-    <div id="mainBodyCss">
+	<table width="100%">
+	    <tbody>
+		     <tr width="20%">
+			      <th align="left"><img width="360" height="135" src="./frame/static/image/survey.jpg" /></th>
+			      <th align="right" style="font-weight:bold;margin:20px;letter-spacing:10px"><font size="5"><i>上海波音航空改装维修工程有限公司</i></font></th>
+		     </tr>
+    	</tbody>
+    </table>
+    <hr style="margin-bottom:10px">
 	<div id="survey_remarks_editer_id" style="text-indent: 0.2cm;line-height: 30px;margin:10px"><font color="#666">${survey.quesSurveyRemarks!}</font></div>
 	<br>
 	<div id="survey_valid_data_id" style="text-indent: 0.2cm;font-weight:bold;margin:10px"><font color="red"><i style="letter-spacing:3px">答卷开始和截止时间 :</i> ${survey.startDate!} 到 ${survey.endDate!}</font></div>
-	<form action=""method="get" id="formSubmit" >
-		<h2 class="big" align="center" style="font-weight:bold;margin:60px;letter-spacing:10px;color:#39a4db"><font size="5"> <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe6b2;</i>${(survey.quesSurveyName)!}</font></h2>
+	<form action=""method="get" id="formSubmit">
+		<h2 class="big" align="center" style="font-weight:bold;margin:40px;letter-spacing:10px"><font size="5"> <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe6b2;</i>${(survey.quesSurveyName)!}</font></h2>
 		<div class="div_style">
 		<#if survey.quesTypeList?default([])?size !=0>
 		<#list survey.quesTypeList as quesType>
@@ -117,7 +93,7 @@
 						</#if>
 					<#elseif ques.quesType == 3>
 						<div class="big" >
-				            <textarea class="big" style="margin-left:20px" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" rows="5"cols="100" maxlength="2000"></textarea>
+				            <textarea class="big" placeholder="请输入答案" id="${ques.quesId}-answerName" name="${ques.quesId}-answerName" class="layui-textarea" rows="5"cols="100" maxlength="2000"></textarea>
 							<#if ques.quesAnswerDetailList?default([])?size !=0>
 									<#list ques.quesAnswerDetailList as aswer> 
 										<input type="hidden" name="${aswer.answerId}-answerId" value="${aswer.answerId}"/>
@@ -137,16 +113,11 @@
 		</#list>
 		</#if>
 		<br>
-			<div align="center">
-			<input type="button" class="layui-btn" id="submitAnswer" value="提交/submit" style="margin:20px;height:40px;width:120px;" align="center">
-			<!--<input type="reset" style="height:30px;width:50px;">-->
-			<br><br>
-			</div>
+		<input type="button" class="layui-btn" id="submitAnswer" value="提交/submit" style="margin-left:40px;height:40px;width:120px;">
+		<!--<input type="reset" style="height:30px;width:50px;">-->
+		<br><br>
 		</div>
 	</form>
-	</div>
-	</div>
-	</div>
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="frame/layui/layui.js"></script>
 	<script src="js/common.js"></script>

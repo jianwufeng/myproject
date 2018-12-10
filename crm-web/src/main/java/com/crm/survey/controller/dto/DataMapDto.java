@@ -17,6 +17,14 @@ public class DataMapDto implements Serializable {
 
     private List<String>      quesTypePerDisAgreeList;
 
+    private List<String>      quesNameAgreeList;
+
+    private List<String>      quesPerAgreeList;
+
+    private List<String>      quesNameDisAgreeList;
+
+    private List<String>      quesPerDisAgreeList;
+
     public List<String> getQuesTypeNameAgreeList() {
         return quesTypeNameAgreeList;
     }
@@ -47,6 +55,38 @@ public class DataMapDto implements Serializable {
 
     public void setQuesTypePerDisAgreeList(List<String> quesTypePerDisAgreeList) {
         this.quesTypePerDisAgreeList = quesTypePerDisAgreeList;
+    }
+
+    public List<String> getQuesNameAgreeList() {
+        return quesNameAgreeList;
+    }
+
+    public void setQuesNameAgreeList(List<String> quesNameAgreeList) {
+        this.quesNameAgreeList = quesNameAgreeList;
+    }
+
+    public List<String> getQuesPerAgreeList() {
+        return quesPerAgreeList;
+    }
+
+    public void setQuesPerAgreeList(List<String> quesPerAgreeList) {
+        this.quesPerAgreeList = quesPerAgreeList;
+    }
+
+    public List<String> getQuesNameDisAgreeList() {
+        return quesNameDisAgreeList;
+    }
+
+    public void setQuesNameDisAgreeList(List<String> quesNameDisAgreeList) {
+        this.quesNameDisAgreeList = quesNameDisAgreeList;
+    }
+
+    public List<String> getQuesPerDisAgreeList() {
+        return quesPerDisAgreeList;
+    }
+
+    public void setQuesPerDisAgreeList(List<String> quesPerDisAgreeList) {
+        this.quesPerDisAgreeList = quesPerDisAgreeList;
     }
 
 }

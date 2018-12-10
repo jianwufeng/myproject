@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.crm.dto.QuesTop5Dto;
 import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 
@@ -16,4 +17,8 @@ public interface QuesSurveyAnsweredDetailExtMapper extends QuesSurveyAnsweredDet
     List<Top5Dto> getPerListByAnswer(@Param("quesSurveyId") Long quesSurveyId, @Param("answerName") String answerName);
 
     SurveyCompanyPerDto getPerListByCompany(Long quesSurveyId);
+
+    List<QuesTop5Dto> getQuesAgreeTop5(Long quesSurveyId);
+
+    List<QuesTop5Dto> getQuesDisAgreeTop5(Long quesSurveyId);
 }

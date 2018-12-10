@@ -26,4 +26,6 @@ public interface IQuesService {
 
     public void editQues(Ques ques);
 
+    public Map<Long, Ques> getQuesByQuesSurveyId(Long quesSurveyId);
+
 }

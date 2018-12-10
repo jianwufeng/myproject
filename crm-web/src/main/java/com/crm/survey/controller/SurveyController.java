@@ -39,6 +39,7 @@ import com.crm.domain.backend.survey.QuesSurvey;
 import com.crm.domain.backend.survey.QuesSurveyAnsweredDetail;
 import com.crm.domain.backend.survey.QuesType;
 import com.crm.domain.backend.survey.User;
+import com.crm.dto.QuesTop5Dto;
 import com.crm.dto.SurveyCompanyPerDto;
 import com.crm.dto.Top5Dto;
 import com.crm.survey.controller.dto.DataMapDto;
@@ -589,6 +590,11 @@ public class SurveyController {
         List<String> quesTypeNameDisAgreeList = Lists.newArrayList();
         List<String> quesTypePerDisAgreeList = Lists.newArrayList();
 
+        List<String> quesNameAgreeList = Lists.newArrayList();
+        List<String> quesPerAgreeList = Lists.newArrayList();
+        List<String> quesNameDisAgreeList = Lists.newArrayList();
+        List<String> quesPerDisAgreeList = Lists.newArrayList();
+
         List<Top5Dto> agreeTop5List = quesSurveyAnsweredDetailService.getAgreeTop5(quesSurveyId);
         List<QuesType> quesTypeList = quesTypeService.queryQuesTypeList(quesSurveyId);
         Map<Long, QuesType> map = Maps.newHashMap();
@@ -613,6 +619,30 @@ public class SurveyController {
         dto.setQuesTypePerAgreeList(quesTypePerAgreeList);
         dto.setQuesTypeNameDisAgreeList(quesTypeNameDisAgreeList);
         dto.setQuesTypePerDisAgreeList(quesTypePerDisAgreeList);
+
+        List<QuesTop5Dto> quesAgreeTop5 = quesSurveyAnsweredDetailService.getQuesAgreeTop5(quesSurveyId);
+        Map<Long, Ques> quesMap = quesService.getQuesByQuesSurveyId(quesSurveyId);
+        if (CollectionUtils.isNotEmpty(quesAgreeTop5)) {
+            for (QuesTop5Dto quesTop5Dto : quesAgreeTop5) {
+                Ques ques = quesMap.get(quesTop5Dto.getQuesId());
+                quesNameAgreeList.add(map.get(ques.getQuesTypeId()).getQuesTypeName() + "-" + ques.getQuesName());
+                quesPerAgreeList.add(quesTop5Dto.getTopPer());
+            }
+        }
+
+        List<QuesTop5Dto> quesDisAgreeTop5 = quesSurveyAnsweredDetailService.getQuesDisAgreeTop5(quesSurveyId);
+        if (CollectionUtils.isNotEmpty(quesDisAgreeTop5)) {
+            for (QuesTop5Dto quesTop5Dto : quesDisAgreeTop5) {
+                Ques ques = quesMap.get(quesTop5Dto.getQuesId());
+                quesNameDisAgreeList.add(map.get(ques.getQuesTypeId()).getQuesTypeName() + "-" + ques.getQuesName());
+                quesPerDisAgreeList.add(quesTop5Dto.getTopPer());
+            }
+        }
+        dto.setQuesNameAgreeList(quesNameAgreeList);
+        dto.setQuesPerAgreeList(quesPerAgreeList);
+        dto.setQuesNameDisAgreeList(quesNameDisAgreeList);
+        dto.setQuesPerDisAgreeList(quesPerDisAgreeList);
+
         return RestResponseEntity.getEntity(dto);
     }
 

@@ -109,4 +109,18 @@ public class QuesServiceImpl implements IQuesService {
         quesMapper.updateByPrimaryKeySelective(ques);
     }
 
+    @Override
+    public Map<Long, Ques> getQuesByQuesSurveyId(Long quesSurveyId) {
+        Map<Long, Ques> result = Maps.newHashMap();
+        QuesExample example = new QuesExample();
+        example.createCriteria().andIsDeleteEqualTo(false).andQuesSurveyIdEqualTo(quesSurveyId);
+        List<Ques> list = quesMapper.selectByExample(example);
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Ques ques : list) {
+                result.put(ques.getQuesId(), ques);
+            }
+        }
+        return result;
+    }
+
 }

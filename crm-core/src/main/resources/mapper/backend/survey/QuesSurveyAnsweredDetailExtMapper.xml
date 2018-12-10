@@ -50,4 +50,76 @@
 		(SELECT count(1) as dontKnowCount FROM t_an_ques_survey_answered_detail WHERE ques_survey_id = #{quesSurveyId} AND is_background_survey = 0 AND is_delete = 0 AND answer_name like '%不清楚%') as dontKnowCount
 	</select>
 	
+	<select id="getQuesAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.QuesTop5Dto">
+		SELECT
+			bb.quesId AS quesId,
+			ROUND(
+				<!-- CONVERT (FLOAT,(bb.agreeCount * 100)) / aa.total, -->
+				(bb.agreeCount * 100) / aa.total,
+				2
+			) AS topPer
+		FROM
+			(
+				SELECT
+					COUNT (1) AS total
+				FROM
+					t_an_ques_survey_answered_detail
+				WHERE
+					ques_survey_id = #{quesSurveyId}
+				AND ques_type = 1
+				AND answer_name LIKE '非常同意%'
+			) aa,
+			(
+				SELECT
+					ques_id AS quesId,
+					COUNT (1) AS agreeCount
+				FROM
+					t_an_ques_survey_answered_detail
+				WHERE
+					ques_survey_id = #{quesSurveyId}
+				AND ques_type = 1
+				AND answer_name LIKE '非常同意%'
+				GROUP BY
+					ques_id
+			) bb
+		ORDER BY
+			topPer DESC
+	</select>
+	
+	<select id="getQuesDisAgreeTop5" parameterType="java.lang.Long" resultType="com.crm.dto.QuesTop5Dto">
+		SELECT
+			bb.quesId AS quesId,
+			ROUND(
+				<!-- CONVERT (FLOAT,(bb.agreeCount * 100)) / aa.total, -->
+				(bb.agreeCount * 100) / aa.total,
+				2
+			) AS topPer
+		FROM
+			(
+				SELECT
+					COUNT (1) AS total
+				FROM
+					t_an_ques_survey_answered_detail
+				WHERE
+					ques_survey_id = #{quesSurveyId}
+				AND ques_type = 1
+				AND answer_name LIKE '非常不同意%'
+			) aa,
+			(
+				SELECT
+					ques_id AS quesId,
+					COUNT (1) AS agreeCount
+				FROM
+					t_an_ques_survey_answered_detail
+				WHERE
+					ques_survey_id = #{quesSurveyId}
+				AND ques_type = 1
+				AND answer_name LIKE '非常不同意%'
+				GROUP BY
+					ques_id
+			) bb
+		ORDER BY
+			topPer DESC
+	</select>
+	
 </mapper>
