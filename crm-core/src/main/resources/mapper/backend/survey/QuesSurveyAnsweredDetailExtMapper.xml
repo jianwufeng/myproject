@@ -61,7 +61,7 @@
 		FROM
 			(
 				SELECT
-					COUNT (1) AS total
+					COUNT(1) AS total
 				FROM
 					t_an_ques_survey_answered_detail
 				WHERE
@@ -72,7 +72,7 @@
 			(
 				SELECT
 					ques_id AS quesId,
-					COUNT (1) AS agreeCount
+					COUNT(1) AS agreeCount
 				FROM
 					t_an_ques_survey_answered_detail
 				WHERE
@@ -97,7 +97,7 @@
 		FROM
 			(
 				SELECT
-					COUNT (1) AS total
+					COUNT(1) AS total
 				FROM
 					t_an_ques_survey_answered_detail
 				WHERE
@@ -108,7 +108,7 @@
 			(
 				SELECT
 					ques_id AS quesId,
-					COUNT (1) AS agreeCount
+					COUNT(1) AS agreeCount
 				FROM
 					t_an_ques_survey_answered_detail
 				WHERE
