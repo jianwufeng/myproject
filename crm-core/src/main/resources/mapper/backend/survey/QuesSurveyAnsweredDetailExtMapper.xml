@@ -105,6 +105,7 @@
 				WHERE
 					ques_survey_id = #{quesSurveyId}
 				AND ques_type = 1
+				AND is_background_survey = 0
 				AND answer_name LIKE '非常不同意%'
 			) aa,
 			(
@@ -116,6 +117,7 @@
 				WHERE
 					ques_survey_id = #{quesSurveyId}
 				AND ques_type = 1
+				AND is_background_survey = 0
 				AND answer_name LIKE '非常不同意%'
 				GROUP BY
 					ques_id

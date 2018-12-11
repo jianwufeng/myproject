@@ -46,8 +46,8 @@
     		var data4 = jsonData.data.quesTypePerDisAgreeList;
     		setChart2(data3,data4);
     		
-    		var data5 = jsonData.data.quesNameDisAgreeList;
-    		var data6 = jsonData.data.quesPerDisAgreeList;
+    		var data5 = jsonData.data.quesNameAgreeList;
+    		var data6 = jsonData.data.quesPerAgreeList;
     		setChart3(data5,data6);
     		
     		var data7 = jsonData.data.quesNameDisAgreeList;
