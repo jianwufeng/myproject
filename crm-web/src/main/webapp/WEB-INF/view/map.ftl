@@ -11,14 +11,7 @@
     <link rel="icon" href="./frame/static/image/code.png">
 </head>
 <body class="body">
-<fieldset class="layui-elem-field layui-field-title">
-	  <legend>题目大类满意度</legend>
-</fieldset>
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<div id="main-line" style="width: 100%;height:400px;"></div>
-
-<div id="main-line2" style="width: 100%;height:400px;"></div>
-
 <fieldset class="layui-elem-field layui-field-title">
 	  <legend>题目满意度</legend>
 </fieldset>
@@ -38,13 +31,13 @@
 	asyncXhrGet('/crm-web/getDataMap.ftl?quesSurveyId='+${quesSurveyId}, '', function(data){
   	var jsonData =  eval("("+data+")");
     	if(jsonData.success){
-    		var data1 = jsonData.data.quesTypeNameAgreeList;
+    		/*var data1 = jsonData.data.quesTypeNameAgreeList;
     		var data2 = jsonData.data.quesTypePerAgreeList;
     		setChart1(data1,data2);
     		
     		var data3 = jsonData.data.quesTypeNameDisAgreeList;
     		var data4 = jsonData.data.quesTypePerDisAgreeList;
-    		setChart2(data3,data4);
+    		setChart2(data3,data4);*/
     		
     		var data5 = jsonData.data.quesNameAgreeList;
     		var data6 = jsonData.data.quesPerAgreeList;
